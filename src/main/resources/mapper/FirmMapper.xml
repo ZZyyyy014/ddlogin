@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tx.dllogin.dao.FirmMapper">
+  <resultMap id="BaseResultMap" type="com.tx.dllogin.model.Firm">
+    <id column="firm_id" jdbcType="VARCHAR" property="firmId" />
+    <result column="firm_name" jdbcType="VARCHAR" property="firmName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    firm_id, firm_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dd_firm
+    where firm_id = #{firmId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from dd_firm
+    where firm_id = #{firmId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.tx.dllogin.model.Firm">
+    insert into dd_firm (firm_id, firm_name)
+    values (#{firmId,jdbcType=VARCHAR}, #{firmName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tx.dllogin.model.Firm">
+    insert into dd_firm
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="firmId != null">
+        firm_id,
+      </if>
+      <if test="firmName != null">
+        firm_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="firmId != null">
+        #{firmId,jdbcType=VARCHAR},
+      </if>
+      <if test="firmName != null">
+        #{firmName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tx.dllogin.model.Firm">
+    update dd_firm
+    <set>
+      <if test="firmName != null">
+        firm_name = #{firmName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where firm_id = #{firmId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tx.dllogin.model.Firm">
+    update dd_firm
+    set firm_name = #{firmName,jdbcType=VARCHAR}
+    where firm_id = #{firmId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

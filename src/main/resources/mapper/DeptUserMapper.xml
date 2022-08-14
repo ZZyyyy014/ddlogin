@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tx.dllogin.dao.DeptUserMapper">
+  <resultMap id="BaseResultMap" type="com.tx.dllogin.model.DeptUser">
+    <id column="dept_user_id" jdbcType="VARCHAR" property="deptUserId" />
+    <result column="dept_id" jdbcType="VARCHAR" property="deptId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column=" spare_v1" jdbcType="VARCHAR" property="spareV1" />
+    <result column=" spare_v2" jdbcType="VARCHAR" property="spareV2" />
+    <result column=" spare_v3" jdbcType="VARCHAR" property="spareV3" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    dept_user_id, dept_id, user_id, " spare_v1", " spare_v2", " spare_v3"
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dd_dept_user
+    where dept_user_id = #{deptUserId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from dd_dept_user
+    where dept_user_id = #{deptUserId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.tx.dllogin.model.DeptUser">
+    insert into dd_dept_user (dept_user_id, dept_id, user_id, 
+      " spare_v1", " spare_v2", " spare_v3"
+      )
+    values (#{deptUserId,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{spareV1,jdbcType=VARCHAR}, #{spareV2,jdbcType=VARCHAR}, #{spareV3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tx.dllogin.model.DeptUser">
+    insert into dd_dept_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deptUserId != null">
+        dept_user_id,
+      </if>
+      <if test="deptId != null">
+        dept_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="spareV1 != null">
+        " spare_v1",
+      </if>
+      <if test="spareV2 != null">
+        " spare_v2",
+      </if>
+      <if test="spareV3 != null">
+        " spare_v3",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deptUserId != null">
+        #{deptUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null">
+        #{deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="spareV1 != null">
+        #{spareV1,jdbcType=VARCHAR},
+      </if>
+      <if test="spareV2 != null">
+        #{spareV2,jdbcType=VARCHAR},
+      </if>
+      <if test="spareV3 != null">
+        #{spareV3,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tx.dllogin.model.DeptUser">
+    update dd_dept_user
+    <set>
+      <if test="deptId != null">
+        dept_id = #{deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="spareV1 != null">
+        " spare_v1" = #{spareV1,jdbcType=VARCHAR},
+      </if>
+      <if test="spareV2 != null">
+        " spare_v2" = #{spareV2,jdbcType=VARCHAR},
+      </if>
+      <if test="spareV3 != null">
+        " spare_v3" = #{spareV3,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where dept_user_id = #{deptUserId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tx.dllogin.model.DeptUser">
+    update dd_dept_user
+    set dept_id = #{deptId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      " spare_v1" = #{spareV1,jdbcType=VARCHAR},
+      " spare_v2" = #{spareV2,jdbcType=VARCHAR},
+      " spare_v3" = #{spareV3,jdbcType=VARCHAR}
+    where dept_user_id = #{deptUserId,jdbcType=VARCHAR}
+  </update>
+
+    <delete id="deleteUserOneByUserId" >
+       delete from  dd_dept_user
+         where  user_id=#{userId}
+    </delete>
+
+
+  <delete id="deleteUserList">
+    delete  from dd_dept_user
+    where user_id in
+    <foreach collection="list"  item="ss" separator="," open="(" close=")" >
+      #{ss}
+    </foreach>
+  </delete>
+
+  <update id="updateUser" >
+     update  dd_dept_user d
+         set
+    <if test="deptId != null">
+      dept_id = #{deptId},
+    </if>
+    <if test="firmId != null">
+      d.` spare_v1` = #{firmId}
+    </if>
+    where user_id = #{userId}
+
+  </update>
+
+</mapper>
