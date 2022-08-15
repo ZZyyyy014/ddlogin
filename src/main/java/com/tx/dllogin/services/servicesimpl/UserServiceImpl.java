@@ -44,7 +44,6 @@ public class UserServiceImpl  implements UserService {
     @Transactional(propagation = Propagation.REQUIRED )//有1个事务  当前只执行一次数据库操作  查询无所谓
     public CommonResult login(String userName, String passWrod,String captcha, HttpServletRequest request)  {
        String attribute =request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY).toString();
-
         if (!attribute.equals(captcha)){
            return CommonResult.error("验证码错误,请重新登录");
        }

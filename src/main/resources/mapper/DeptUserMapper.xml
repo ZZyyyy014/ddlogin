@@ -5,12 +5,12 @@
     <id column="dept_user_id" jdbcType="VARCHAR" property="deptUserId" />
     <result column="dept_id" jdbcType="VARCHAR" property="deptId" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column=" sparess_v1" jdbcType="VARCHAR" property="sparessV1" />
-    <result column=" sparess_v2" jdbcType="VARCHAR" property="sparessV2" />
-    <result column=" sparess_v3" jdbcType="VARCHAR" property="sparessV3" />
+    <result column="sparess_v1" jdbcType="VARCHAR" property="sparessV1" />
+    <result column="sparess_v2" jdbcType="VARCHAR" property="sparessV2" />
+    <result column="sparess_v3" jdbcType="VARCHAR" property="sparessV3" />
   </resultMap>
   <sql id="Base_Column_List">
-    dept_user_id, dept_id, user_id, " sparess_v1", " sparess_v2", " sparess_v3"
+    dept_user_id, dept_id, user_id, sparess_v1, sparess_v2, sparess_v3
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -24,7 +24,7 @@
   </delete>
   <insert id="insert" parameterType="com.tx.dllogin.model.DeptUser">
     insert into dd_dept_user (dept_user_id, dept_id, user_id, 
-      " sparess_v1", " sparess_v2", " sparess_v3"
+      sparess_v1, sparess_v2, sparess_v3
       )
     values (#{deptUserId,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
       #{sparessV1,jdbcType=VARCHAR}, #{sparessV2,jdbcType=VARCHAR}, #{sparessV3,jdbcType=VARCHAR}
@@ -43,13 +43,13 @@
         user_id,
       </if>
       <if test="sparessV1 != null">
-        " sparess_v1",
+        sparess_v1,
       </if>
       <if test="sparessV2 != null">
-        " sparess_v2",
+        sparess_v2,
       </if>
       <if test="sparessV3 != null">
-        " sparess_v3",
+        sparess_v3,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -83,24 +83,25 @@
         user_id = #{userId,jdbcType=VARCHAR},
       </if>
       <if test="sparessV1 != null">
-        " sparess_v1" = #{sparessV1,jdbcType=VARCHAR},
+        sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
       </if>
       <if test="sparessV2 != null">
-        " sparess_v2" = #{sparessV2,jdbcType=VARCHAR},
+        sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
       </if>
       <if test="sparessV3 != null">
-        " sparess_v3" = #{sparessV3,jdbcType=VARCHAR},
+        sparess_v3 = #{sparessV3,jdbcType=VARCHAR},
       </if>
     </set>
     where dept_user_id = #{deptUserId,jdbcType=VARCHAR}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.tx.dllogin.model.DeptUser">
     update dd_dept_user
     set dept_id = #{deptId,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=VARCHAR},
-      " sparess_v1" = #{sparessV1,jdbcType=VARCHAR},
-      " sparess_v2" = #{sparessV2,jdbcType=VARCHAR},
-      " sparess_v3" = #{sparessV3,jdbcType=VARCHAR}
+      sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
+      sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
+      sparess_v3 = #{sparessV3,jdbcType=VARCHAR}
     where dept_user_id = #{deptUserId,jdbcType=VARCHAR}
   </update>
 
