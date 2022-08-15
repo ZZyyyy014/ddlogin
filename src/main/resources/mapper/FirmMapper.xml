@@ -91,7 +91,7 @@
     where firm_id = #{firmId,jdbcType=VARCHAR}
   </update>
 
-  <select id="findAllFrims" resultType="Firm" >
+  <select id="findAllFrims" resultType="Firm">
     select  *
     from dd_firm
   </select>

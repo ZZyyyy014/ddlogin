@@ -5,9 +5,9 @@
     <id column="dept_id" jdbcType="VARCHAR" property="deptId" />
     <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
     <result column="dept_super_id" jdbcType="VARCHAR" property="deptSuperId" />
-    <result column=" sparess_v1" jdbcType="VARCHAR" property="sparessV1" />
-    <result column=" sparess_v2" jdbcType="VARCHAR" property="sparessV2" />
-    <result column=" sparess_v3" jdbcType="VARCHAR" property="sparessV3" />
+    <result column="sparess_v1" jdbcType="VARCHAR" property="sparessV1" />
+    <result column="sparess_v2" jdbcType="VARCHAR" property="sparessV2" />
+    <result column="sparess_v3" jdbcType="VARCHAR" property="sparessV3" />
   </resultMap>
   <sql id="Base_Column_List">
     dept_id, dept_name, dept_super_id, " sparess_v1", " sparess_v2", " sparess_v3"
@@ -24,7 +24,7 @@
   </delete>
   <insert id="insert" parameterType="com.tx.dllogin.model.Dept">
     insert into dd_dept (dept_id, dept_name, dept_super_id, 
-      " sparess_v1", " sparess_v2", " sparess_v3"
+      sparess_v1, sparess_v2, sparess_v3
       )
     values (#{deptId,jdbcType=VARCHAR}, #{deptName,jdbcType=VARCHAR}, #{deptSuperId,jdbcType=VARCHAR}, 
       #{sparessV1,jdbcType=VARCHAR}, #{sparessV2,jdbcType=VARCHAR}, #{sparessV3,jdbcType=VARCHAR}
@@ -43,13 +43,13 @@
         dept_super_id,
       </if>
       <if test="sparessV1 != null">
-        " sparess_v1",
+        sparess_v1,
       </if>
       <if test="sparessV2 != null">
-        " sparess_v2",
+       sparess_v2,
       </if>
       <if test="sparessV3 != null">
-        " sparess_v3",
+        sparess_v3,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -83,13 +83,13 @@
         dept_super_id = #{deptSuperId,jdbcType=VARCHAR},
       </if>
       <if test="sparessV1 != null">
-        " sparess_v1" = #{sparessV1,jdbcType=VARCHAR},
+        sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
       </if>
       <if test="sparessV2 != null">
-        " sparess_v2" = #{sparessV2,jdbcType=VARCHAR},
+        sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
       </if>
       <if test="sparessV3 != null">
-        " sparess_v3" = #{sparessV3,jdbcType=VARCHAR},
+        sparess_v3 = #{sparessV3,jdbcType=VARCHAR},
       </if>
     </set>
     where dept_id = #{deptId,jdbcType=VARCHAR}
@@ -98,9 +98,9 @@
     update dd_dept
     set dept_name = #{deptName,jdbcType=VARCHAR},
       dept_super_id = #{deptSuperId,jdbcType=VARCHAR},
-      " sparess_v1" = #{sparessV1,jdbcType=VARCHAR},
-      " sparess_v2" = #{sparessV2,jdbcType=VARCHAR},
-      " sparess_v3" = #{sparessV3,jdbcType=VARCHAR}
+      sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
+      sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
+      sparess_v3 = #{sparessV3,jdbcType=VARCHAR}
     where dept_id = #{deptId,jdbcType=VARCHAR}
   </update>
 

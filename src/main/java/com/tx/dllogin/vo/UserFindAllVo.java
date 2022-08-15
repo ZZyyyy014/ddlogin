@@ -22,7 +22,7 @@ public class UserFindAllVo {
     private String ip;
 
     // 所在公司id
-    private String sparessV1;
+    private String  sparessV1;
     //所在公司名称
 
     private String firmName;

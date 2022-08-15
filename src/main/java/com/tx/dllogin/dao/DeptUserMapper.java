@@ -18,7 +18,6 @@ public interface DeptUserMapper {
 
     int updateByPrimaryKey(DeptUser record);
 
-    //刪除多个 用户
     void  deleteUserList(List<String> list);
 
     //删除单个用户
@@ -27,5 +26,4 @@ public interface DeptUserMapper {
     void  updateUser(@Param("userId") String userId
             ,@Param("deptId") String deptId
             ,@Param("firmId") String firmId);
-
 }

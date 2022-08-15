@@ -19,6 +19,7 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
+
     //根据名称 查询 用户
     User  findUserByName(@Param("userName") String userName);
 
