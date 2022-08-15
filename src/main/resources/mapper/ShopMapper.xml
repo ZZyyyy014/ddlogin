@@ -8,13 +8,13 @@
     <result column="shop_login_date" jdbcType="TIMESTAMP" property="shopLoginDate" />
     <result column="shop_ip" jdbcType="VARCHAR" property="shopIp" />
     <result column="shop_authorization" jdbcType="VARCHAR" property="shopAuthorization" />
-    <result column="spare_v1" jdbcType="VARCHAR" property="spareV1" />
-    <result column="spare_v2" jdbcType="VARCHAR" property="spareV2" />
-    <result column="spare_v3" jdbcType="VARCHAR" property="spareV3" />
+    <result column="sparess_v1" jdbcType="VARCHAR" property="sparessV1" />
+    <result column="sparess_v2" jdbcType="VARCHAR" property="sparessV2" />
+    <result column="sparess_v3" jdbcType="VARCHAR" property="sparessV3" />
   </resultMap>
   <sql id="Base_Column_List">
     shop_id, shop_user_name, shop_user_passWrod, shop_login_date, shop_ip, shop_authorization, 
-    spare_v1, spare_v2, spare_v3
+    sparess_v1, sparess_v2, sparess_v3
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -29,11 +29,11 @@
   <insert id="insert" parameterType="com.tx.dllogin.model.Shop">
     insert into dd_shop (shop_id, shop_user_name, shop_user_passWrod, 
       shop_login_date, shop_ip, shop_authorization, 
-      spare_v1, spare_v2, spare_v3
+      sparess_v1, sparess_v2, sparess_v3
       )
     values (#{shopId,jdbcType=VARCHAR}, #{shopUserName,jdbcType=VARCHAR}, #{shopUserPasswrod,jdbcType=VARCHAR}, 
       #{shopLoginDate,jdbcType=TIMESTAMP}, #{shopIp,jdbcType=VARCHAR}, #{shopAuthorization,jdbcType=VARCHAR}, 
-      #{spareV1,jdbcType=VARCHAR}, #{spareV2,jdbcType=VARCHAR}, #{spareV3,jdbcType=VARCHAR}
+      #{sparessV1,jdbcType=VARCHAR}, #{sparessV2,jdbcType=VARCHAR}, #{sparessV3,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.tx.dllogin.model.Shop">
@@ -57,14 +57,14 @@
       <if test="shopAuthorization != null">
         shop_authorization,
       </if>
-      <if test="spareV1 != null">
-        spare_v1,
+      <if test="sparessV1 != null">
+        sparess_v1,
       </if>
-      <if test="spareV2 != null">
-        spare_v2,
+      <if test="sparessV2 != null">
+        sparess_v2,
       </if>
-      <if test="spareV3 != null">
-        spare_v3,
+      <if test="sparessV3 != null">
+        sparess_v3,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -86,14 +86,14 @@
       <if test="shopAuthorization != null">
         #{shopAuthorization,jdbcType=VARCHAR},
       </if>
-      <if test="spareV1 != null">
-        #{spareV1,jdbcType=VARCHAR},
+      <if test="sparessV1 != null">
+        #{sparessV1,jdbcType=VARCHAR},
       </if>
-      <if test="spareV2 != null">
-        #{spareV2,jdbcType=VARCHAR},
+      <if test="sparessV2 != null">
+        #{sparessV2,jdbcType=VARCHAR},
       </if>
-      <if test="spareV3 != null">
-        #{spareV3,jdbcType=VARCHAR},
+      <if test="sparessV3 != null">
+        #{sparessV3,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -115,14 +115,14 @@
       <if test="shopAuthorization != null">
         shop_authorization = #{shopAuthorization,jdbcType=VARCHAR},
       </if>
-      <if test="spareV1 != null">
-        spare_v1 = #{spareV1,jdbcType=VARCHAR},
+      <if test="sparessV1 != null">
+        sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
       </if>
-      <if test="spareV2 != null">
-        spare_v2 = #{spareV2,jdbcType=VARCHAR},
+      <if test="sparessV2 != null">
+        sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
       </if>
-      <if test="spareV3 != null">
-        spare_v3 = #{spareV3,jdbcType=VARCHAR},
+      <if test="sparessV3 != null">
+        sparess_v3 = #{sparessV3,jdbcType=VARCHAR},
       </if>
     </set>
     where shop_id = #{shopId,jdbcType=VARCHAR}
@@ -134,9 +134,9 @@
       shop_login_date = #{shopLoginDate,jdbcType=TIMESTAMP},
       shop_ip = #{shopIp,jdbcType=VARCHAR},
       shop_authorization = #{shopAuthorization,jdbcType=VARCHAR},
-      spare_v1 = #{spareV1,jdbcType=VARCHAR},
-      spare_v2 = #{spareV2,jdbcType=VARCHAR},
-      spare_v3 = #{spareV3,jdbcType=VARCHAR}
+      sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
+      sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
+      sparess_v3 = #{sparessV3,jdbcType=VARCHAR}
     where shop_id = #{shopId,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -1,6 +1,7 @@
 package com.tx.dllogin.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -22,19 +23,19 @@ public class JwtIterceptceptorConfig implements WebMvcConfigurer {
     }
 
 
- /*   @Override //跨域选择 失效 配置拦截器就失效了 应为是在拦截器后面
+    @Override //跨域选择 失效 配置拦截器就失效了 应为是在拦截器后面
     public void addCorsMappings(CorsRegistry registry) {
             //设置 允许的跨域路由
         registry.addMapping("/**")
                 //允许跨域的域名
-                .allowedOrigins("http://localhost:8070","http://localhost:9090")
+                .allowedOrigins("*")
                  //是否允许 cookies
                 .allowCredentials(true)
                 //允许方法
                 .allowedMethods("*")
                 //允许跨域时间
                 .maxAge(3600);
-    }*/
+    }
 
 
 

@@ -4,9 +4,12 @@
   <resultMap id="BaseResultMap" type="com.tx.dllogin.model.Firm">
     <id column="firm_id" jdbcType="VARCHAR" property="firmId" />
     <result column="firm_name" jdbcType="VARCHAR" property="firmName" />
+    <result column="sparess_v1" jdbcType="VARCHAR" property="sparessV1" />
+    <result column="sparess_v2" jdbcType="VARCHAR" property="sparessV2" />
+    <result column="sparess_v3" jdbcType="VARCHAR" property="sparessV3" />
   </resultMap>
   <sql id="Base_Column_List">
-    firm_id, firm_name
+    firm_id, firm_name, sparess_v1, sparess_v2, sparess_v3
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -19,8 +22,10 @@
     where firm_id = #{firmId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.tx.dllogin.model.Firm">
-    insert into dd_firm (firm_id, firm_name)
-    values (#{firmId,jdbcType=VARCHAR}, #{firmName,jdbcType=VARCHAR})
+    insert into dd_firm (firm_id, firm_name, sparess_v1, 
+      sparess_v2, sparess_v3)
+    values (#{firmId,jdbcType=VARCHAR}, #{firmName,jdbcType=VARCHAR}, #{sparessV1,jdbcType=VARCHAR}, 
+      #{sparessV2,jdbcType=VARCHAR}, #{sparessV3,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.tx.dllogin.model.Firm">
     insert into dd_firm
@@ -31,6 +36,15 @@
       <if test="firmName != null">
         firm_name,
       </if>
+      <if test="sparessV1 != null">
+        sparess_v1,
+      </if>
+      <if test="sparessV2 != null">
+        sparess_v2,
+      </if>
+      <if test="sparessV3 != null">
+        sparess_v3,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="firmId != null">
@@ -38,6 +52,15 @@
       </if>
       <if test="firmName != null">
         #{firmName,jdbcType=VARCHAR},
+      </if>
+      <if test="sparessV1 != null">
+        #{sparessV1,jdbcType=VARCHAR},
+      </if>
+      <if test="sparessV2 != null">
+        #{sparessV2,jdbcType=VARCHAR},
+      </if>
+      <if test="sparessV3 != null">
+        #{sparessV3,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -47,13 +70,30 @@
       <if test="firmName != null">
         firm_name = #{firmName,jdbcType=VARCHAR},
       </if>
+      <if test="sparessV1 != null">
+        sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
+      </if>
+      <if test="sparessV2 != null">
+        sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
+      </if>
+      <if test="sparessV3 != null">
+        sparess_v3 = #{sparessV3,jdbcType=VARCHAR},
+      </if>
     </set>
     where firm_id = #{firmId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.tx.dllogin.model.Firm">
     update dd_firm
-    set firm_name = #{firmName,jdbcType=VARCHAR}
+    set firm_name = #{firmName,jdbcType=VARCHAR},
+      sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
+      sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
+      sparess_v3 = #{sparessV3,jdbcType=VARCHAR}
     where firm_id = #{firmId,jdbcType=VARCHAR}
   </update>
+
+  <select id="findAllFrims" resultType="Firm" >
+    select  *
+    from dd_firm
+  </select>
 
 </mapper>

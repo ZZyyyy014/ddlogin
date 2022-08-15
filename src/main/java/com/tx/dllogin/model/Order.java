@@ -1,10 +1,7 @@
 package com.tx.dllogin.model;
 
-import lombok.Data;
-
 import java.util.Date;
 
-@Data
 public class Order {
     private String orderId;
 
@@ -12,11 +9,11 @@ public class Order {
 
     private Date orderDate;
 
-    private String spareV1;
+    private String sparessV1;
 
-    private String spareV2;
+    private String sparessV2;
 
-    private String spareV3;
+    private String sparessV3;
 
     public String getOrderId() {
         return orderId;
@@ -42,27 +39,27 @@ public class Order {
         this.orderDate = orderDate;
     }
 
-    public String getSpareV1() {
-        return spareV1;
+    public String getSparessV1() {
+        return sparessV1;
     }
 
-    public void setSpareV1(String spareV1) {
-        this.spareV1 = spareV1 == null ? null : spareV1.trim();
+    public void setSparessV1(String sparessV1) {
+        this.sparessV1 = sparessV1 == null ? null : sparessV1.trim();
     }
 
-    public String getSpareV2() {
-        return spareV2;
+    public String getSparessV2() {
+        return sparessV2;
     }
 
-    public void setSpareV2(String spareV2) {
-        this.spareV2 = spareV2 == null ? null : spareV2.trim();
+    public void setSparessV2(String sparessV2) {
+        this.sparessV2 = sparessV2 == null ? null : sparessV2.trim();
     }
 
-    public String getSpareV3() {
-        return spareV3;
+    public String getSparessV3() {
+        return sparessV3;
     }
 
-    public void setSpareV3(String spareV3) {
-        this.spareV3 = spareV3 == null ? null : spareV3.trim();
+    public void setSparessV3(String sparessV3) {
+        this.sparessV3 = sparessV3 == null ? null : sparessV3.trim();
     }
 }

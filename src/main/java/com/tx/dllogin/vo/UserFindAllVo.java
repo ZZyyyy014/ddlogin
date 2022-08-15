@@ -20,10 +20,13 @@ public class UserFindAllVo {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date loginDate;
     private String ip;
+
     // 所在公司id
-    private String spareV1;
+    private String sparessV1;
     //所在公司名称
+
     private String firmName;
-   // private String spareV3;
-    private String level;
+
+    // private String spareV3;
+    private String levelss;
 }

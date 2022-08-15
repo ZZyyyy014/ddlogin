@@ -5,6 +5,7 @@ import com.google.code.kaptcha.Producer;
 import com.tx.dllogin.common.CommonResult;
 import com.tx.dllogin.services.UserService;
 import com.tx.dllogin.utill.AesUtil;
+import com.tx.dllogin.vo.AddUserVo;
 import com.tx.dllogin.vo.UserFindAllVo;
 import com.tx.dllogin.vo.Uservo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin("*")
 public class UserController {
 
     @Autowired
@@ -104,6 +105,11 @@ public class UserController {
         return allLogin;
     }
 
+    @PostMapping("/user/AddUser")
+    public CommonResult AddUser(@RequestBody AddUserVo addUserVo){
+        CommonResult commonResult = userService.AddUser(addUserVo);
+        return commonResult;
+    }
 
 
 }

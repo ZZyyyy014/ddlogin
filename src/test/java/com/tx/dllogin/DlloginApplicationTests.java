@@ -77,6 +77,7 @@ public class DlloginApplicationTests {
         String s = AesUtil.loginDd("森马萌2","QWEQWE123");
         System.out.println(s);
     }
+
     @Test
     public void tset26() {
         List<String> list = new ArrayList<>();
@@ -88,7 +89,10 @@ public class DlloginApplicationTests {
 
 
     @Test
-    public void tset27() {}
+    public void tset27() {
+
+
+    }
 
 
 

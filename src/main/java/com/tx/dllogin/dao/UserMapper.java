@@ -25,7 +25,9 @@ public interface UserMapper {
     //查询所有  用户信息
     List<UserFindAllVo> findAllUser();
 
-    //根据 用户名称   删除多个用户  和绑定关系表
-    void deleteUserList(@Param("lists")List<String> lists);
+    //判断是否存在该用户名
+    Integer  findExitByUserName(@Param("userName") String userName);
 
+    //根据 用户名称   删除多个用户  和绑定关系表
+    void deleteUserList(@Param("lists") List<String> lists);
 }

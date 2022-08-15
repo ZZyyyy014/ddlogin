@@ -6,10 +6,13 @@ import com.google.code.kaptcha.Constants;
 import com.tx.dllogin.common.CommonResult;
 import com.tx.dllogin.dao.DeptUserMapper;
 import com.tx.dllogin.dao.UserMapper;
+import com.tx.dllogin.model.DeptUser;
 import com.tx.dllogin.model.User;
 import com.tx.dllogin.services.UserService;
+import com.tx.dllogin.utill.GetUUIdUtil;
 import com.tx.dllogin.utill.IpUtill;
 import com.tx.dllogin.utill.JwtUtil;
+import com.tx.dllogin.vo.AddUserVo;
 import com.tx.dllogin.vo.UserFindAllVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +43,8 @@ public class UserServiceImpl  implements UserService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED )//有1个事务  当前只执行一次数据库操作  查询无所谓
     public CommonResult login(String userName, String passWrod,String captcha, HttpServletRequest request)  {
-        String attribute =request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY).toString();
+       String attribute =request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY).toString();
+
         if (!attribute.equals(captcha)){
            return CommonResult.error("验证码错误,请重新登录");
        }
@@ -49,7 +53,7 @@ public class UserServiceImpl  implements UserService {
              return CommonResult.error("该用户未注册");
         }
         //   getMD5String 获取密码加密
-     /*
+        /*
         String md5String = AesUtil.getMD5String(passWrod);
         if(userByName.getUserPasswrod()!=md5String){
             return CommonResult.error("密码错误");
@@ -75,7 +79,7 @@ public class UserServiceImpl  implements UserService {
         HashMap<String, String> map1 = new HashMap<>();
         map1.put("userName", userByName.getUserName());
         map1.put("userId", userByName.getUserId());
-        map1.put("level",userByName.getLevel());
+        map1.put("level",userByName.getLevelss());
         token = JwtUtil.getToken(map1);
         HashMap<String, String> map = new HashMap<>();
         map.put("jwtToken", token);
@@ -128,9 +132,11 @@ public class UserServiceImpl  implements UserService {
             User user = new User();
             user.setUserId(userFindAllVo.getUserId());
             user.setDeptId(userFindAllVo.getDeptId());
-            user.setSpareV1(userFindAllVo.getUserRealName());
+
+            user.setSparessV1(userFindAllVo.getUserRealName());
+
             userMapper.updateByPrimaryKeySelective(user);
-            deptUserMapper.updateUser(userFindAllVo.getUserId(), userFindAllVo.getDeptId(), userFindAllVo.getSpareV1());
+            deptUserMapper.updateUser(userFindAllVo.getUserId(), userFindAllVo.getDeptId(), userFindAllVo.getSparessV1());
         }catch (Exception e){
             e.printStackTrace();
             return CommonResult.error("修改用户信息失败");
@@ -138,6 +144,48 @@ public class UserServiceImpl  implements UserService {
         return CommonResult.success();
     }
 
+    //把前面事务当做子事务， 父事务成功后 才所有释放 否则 rollback
+    @Transactional(propagation = Propagation.NESTED)
+    @Override
+    public CommonResult AddUser(AddUserVo addUserVo) {
+        //先判断 从前端传来的 deptId  和firmId  是否为null ""
+        if(addUserVo.getDeptId()==null && addUserVo.getDeptId().equals("")){
+              return CommonResult.error("请选择一个部门");
+        }
+        if(addUserVo.getFirmId()==null && addUserVo.getFirmId().equals("")){
+            return CommonResult.error("请选择一个公司");
+        }
+        //先查数据库 是否存在该 用户名
+        Integer exitByUserName = userMapper.findExitByUserName(addUserVo.getUserName());
+        if( exitByUserName!=null&& exitByUserName==1){
+            return CommonResult.error("该用户账号已经存在");
+        }
+        User user = new User();
+        String useruUuId = GetUUIdUtil.getUUId();
+        user.setUserId(useruUuId);
+        user.setUserName(addUserVo.getUserName());
+        user.setSparessV1(addUserVo.getSpareV1());
+        user.setDeptId(addUserVo.getDeptId());
+        //密码md5加密后
+          //String md5String = AesUtil.getMD5String(addUserVo.getUserPassWrod());
+        //不知道用不用 MD5
+        user.setUserPasswrod(addUserVo.getUserPassWrod());
+     try {
+         userMapper.insertSelective(user);
+         //关联关系
+         DeptUser deptUser = new DeptUser();
+         //主键
+         deptUser.setDeptUserId(GetUUIdUtil.getUUId());
+         deptUser.setUserId(useruUuId);
+         deptUser.setDeptId(addUserVo.getDeptId());
+         deptUser.setSparessV1(addUserVo.getSpareV1());
+         deptUserMapper.insertSelective(deptUser);
+     }catch (Exception e){
+         e.printStackTrace();
+         return CommonResult.error("添加失败");
+     }
+        return CommonResult.success("添加成功");
+    }
 
 
 }

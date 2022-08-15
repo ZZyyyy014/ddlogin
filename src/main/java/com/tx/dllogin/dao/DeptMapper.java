@@ -18,5 +18,4 @@ public interface DeptMapper {
     int updateByPrimaryKey(Dept record);
 
     List<Dept> findAllDept();
-
 }

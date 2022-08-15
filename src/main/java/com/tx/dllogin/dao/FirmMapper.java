@@ -2,6 +2,8 @@ package com.tx.dllogin.dao;
 
 import com.tx.dllogin.model.Firm;
 
+import java.util.List;
+
 public interface FirmMapper {
     int deleteByPrimaryKey(String firmId);
 
@@ -14,4 +16,6 @@ public interface FirmMapper {
     int updateByPrimaryKeySelective(Firm record);
 
     int updateByPrimaryKey(Firm record);
+
+    List<Firm> findAllFrims();
 }

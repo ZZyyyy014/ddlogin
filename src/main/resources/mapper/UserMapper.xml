@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tx.dllogin.dao.UserMapper">
-
   <resultMap id="BaseResultMap" type="com.tx.dllogin.model.User">
     <id column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
@@ -9,14 +8,14 @@
     <result column="login_date" jdbcType="TIMESTAMP" property="loginDate" />
     <result column="dept_id" jdbcType="VARCHAR" property="deptId" />
     <result column="ip" jdbcType="VARCHAR" property="ip" />
-    <result column="spare_v1" jdbcType="VARCHAR" property="spareV1" />
-    <result column="spare_v2" jdbcType="VARCHAR" property="spareV2" />
-    <result column="spare_v3" jdbcType="VARCHAR" property="spareV3" />
-    <result column="level" jdbcType="VARCHAR" property="level" />
+    <result column="sparess_v1" jdbcType="VARCHAR" property="sparessV1" />
+    <result column="sparess_v2" jdbcType="VARCHAR" property="sparessV2" />
+    <result column="sparess_v3" jdbcType="VARCHAR" property="sparessV3" />
+    <result column="levelss" jdbcType="VARCHAR" property="level" />
   </resultMap>
   <sql id="Base_Column_List">
-    user_id, user_name, user_passWrod, login_date, dept_id, ip, spare_v1, spare_v2, spare_v3, 
-    level
+    user_id, user_name, user_passWrod, login_date, dept_id, ip, sparess_v1, sparess_v2, 
+    sparess_v3, levelss
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -31,12 +30,12 @@
   <insert id="insert" parameterType="com.tx.dllogin.model.User">
     insert into dd_user (user_id, user_name, user_passWrod, 
       login_date, dept_id, ip, 
-      spare_v1, spare_v2, spare_v3, 
-      level)
+      sparess_v1, sparess_v2, sparess_v3, 
+      levelss)
     values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userPasswrod,jdbcType=VARCHAR}, 
       #{loginDate,jdbcType=TIMESTAMP}, #{deptId,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
-      #{spareV1,jdbcType=VARCHAR}, #{spareV2,jdbcType=VARCHAR}, #{spareV3,jdbcType=VARCHAR}, 
-      #{level,jdbcType=VARCHAR})
+      #{sparessV1,jdbcType=VARCHAR}, #{sparessV2,jdbcType=VARCHAR}, #{sparessV3,jdbcType=VARCHAR}, 
+      #{levelss,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.tx.dllogin.model.User">
     insert into dd_user
@@ -59,17 +58,17 @@
       <if test="ip != null">
         ip,
       </if>
-      <if test="spareV1 != null">
-        spare_v1,
+      <if test="sparessV1 != null">
+        sparess_v1,
       </if>
-      <if test="spareV2 != null">
-        spare_v2,
+      <if test="sparessV2 != null">
+        sparess_v2,
       </if>
-      <if test="spareV3 != null">
-        spare_v3,
+      <if test="sparessV3 != null">
+        sparess_v3,
       </if>
-      <if test="level != null">
-        level,
+      <if test="levelss != null">
+        levelss,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -91,17 +90,17 @@
       <if test="ip != null">
         #{ip,jdbcType=VARCHAR},
       </if>
-      <if test="spareV1 != null">
-        #{spareV1,jdbcType=VARCHAR},
+      <if test="sparessV1 != null">
+        #{sparessV1,jdbcType=VARCHAR},
       </if>
-      <if test="spareV2 != null">
-        #{spareV2,jdbcType=VARCHAR},
+      <if test="sparessV2 != null">
+        #{sparessV2,jdbcType=VARCHAR},
       </if>
-      <if test="spareV3 != null">
-        #{spareV3,jdbcType=VARCHAR},
+      <if test="sparessV3 != null">
+        #{sparessV3,jdbcType=VARCHAR},
       </if>
-      <if test="level != null">
-        #{level,jdbcType=VARCHAR},
+      <if test="levelss != null">
+        #{levelss,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -123,17 +122,17 @@
       <if test="ip != null">
         ip = #{ip,jdbcType=VARCHAR},
       </if>
-      <if test="spareV1 != null">
-        spare_v1 = #{spareV1,jdbcType=VARCHAR},
+      <if test="sparessV1 != null">
+        sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
       </if>
-      <if test="spareV2 != null">
-        spare_v2 = #{spareV2,jdbcType=VARCHAR},
+      <if test="sparessV2 != null">
+        sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
       </if>
-      <if test="spareV3 != null">
-        spare_v3 = #{spareV3,jdbcType=VARCHAR},
+      <if test="sparessV3 != null">
+        sparess_v3 = #{sparessV3,jdbcType=VARCHAR},
       </if>
-      <if test="level != null">
-        level = #{level,jdbcType=VARCHAR},
+      <if test="levelss != null">
+        levelss = #{levelss,jdbcType=VARCHAR},
       </if>
     </set>
     where user_id = #{userId,jdbcType=VARCHAR}
@@ -145,12 +144,13 @@
       login_date = #{loginDate,jdbcType=TIMESTAMP},
       dept_id = #{deptId,jdbcType=VARCHAR},
       ip = #{ip,jdbcType=VARCHAR},
-      spare_v1 = #{spareV1,jdbcType=VARCHAR},
-      spare_v2 = #{spareV2,jdbcType=VARCHAR},
-      spare_v3 = #{spareV3,jdbcType=VARCHAR},
-      level = #{level,jdbcType=VARCHAR}
+      sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
+      sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
+      sparess_v3 = #{sparessV3,jdbcType=VARCHAR},
+      levelss = #{levelss,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=VARCHAR}
   </update>
+
 
   <select id="findUserByName" resultType="com.tx.dllogin.model.User">
     select  *
@@ -161,49 +161,54 @@
 
 
   <resultMap id="findAllUser" type="UserFindAllVo">
-    <id column="duspare_v1" property="spareV1" />
-      <result column="dfspare_v2" property="firmName" />
-      <result column="uuser_id" property="userId" />
-      <result column="uuser_name" property="userName" />
-      <result column="ulogin_date" property="loginDate" />
-      <result column="uspare_v1" property="userRealName" />
-      <result column="ddept_name" property="deptName" />
-      <result column="ddept_id" property="deptId" />
-      <result column="uip" property="ip" />
-      <result column="ulv" property="level" />
+    <id column="dusparess_v1" property="sparessV1" />
+    <result column="dfirmName" property="firmName" />
+    <result column="uuser_id" property="userId" />
+    <result column="uuser_name" property="userName" />
+    <result column="ulogin_date" property="loginDate" />
+    <result column="uspare_v1" property="userRealName" />
+    <result column="ddept_name" property="deptName" />
+    <result column="ddept_id" property="deptId" />
+    <result column="uip" property="ip" />
+    <result column="ulv" property="levelss" />
   </resultMap>
 
   <select id="findAllUser" resultMap="findAllUser">
     select DISTINCT
-                   du.` spare_v1`  duspare_v1
-                  ,df.firm_name    dfspare_v2
+                   du.sparess_v1  duspare_v1
+                  ,df.firm_name    dfirmName
                   ,d.dept_id       ddept_id
                   ,d.dept_name ddept_name
                   ,u.user_id uuser_id
                   ,u.user_name uuser_name
                   ,u.login_date ulogin_date
-                  ,u.spare_v1 uspare_v1
+                  ,u.sparess_v1 uspare_v1
                   ,u.ip uip
-                  ,u.`level` ulv
+                  ,u.levelss ulv
     from  dd_dept_user du,dd_dept d,dd_user u,dd_firm df
     where  du.dept_id=d.dept_id
       and  du.user_id=u.user_id
-      and  du.` spare_v1`=df.firm_id
-    ORDER BY dfspare_v2,ddept_id
-
-</select>
+      and  du.sparess_v1=df.firm_id
+    ORDER BY dfirmName,ddept_id
+  </select>
 
 
 
   <delete id="deleteUserList">
-         delete  from dd_user
-         where user_id  in
-          <foreach close=")" collection="lists" item="ss" open="(" separator=",">
-              #{ss}
-          </foreach>
+    delete  from dd_user
+    where user_id  in
+    <foreach close=")" collection="lists" item="ss" open="(" separator=",">
+      #{ss}
+    </foreach>
   </delete>
 
-
+  <select id="findExitByUserName"  resultType="Integer">
+    select
+      user_name
+    from dd_user
+    where user_name=#{userName}
+    limit 1
+  </select>
 
 
 

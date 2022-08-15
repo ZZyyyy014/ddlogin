@@ -1,6 +1,7 @@
 package com.tx.dllogin.services;
 
 import com.tx.dllogin.common.CommonResult;
+import com.tx.dllogin.vo.AddUserVo;
 import com.tx.dllogin.vo.UserFindAllVo;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,8 @@ public interface UserService {
     CommonResult  deleteListUser(List<String> userId);
 
     CommonResult updateUserFindAllVo(UserFindAllVo userFindAllVo);
+
+    CommonResult  AddUser(AddUserVo addUserVo);
 
 
 
