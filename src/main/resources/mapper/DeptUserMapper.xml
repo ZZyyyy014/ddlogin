@@ -94,7 +94,6 @@
     </set>
     where dept_user_id = #{deptUserId,jdbcType=VARCHAR}
   </update>
-
   <update id="updateByPrimaryKey" parameterType="com.tx.dllogin.model.DeptUser">
     update dd_dept_user
     set dept_id = #{deptId,jdbcType=VARCHAR},
@@ -104,13 +103,6 @@
       sparess_v3 = #{sparessV3,jdbcType=VARCHAR}
     where dept_user_id = #{deptUserId,jdbcType=VARCHAR}
   </update>
-
-
-  <delete id="deleteUserOneByUserId">
-    delete from  dd_dept_user
-    where  user_id=#{userId}
-  </delete>
-
 
   <delete id="deleteUserList">
     delete  from dd_dept_user
@@ -132,6 +124,7 @@
     where user_id = #{userId}
 
   </update>
+
 
 
 </mapper>

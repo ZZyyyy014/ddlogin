@@ -1,6 +1,7 @@
 package com.tx.dllogin.dao;
 
 import com.tx.dllogin.model.Firm;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,5 +18,9 @@ public interface FirmMapper {
 
     int updateByPrimaryKey(Firm record);
 
+
+    //查询所有的公司
     List<Firm> findAllFrims();
+    //查询公司 名称是否存在
+    String  findBuyFirmName(@Param("firmName") String firmName);
 }

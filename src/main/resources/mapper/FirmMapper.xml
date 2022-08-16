@@ -96,4 +96,14 @@
     from dd_firm
   </select>
 
+  <select id="findBuyFirmName" resultType="String">
+    select firm_name
+    from  dd_firm
+    where firm_name=#{firmName}
+    limit 1
+  </select>
+
+
+
+
 </mapper>

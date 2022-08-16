@@ -11,7 +11,7 @@
     <result column="sparess_v1" jdbcType="VARCHAR" property="sparessV1" />
     <result column="sparess_v2" jdbcType="VARCHAR" property="sparessV2" />
     <result column="sparess_v3" jdbcType="VARCHAR" property="sparessV3" />
-    <result column="levelss" jdbcType="VARCHAR" property="level" />
+    <result column="levelss" jdbcType="VARCHAR" property="levelss" />
   </resultMap>
   <sql id="Base_Column_List">
     user_id, user_name, user_passWrod, login_date, dept_id, ip, sparess_v1, sparess_v2, 
@@ -152,6 +152,7 @@
   </update>
 
 
+
   <select id="findUserByName" resultType="com.tx.dllogin.model.User">
     select  *
     from  dd_user
@@ -175,7 +176,7 @@
 
   <select id="findAllUser" resultMap="findAllUser">
     select DISTINCT
-                  du.sparess_v1  dusparess_v1
+      du.sparess_v1  dusparess_v1
                   ,df.firm_name    dfirmName
                   ,d.dept_id       ddept_id
                   ,d.dept_name ddept_name
@@ -207,6 +208,8 @@
     where user_name=#{userName}
     limit 1
   </select>
+
+
 
 
 

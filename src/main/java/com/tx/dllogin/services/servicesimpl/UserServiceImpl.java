@@ -43,8 +43,8 @@ public class UserServiceImpl  implements UserService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED )//有1个事务  当前只执行一次数据库操作  查询无所谓
     public CommonResult login(String userName, String passWrod,String captcha, HttpServletRequest request)  {
-       String attribute =request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY).toString();
-        if (!attribute.equals(captcha)){
+        String attribute =request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY).toString();
+       if (!attribute.equals(captcha)){
            return CommonResult.error("验证码错误,请重新登录");
        }
         User userByName = userMapper.findUserByName(userName);
@@ -148,22 +148,23 @@ public class UserServiceImpl  implements UserService {
     @Override
     public CommonResult AddUser(AddUserVo addUserVo) {
         //先判断 从前端传来的 deptId  和firmId  是否为null ""
-        if(addUserVo.getDeptId()==null && addUserVo.getDeptId().equals("")){
+        if(addUserVo.getDeptId()==null){
               return CommonResult.error("请选择一个部门");
         }
-        if(addUserVo.getFirmId()==null && addUserVo.getFirmId().equals("")){
+        if(addUserVo.getFirmId()==null){
             return CommonResult.error("请选择一个公司");
         }
         //先查数据库 是否存在该 用户名
         Integer exitByUserName = userMapper.findExitByUserName(addUserVo.getUserName());
-        if( exitByUserName!=null&& exitByUserName==1){
+        //我TMD傻了，...不能用1对比 应为有可能用户1234  他转为数字 坑。。。。
+        if(exitByUserName!=null){
             return CommonResult.error("该用户账号已经存在");
         }
         User user = new User();
         String useruUuId = GetUUIdUtil.getUUId();
         user.setUserId(useruUuId);
         user.setUserName(addUserVo.getUserName());
-        user.setSparessV1(addUserVo.getSpareV1());
+        user.setSparessV1(addUserVo.getSparessV1());
         user.setDeptId(addUserVo.getDeptId());
         //密码md5加密后
           //String md5String = AesUtil.getMD5String(addUserVo.getUserPassWrod());
@@ -177,7 +178,7 @@ public class UserServiceImpl  implements UserService {
          deptUser.setDeptUserId(GetUUIdUtil.getUUId());
          deptUser.setUserId(useruUuId);
          deptUser.setDeptId(addUserVo.getDeptId());
-         deptUser.setSparessV1(addUserVo.getSpareV1());
+         deptUser.setSparessV1(addUserVo.getSparessV1());
          deptUserMapper.insertSelective(deptUser);
      }catch (Exception e){
          e.printStackTrace();

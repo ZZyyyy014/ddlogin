@@ -1,106 +1,194 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tx.dllogin.dao.OrderMapper">
-  <resultMap id="BaseResultMap" type="com.tx.dllogin.model.Order">
-    <id column="order_id" jdbcType="VARCHAR" property="orderId" />
-    <result column="order_number" jdbcType="VARCHAR" property="orderNumber" />
-    <result column="order_date" jdbcType="TIMESTAMP" property="orderDate" />
-    <result column="sparess_v1" jdbcType="VARCHAR" property="sparessV1" />
-    <result column="sparess_v2" jdbcType="VARCHAR" property="sparessV2" />
-    <result column="sparess_v3" jdbcType="VARCHAR" property="sparessV3" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    order_id, order_number, order_date, sparess_v1, sparess_v2, sparess_v3
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from dd_order
-    where order_id = #{orderId,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from dd_order
-    where order_id = #{orderId,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="com.tx.dllogin.model.Order">
-    insert into dd_order (order_id, order_number, order_date, 
-      sparess_v1, sparess_v2, sparess_v3
-      )
-    values (#{orderId,jdbcType=VARCHAR}, #{orderNumber,jdbcType=VARCHAR}, #{orderDate,jdbcType=TIMESTAMP}, 
-      #{sparessV1,jdbcType=VARCHAR}, #{sparessV2,jdbcType=VARCHAR}, #{sparessV3,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.tx.dllogin.model.Order">
-    insert into dd_order
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="orderId != null">
-        order_id,
-      </if>
-      <if test="orderNumber != null">
-        order_number,
-      </if>
-      <if test="orderDate != null">
-        order_date,
-      </if>
-      <if test="sparessV1 != null">
-        sparess_v1,
-      </if>
-      <if test="sparessV2 != null">
-        sparess_v2,
-      </if>
-      <if test="sparessV3 != null">
-        sparess_v3,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="orderId != null">
-        #{orderId,jdbcType=VARCHAR},
-      </if>
-      <if test="orderNumber != null">
-        #{orderNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="orderDate != null">
-        #{orderDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="sparessV1 != null">
-        #{sparessV1,jdbcType=VARCHAR},
-      </if>
-      <if test="sparessV2 != null">
-        #{sparessV2,jdbcType=VARCHAR},
-      </if>
-      <if test="sparessV3 != null">
-        #{sparessV3,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.tx.dllogin.model.Order">
-    update dd_order
-    <set>
-      <if test="orderNumber != null">
-        order_number = #{orderNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="orderDate != null">
-        order_date = #{orderDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="sparessV1 != null">
-        sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
-      </if>
-      <if test="sparessV2 != null">
-        sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
-      </if>
-      <if test="sparessV3 != null">
-        sparess_v3 = #{sparessV3,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where order_id = #{orderId,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.tx.dllogin.model.Order">
-    update dd_order
-    set order_number = #{orderNumber,jdbcType=VARCHAR},
-      order_date = #{orderDate,jdbcType=TIMESTAMP},
-      sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
-      sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
-      sparess_v3 = #{sparessV3,jdbcType=VARCHAR}
-    where order_id = #{orderId,jdbcType=VARCHAR}
-  </update>
+    <resultMap id="BaseResultMap" type="com.tx.dllogin.model.Order">
+        <id column="order_id" jdbcType="VARCHAR" property="orderId"/>
+        <result column="order_number" jdbcType="VARCHAR" property="orderNumber"/>
+        <result column="order_date" jdbcType="TIMESTAMP" property="orderDate"/>
+        <result column="sparess_v1" jdbcType="VARCHAR" property="sparessV1"/>
+        <result column="sparess_v2" jdbcType="VARCHAR" property="sparessV2"/>
+        <result column="sparess_v3" jdbcType="VARCHAR" property="sparessV3"/>
+        <result column="shop_user_name" jdbcType="VARCHAR" property="shopUserName"/>
+        <result column="customerTel" jdbcType="VARCHAR" property="customertel"/>
+        <result column="expressageCode" jdbcType="VARCHAR" property="expressagecode"/>
+        <result column="customerName" jdbcType="VARCHAR" property="customername"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        order_id, order_number, order_date, sparess_v1, sparess_v2, sparess_v3, shop_user_name,
+    customerTel, expressageCode, customerName
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dd_order
+        where order_id = #{orderId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete
+        from dd_order
+        where order_id = #{orderId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.tx.dllogin.model.Order">
+        insert into dd_order (order_id, order_number, order_date,
+                              sparess_v1, sparess_v2, sparess_v3,
+                              shop_user_name, customerTel, expressageCode,
+                              customerName)
+        values (#{orderId,jdbcType=VARCHAR}, #{orderNumber,jdbcType=VARCHAR}, #{orderDate,jdbcType=TIMESTAMP},
+                #{sparessV1,jdbcType=VARCHAR}, #{sparessV2,jdbcType=VARCHAR}, #{sparessV3,jdbcType=VARCHAR},
+                #{shopUserName,jdbcType=VARCHAR}, #{customertel,jdbcType=VARCHAR}, #{expressagecode,jdbcType=VARCHAR},
+                #{customername,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.tx.dllogin.model.Order">
+        insert into dd_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">
+                order_id,
+            </if>
+            <if test="orderNumber != null">
+                order_number,
+            </if>
+            <if test="orderDate != null">
+                order_date,
+            </if>
+            <if test="sparessV1 != null">
+                sparess_v1,
+            </if>
+            <if test="sparessV2 != null">
+                sparess_v2,
+            </if>
+            <if test="sparessV3 != null">
+                sparess_v3,
+            </if>
+            <if test="shopUserName != null">
+                shop_user_name,
+            </if>
+            <if test="customertel != null">
+                customerTel,
+            </if>
+            <if test="expressagecode != null">
+                expressageCode,
+            </if>
+            <if test="customername != null">
+                customerName,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">
+                #{orderId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNumber != null">
+                #{orderNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="orderDate != null">
+                #{orderDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sparessV1 != null">
+                #{sparessV1,jdbcType=VARCHAR},
+            </if>
+            <if test="sparessV2 != null">
+                #{sparessV2,jdbcType=VARCHAR},
+            </if>
+            <if test="sparessV3 != null">
+                #{sparessV3,jdbcType=VARCHAR},
+            </if>
+            <if test="shopUserName != null">
+                #{shopUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="customertel != null">
+                #{customertel,jdbcType=VARCHAR},
+            </if>
+            <if test="expressagecode != null">
+                #{expressagecode,jdbcType=VARCHAR},
+            </if>
+            <if test="customername != null">
+                #{customername,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.tx.dllogin.model.Order">
+        update dd_order
+        <set>
+            <if test="orderNumber != null">
+                order_number = #{orderNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="orderDate != null">
+                order_date = #{orderDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sparessV1 != null">
+                sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
+            </if>
+            <if test="sparessV2 != null">
+                sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
+            </if>
+            <if test="sparessV3 != null">
+                sparess_v3 = #{sparessV3,jdbcType=VARCHAR},
+            </if>
+            <if test="shopUserName != null">
+                shop_user_name = #{shopUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="customertel != null">
+                customerTel = #{customertel,jdbcType=VARCHAR},
+            </if>
+            <if test="expressagecode != null">
+                expressageCode = #{expressagecode,jdbcType=VARCHAR},
+            </if>
+            <if test="customername != null">
+                customerName = #{customername,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where order_id = #{orderId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.tx.dllogin.model.Order">
+        update dd_order
+        set order_number   = #{orderNumber,jdbcType=VARCHAR},
+            order_date     = #{orderDate,jdbcType=TIMESTAMP},
+            sparess_v1     = #{sparessV1,jdbcType=VARCHAR},
+            sparess_v2     = #{sparessV2,jdbcType=VARCHAR},
+            sparess_v3     = #{sparessV3,jdbcType=VARCHAR},
+            shop_user_name = #{shopUserName,jdbcType=VARCHAR},
+            customerTel    = #{customertel,jdbcType=VARCHAR},
+            expressageCode = #{expressagecode,jdbcType=VARCHAR},
+            customerName   = #{customername,jdbcType=VARCHAR}
+        where order_id = #{orderId,jdbcType=VARCHAR}
+    </update>
+
+    <select id="findAllOrder" resultType="Order">
+        select *
+        from dd_order
+    </select>
+
+    <delete id="deleteOrderById">
+        delete
+        from dd_order
+        where order_id = #{orderId}
+    </delete>
+
+    <select id="findLikeAllOrder" resultType="Order">
+        select *
+        from dd_order d
+        <where>
+             1=1
+            <if test="dateFrist!=null and  dateEnd!=null ">
+                and d.order_date between #{dateFrist}  and  #{dateEnd}
+            </if>
+            <if test="orderNumber!=null and orderNumber!='' ">
+                and d.order_number like  concat('%',#{orderNumber},'%')
+            </if>
+            <if test="customerTel!=null and customerTel!='' ">
+               and d.customerTel like concat('%',#{customerTel},'%')
+            </if>
+           <if test="expressageCode!=null  and expressageCode!=''  " >
+             and d.expressageCode like concat('%',#{expressageCode} ,'%')
+           </if>
+           <if test="customerName!=null and customerName!=''  ">
+               and d.customerName like concat('%',#{customerName} ,'%')
+           </if>
+            <if test="shopUserName!=null and shopUserName!=''  ">
+              and d.shop_user_name   like concat('%',#{shopUserName} ,'%')
+            </if>
+        </where>
+
+    </select>
+
+
 </mapper>

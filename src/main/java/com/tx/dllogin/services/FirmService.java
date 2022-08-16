@@ -6,4 +6,6 @@ public interface FirmService {
 
     CommonResult findAllFirm();
 
+    CommonResult addFirm(String firmName);
+
 }

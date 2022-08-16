@@ -1,7 +1,9 @@
 package com.tx.dllogin.model;
 
-import java.util.Date;
+import lombok.Data;
 
+import java.util.Date;
+@Data
 public class Shop {
     private String shopId;
 
@@ -20,6 +22,10 @@ public class Shop {
     private String sparessV2;
 
     private String sparessV3;
+
+    private String returnCookie;
+
+    private String userTypess;
 
     public String getShopId() {
         return shopId;
@@ -91,5 +97,21 @@ public class Shop {
 
     public void setSparessV3(String sparessV3) {
         this.sparessV3 = sparessV3 == null ? null : sparessV3.trim();
+    }
+
+    public String getReturnCookie() {
+        return returnCookie;
+    }
+
+    public void setReturnCookie(String returnCookie) {
+        this.returnCookie = returnCookie == null ? null : returnCookie.trim();
+    }
+
+    public String getUserTypess() {
+        return userTypess;
+    }
+
+    public void setUserTypess(String userTypess) {
+        this.userTypess = userTypess == null ? null : userTypess.trim();
     }
 }

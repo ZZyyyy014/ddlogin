@@ -10,7 +10,7 @@
     <result column="sparess_v3" jdbcType="VARCHAR" property="sparessV3" />
   </resultMap>
   <sql id="Base_Column_List">
-    dept_id, dept_name, dept_super_id, " sparess_v1", " sparess_v2", " sparess_v3"
+    dept_id, dept_name, dept_super_id, sparess_v1, sparess_v2, sparess_v3
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -46,7 +46,7 @@
         sparess_v1,
       </if>
       <if test="sparessV2 != null">
-       sparess_v2,
+        sparess_v2,
       </if>
       <if test="sparessV3 != null">
         sparess_v3,
@@ -108,6 +108,15 @@
     select  dept_id ,dept_name
     from  dd_dept
   </select>
+
+  <select id="findDeptByName" resultType="String">
+    select   dept_name
+    from  dd_dept
+    where dept_name=#{deptName}
+    limit 1
+  </select>
+
+
 
 
 </mapper>

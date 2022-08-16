@@ -11,10 +11,12 @@
     <result column="sparess_v1" jdbcType="VARCHAR" property="sparessV1" />
     <result column="sparess_v2" jdbcType="VARCHAR" property="sparessV2" />
     <result column="sparess_v3" jdbcType="VARCHAR" property="sparessV3" />
+    <result column="return_cookie" jdbcType="VARCHAR" property="returnCookie" />
+    <result column="user_typess" jdbcType="VARCHAR" property="userTypess" />
   </resultMap>
   <sql id="Base_Column_List">
     shop_id, shop_user_name, shop_user_passWrod, shop_login_date, shop_ip, shop_authorization, 
-    sparess_v1, sparess_v2, sparess_v3
+    sparess_v1, sparess_v2, sparess_v3, return_cookie, user_typess
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -29,12 +31,12 @@
   <insert id="insert" parameterType="com.tx.dllogin.model.Shop">
     insert into dd_shop (shop_id, shop_user_name, shop_user_passWrod, 
       shop_login_date, shop_ip, shop_authorization, 
-      sparess_v1, sparess_v2, sparess_v3
-      )
+      sparess_v1, sparess_v2, sparess_v3, 
+      return_cookie, user_typess)
     values (#{shopId,jdbcType=VARCHAR}, #{shopUserName,jdbcType=VARCHAR}, #{shopUserPasswrod,jdbcType=VARCHAR}, 
       #{shopLoginDate,jdbcType=TIMESTAMP}, #{shopIp,jdbcType=VARCHAR}, #{shopAuthorization,jdbcType=VARCHAR}, 
-      #{sparessV1,jdbcType=VARCHAR}, #{sparessV2,jdbcType=VARCHAR}, #{sparessV3,jdbcType=VARCHAR}
-      )
+      #{sparessV1,jdbcType=VARCHAR}, #{sparessV2,jdbcType=VARCHAR}, #{sparessV3,jdbcType=VARCHAR}, 
+      #{returnCookie,jdbcType=VARCHAR}, #{userTypess,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.tx.dllogin.model.Shop">
     insert into dd_shop
@@ -66,6 +68,12 @@
       <if test="sparessV3 != null">
         sparess_v3,
       </if>
+      <if test="returnCookie != null">
+        return_cookie,
+      </if>
+      <if test="userTypess != null">
+        user_typess,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="shopId != null">
@@ -94,6 +102,12 @@
       </if>
       <if test="sparessV3 != null">
         #{sparessV3,jdbcType=VARCHAR},
+      </if>
+      <if test="returnCookie != null">
+        #{returnCookie,jdbcType=VARCHAR},
+      </if>
+      <if test="userTypess != null">
+        #{userTypess,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -124,6 +138,12 @@
       <if test="sparessV3 != null">
         sparess_v3 = #{sparessV3,jdbcType=VARCHAR},
       </if>
+      <if test="returnCookie != null">
+        return_cookie = #{returnCookie,jdbcType=VARCHAR},
+      </if>
+      <if test="userTypess != null">
+        user_typess = #{userTypess,jdbcType=VARCHAR},
+      </if>
     </set>
     where shop_id = #{shopId,jdbcType=VARCHAR}
   </update>
@@ -136,7 +156,16 @@
       shop_authorization = #{shopAuthorization,jdbcType=VARCHAR},
       sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
       sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
-      sparess_v3 = #{sparessV3,jdbcType=VARCHAR}
+      sparess_v3 = #{sparessV3,jdbcType=VARCHAR},
+      return_cookie = #{returnCookie,jdbcType=VARCHAR},
+      user_typess = #{userTypess,jdbcType=VARCHAR}
     where shop_id = #{shopId,jdbcType=VARCHAR}
   </update>
+
+
+
+
+
+
+
 </mapper>

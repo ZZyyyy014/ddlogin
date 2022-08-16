@@ -6,5 +6,7 @@ public interface DeptService {
 
     CommonResult findAllDept();
 
+    CommonResult  createDept(String deptName);
+
 
 }

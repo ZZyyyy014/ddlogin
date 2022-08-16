@@ -26,4 +26,5 @@ public interface DeptUserMapper {
     void  updateUser(@Param("userId") String userId
             ,@Param("deptId") String deptId
             ,@Param("firmId") String firmId);
+
 }
