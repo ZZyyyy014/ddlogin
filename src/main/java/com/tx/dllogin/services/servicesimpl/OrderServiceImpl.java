@@ -7,6 +7,7 @@ import com.tx.dllogin.dao.OrderMapper;
 import com.tx.dllogin.model.Order;
 import com.tx.dllogin.services.OrderService;
 import com.tx.dllogin.vo.FindLikeAllOrderVo;
+import com.tx.dllogin.vo.InsertListOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,6 +71,18 @@ public class OrderServiceImpl implements OrderService {
                 return CommonResult.error("模糊查询订单失败");
         }
 
+    }
+
+    @Transactional
+    @Override
+    public CommonResult insetListOrder(List<InsertListOrder> listOrders) {
+          try{
+              orderMapper.insertListOrder(listOrders);
+              return CommonResult.success();
+          }catch (Exception e){
+              e.printStackTrace();
+              return CommonResult.error("拆入失败");
+          }
     }
 
 }

@@ -1,5 +1,6 @@
 package com.tx.dllogin;
 
+import com.alibaba.fastjson.JSON;
 import com.tx.dllogin.dao.DeptMapper;
 import com.tx.dllogin.dao.DeptUserMapper;
 import com.tx.dllogin.dao.OrderMapper;
@@ -92,15 +93,11 @@ public class DlloginApplicationTests {
     public void tset27() {
         List<Order> likeAllOrder = orderMapper.findLikeAllOrder(null,
                 null,
-                "",
+                null,
                 null,
                 null, null,
                 null);
-        for (Order order : likeAllOrder) {
-            System.out.println(order);
-        }
-
-
+        System.out.println(JSON.toJSONString(likeAllOrder.get(0)));
 
     }
 

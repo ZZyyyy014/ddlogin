@@ -1,6 +1,7 @@
 package com.tx.dllogin.dao;
 
 import com.tx.dllogin.model.Order;
+import com.tx.dllogin.vo.InsertListOrder;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -33,5 +34,10 @@ public interface OrderMapper {
                                   @Param("expressageCode")String expressageCode,
                                   @Param("customerName")String customerName,
                                   @Param("shopUserName")String shopUserName);
+
+
+    void   insertListOrder(List<InsertListOrder> list );
+
+
 
 }

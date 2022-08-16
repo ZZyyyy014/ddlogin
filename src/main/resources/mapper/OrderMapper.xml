@@ -172,23 +172,41 @@
                 and d.order_date between #{dateFrist}  and  #{dateEnd}
             </if>
             <if test="orderNumber!=null and orderNumber!='' ">
-                and d.order_number like  concat('%',#{orderNumber},'%')
+                 and d.order_number = #{orderNumber}
             </if>
             <if test="customerTel!=null and customerTel!='' ">
-               and d.customerTel like concat('%',#{customerTel},'%')
+               and d.customerTel =#{customerTel}
             </if>
            <if test="expressageCode!=null  and expressageCode!=''  " >
-             and d.expressageCode like concat('%',#{expressageCode} ,'%')
+             and d.expressageCode =#{expressageCode}
            </if>
            <if test="customerName!=null and customerName!=''  ">
-               and d.customerName like concat('%',#{customerName} ,'%')
+               and d.customerName =#{customerName}
            </if>
             <if test="shopUserName!=null and shopUserName!=''  ">
-              and d.shop_user_name   like concat('%',#{shopUserName} ,'%')
+              and d.shop_user_name   =#{shopUserName}
             </if>
         </where>
-
     </select>
+
+    <insert id="insertListOrder"  parameterType="InsertListOrder">
+        INSERT into
+            dd_order(order_number
+                    ,order_date
+                    ,shop_user_name
+                    ,customerTel
+                    ,expressageCode
+                    ,customerName)VALUES
+         <foreach collection="list" item="item" open="" close="" separator="," index="index">
+          (#{item.orderNumber},
+           #{item.orderDate},
+           #{item.shopUserName},
+           #{item.customerTel},
+           #{item.expressageCode},
+           #{item.customerName})
+         </foreach>
+    </insert>
+
 
 
 </mapper>

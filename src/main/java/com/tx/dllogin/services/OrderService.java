@@ -2,6 +2,9 @@ package com.tx.dllogin.services;
 
 import com.tx.dllogin.common.CommonResult;
 import com.tx.dllogin.vo.FindLikeAllOrderVo;
+import com.tx.dllogin.vo.InsertListOrder;
+
+import java.util.List;
 
 public interface OrderService {
 
@@ -15,5 +18,6 @@ public interface OrderService {
 
     CommonResult findLikeAllOrder(FindLikeAllOrderVo findLikeAllOrderVo);
 
+    CommonResult insetListOrder(List<InsertListOrder> listOrders);
 
 }
