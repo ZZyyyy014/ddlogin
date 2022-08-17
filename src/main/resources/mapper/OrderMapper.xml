@@ -187,6 +187,7 @@
               and d.shop_user_name   =#{shopUserName}
             </if>
         </where>
+     order by d.order_date desc
     </select>
 
     <insert id="insertListOrder"  parameterType="InsertListOrder">

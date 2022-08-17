@@ -8,6 +8,8 @@ import com.tx.dllogin.utill.AesUtil;
 import com.tx.dllogin.vo.AddUserVo;
 import com.tx.dllogin.vo.UserFindAllVo;
 import com.tx.dllogin.vo.Uservo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +22,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
 
+
+@Api(value = "用户模块操作" ,tags = "用户模块操作")
 @RestController
 @CrossOrigin("*")
 public class UserController {
@@ -35,6 +39,7 @@ public class UserController {
 
 
 
+    @ApiOperation("产生验证码")
     //验证码生产
     @GetMapping("/user/captcha.jpg")
     public void captcha(HttpServletResponse response, HttpServletRequest request) throws ServletException, IOException {
@@ -61,6 +66,7 @@ public class UserController {
 
 
 
+    @ApiOperation("京麦免登陆")
     @GetMapping("/user/ddUrl")
     public  String  ddUrl(String userName,String passWrod){
         //返回的免密 登录
@@ -68,7 +74,7 @@ public class UserController {
         return ddUrl;
     }
 
-
+    @ApiOperation("dd后台登录")
     @PostMapping("/user/ddlogin")
     public CommonResult ddlogin(@RequestBody Uservo user){
         //返回的登录
