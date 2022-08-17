@@ -5,8 +5,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
-import org.springframework.core.env.Profiles;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -18,6 +18,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 @EnableKnife4j
+//设置 配置环境不是application-prod.properties时候才生效
+@Profile("!prod")
 public class Knife4jConfig {
 
 
@@ -28,10 +30,11 @@ public class Knife4jConfig {
     public Docket createRestApi() {
 
         //设置只在开发中环境中启动swagger
-        Profiles profiles=Profiles.of("dev");
+       // Profiles profiles=Profiles.of("dev");
 
         //表示如果现在是dev环境，则返回true 开启swagger
-        boolean flag=environment.acceptsProfiles(profiles);
+      //  boolean flag=environment.acceptsProfiles(profiles);
+
 
         return  new Docket(DocumentationType.SWAGGER_2)
                 .useDefaultResponseMessages(false)
@@ -43,14 +46,12 @@ public class Knife4jConfig {
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .paths(PathSelectors.any())
                 .build();
-
     }
-
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("dd后台Api")
                 .description("API")
-                .termsOfServiceUrl("http://localhos:9090/")
+                .termsOfServiceUrl("dev-http://localhos:9090/")
                 .version("1.0")
                 .build();
     }
