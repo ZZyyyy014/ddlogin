@@ -218,6 +218,33 @@
 
   </select>
 
+  <resultMap id="findShiroParms" type="FIndShiroUserVo">
+  <id column="dduser_id" property="userId"  />
+    <result column="drrole_name" property="roleName"/>
+    <result column="drrole_remark" property="roleReamark"/>
+    <collection property="parmsList" ofType="String">
+       <result column="dmparms"/>
+    </collection>
+  </resultMap>
+
+  <select id="findShiroParms" resultMap="findShiroParms">
+    select DISTINCT dd_user.user_id dduser_id,
+                    dr.role_name    drrole_name,
+                    dr.role_remark  drrole_remark,
+                    dm.parms      dmparms
+    from dd_user
+       , dd_role dr
+       ,dd_role_menu drm
+       ,dd_menu dm
+    where dd_user.user_name='1'
+      and  dd_user.levelss = dr.role_id
+      and dr.role_id = drm.role_id
+      and drm.menu_id = dm.menu_id
+      and  dm.type='2'
+  </select>
+
+
+
 
 
 

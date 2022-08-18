@@ -1,6 +1,7 @@
 package com.tx.dllogin.dao;
 
 import com.tx.dllogin.model.User;
+import com.tx.dllogin.vo.FIndShiroUserVo;
 import com.tx.dllogin.vo.UserFindAllVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -33,6 +34,8 @@ public interface UserMapper {
     void deleteUserList(@Param("lists") List<String> lists);
 
     String findPassWrodByUserName(@Param("userName") String userName);
+
+    FIndShiroUserVo  findShiroParms(@Param("userName")String userName);
 
 
 }

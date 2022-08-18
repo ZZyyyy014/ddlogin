@@ -1,8 +1,8 @@
 package com.tx.dllogin;
 
 import com.tx.dllogin.dao.*;
-import com.tx.dllogin.model.Shop;
 import com.tx.dllogin.utill.AesUtil;
+import com.tx.dllogin.vo.FIndShiroUserVo;
 import com.tx.dllogin.vo.UserFindAllVo;
 import org.apache.commons.codec.binary.Hex;
 import org.junit.Test;
@@ -90,9 +90,8 @@ public class DlloginApplicationTests {
 
     @Test
     public void tset27() {
-        Shop shop = shopMapper.selectByPrimaryKey("10");
-        if(shop==null) System.out.println("-------");
-
+        FIndShiroUserVo shiroParms = userMapper.findShiroParms("1");
+        System.out.println(shiroParms);
     }
 
 
