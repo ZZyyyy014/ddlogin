@@ -1,25 +1,13 @@
 package com.tx.dllogin.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
-@Data
+
 public class Order {
-    private String orderId;
+    private Integer orderId;
 
     private String orderNumber;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date orderDate;
-
-    private String sparessV1;
-
-    private String sparessV2;
-
-    private String sparessV3;
 
     private String shopUserName;
 
@@ -29,12 +17,18 @@ public class Order {
 
     private String customername;
 
-    public String getOrderId() {
+    private String sparessV1;
+
+    private String sparessV2;
+
+    private String sparessV3;
+
+    public Integer getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId == null ? null : orderId.trim();
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 
     public String getOrderNumber() {
@@ -51,30 +45,6 @@ public class Order {
 
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
-    }
-
-    public String getSparessV1() {
-        return sparessV1;
-    }
-
-    public void setSparessV1(String sparessV1) {
-        this.sparessV1 = sparessV1 == null ? null : sparessV1.trim();
-    }
-
-    public String getSparessV2() {
-        return sparessV2;
-    }
-
-    public void setSparessV2(String sparessV2) {
-        this.sparessV2 = sparessV2 == null ? null : sparessV2.trim();
-    }
-
-    public String getSparessV3() {
-        return sparessV3;
-    }
-
-    public void setSparessV3(String sparessV3) {
-        this.sparessV3 = sparessV3 == null ? null : sparessV3.trim();
     }
 
     public String getShopUserName() {
@@ -107,5 +77,29 @@ public class Order {
 
     public void setCustomername(String customername) {
         this.customername = customername == null ? null : customername.trim();
+    }
+
+    public String getSparessV1() {
+        return sparessV1;
+    }
+
+    public void setSparessV1(String sparessV1) {
+        this.sparessV1 = sparessV1 == null ? null : sparessV1.trim();
+    }
+
+    public String getSparessV2() {
+        return sparessV2;
+    }
+
+    public void setSparessV2(String sparessV2) {
+        this.sparessV2 = sparessV2 == null ? null : sparessV2.trim();
+    }
+
+    public String getSparessV3() {
+        return sparessV3;
+    }
+
+    public void setSparessV3(String sparessV3) {
+        this.sparessV3 = sparessV3 == null ? null : sparessV3.trim();
     }
 }

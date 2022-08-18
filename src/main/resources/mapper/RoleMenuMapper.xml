@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tx.dllogin.dao.RoleMenuMapper">
+  <resultMap id="BaseResultMap" type="com.tx.dllogin.model.RoleMenu">
+    <id column="role_menu_id" jdbcType="INTEGER" property="roleMenuId" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="menu_id" jdbcType="INTEGER" property="menuId" />
+    <result column="sparess_v1" jdbcType="VARCHAR" property="sparessV1" />
+    <result column="sparess_v2" jdbcType="VARCHAR" property="sparessV2" />
+    <result column="sparess_v3" jdbcType="VARCHAR" property="sparessV3" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    role_menu_id, role_id, menu_id, sparess_v1, sparess_v2, sparess_v3
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dd_role_menu
+    where role_menu_id = #{roleMenuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dd_role_menu
+    where role_menu_id = #{roleMenuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tx.dllogin.model.RoleMenu">
+    insert into dd_role_menu (role_menu_id, role_id, menu_id, 
+      sparess_v1, sparess_v2, sparess_v3
+      )
+    values (#{roleMenuId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{menuId,jdbcType=INTEGER}, 
+      #{sparessV1,jdbcType=VARCHAR}, #{sparessV2,jdbcType=VARCHAR}, #{sparessV3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tx.dllogin.model.RoleMenu">
+    insert into dd_role_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleMenuId != null">
+        role_menu_id,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="menuId != null">
+        menu_id,
+      </if>
+      <if test="sparessV1 != null">
+        sparess_v1,
+      </if>
+      <if test="sparessV2 != null">
+        sparess_v2,
+      </if>
+      <if test="sparessV3 != null">
+        sparess_v3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleMenuId != null">
+        #{roleMenuId,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="menuId != null">
+        #{menuId,jdbcType=INTEGER},
+      </if>
+      <if test="sparessV1 != null">
+        #{sparessV1,jdbcType=VARCHAR},
+      </if>
+      <if test="sparessV2 != null">
+        #{sparessV2,jdbcType=VARCHAR},
+      </if>
+      <if test="sparessV3 != null">
+        #{sparessV3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tx.dllogin.model.RoleMenu">
+    update dd_role_menu
+    <set>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="menuId != null">
+        menu_id = #{menuId,jdbcType=INTEGER},
+      </if>
+      <if test="sparessV1 != null">
+        sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
+      </if>
+      <if test="sparessV2 != null">
+        sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
+      </if>
+      <if test="sparessV3 != null">
+        sparess_v3 = #{sparessV3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where role_menu_id = #{roleMenuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tx.dllogin.model.RoleMenu">
+    update dd_role_menu
+    set role_id = #{roleId,jdbcType=INTEGER},
+      menu_id = #{menuId,jdbcType=INTEGER},
+      sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
+      sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
+      sparess_v3 = #{sparessV3,jdbcType=VARCHAR}
+    where role_menu_id = #{roleMenuId,jdbcType=INTEGER}
+  </update>
+</mapper>

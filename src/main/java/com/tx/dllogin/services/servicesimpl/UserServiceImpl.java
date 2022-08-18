@@ -40,6 +40,7 @@ public class UserServiceImpl  implements UserService {
 
 
 
+
     @Override
     @Transactional(propagation = Propagation.REQUIRED )//有1个事务  当前只执行一次数据库操作  查询无所谓
     public CommonResult login(String userName, String passWrod,String captcha, HttpServletRequest request)  {
@@ -72,7 +73,22 @@ public class UserServiceImpl  implements UserService {
         } catch (Exception e) {
             return CommonResult.error("获取当前IP失败,请重新登录");
         }
-        userMapper.updateByPrimaryKeySelective(user);
+     /*   userMapper.updateByPrimaryKeySelective(user);
+       try {
+           // 登录时候认证
+           Subject subject = ShiroMyUtills.getSubject( new MyRealm());
+           UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(userName, passWrod);
+           subject.login(usernamePasswordToken);
+       }catch (UnknownAccountException e){
+           e.printStackTrace();
+           return CommonResult.error("shiro加密,账号错误");
+       }catch (IncorrectCredentialsException e){
+           e.printStackTrace();
+           return CommonResult.error("shiro加密,密码错误");
+       }catch(Exception e){
+           e.printStackTrace();
+           return CommonResult.error("shiro加密,密码错误");
+       }*/
         //生成toekn
         String token ="";
         HashMap<String, String> map1 = new HashMap<>();
@@ -85,7 +101,8 @@ public class UserServiceImpl  implements UserService {
         return CommonResult.success("登录成功",map);
     }
 
-    @Override
+
+    @Override //查询分页用户
     public CommonResult findAllLogin(Integer pageNum,Integer pageSize) {
          //设置开启分页参数    1.当前业数   2.每页多少
         PageHelper.startPage(pageNum, pageSize);
@@ -186,6 +203,10 @@ public class UserServiceImpl  implements UserService {
      }
         return CommonResult.success("添加成功");
     }
+
+
+
+
 
 
 }

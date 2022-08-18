@@ -5,18 +5,13 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Configuration
 public class JwtIterceptceptorConfig implements WebMvcConfigurer {
 
 
     @Override //重写拦截器 拦截的是方法执行前  拦截方法
     public void addInterceptors(InterceptorRegistry registry) {
-
-
-        // 无需拦截的接口集合
+/*        // 无需拦截的接口集合
         List<String> ignorePath = new ArrayList<>();
         // knife4j(swagger)
         ignorePath.add("/swagger-resources/**");
@@ -38,6 +33,7 @@ public class JwtIterceptceptorConfig implements WebMvcConfigurer {
                 //拦截所有路径
         //添加入webmvc 配置里
         WebMvcConfigurer.super.addInterceptors(registry);
+        */
     }
 
 

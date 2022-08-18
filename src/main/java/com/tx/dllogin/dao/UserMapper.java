@@ -32,6 +32,7 @@ public interface UserMapper {
     //根据 用户名称   删除多个用户  和绑定关系表
     void deleteUserList(@Param("lists") List<String> lists);
 
+    String findPassWrodByUserName(@Param("userName") String userName);
 
 
 }

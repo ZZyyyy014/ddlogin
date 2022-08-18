@@ -77,6 +77,9 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public CommonResult insetListOrder(List<InsertListOrder> listOrders) {
           try{
+              if(listOrders.size()==0){
+                  return CommonResult.error("请添加参数");
+              }
               orderMapper.insertListOrder(listOrders);
               return CommonResult.success();
           }catch (Exception e){

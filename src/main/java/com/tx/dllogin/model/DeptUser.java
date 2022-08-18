@@ -1,8 +1,5 @@
 package com.tx.dllogin.model;
 
-import lombok.Data;
-
-@Data
 public class DeptUser {
     private String deptUserId;
 

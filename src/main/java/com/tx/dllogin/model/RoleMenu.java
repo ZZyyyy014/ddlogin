@@ -1,11 +1,11 @@
 package com.tx.dllogin.model;
 
-public class Dept {
-    private String deptId;
+public class RoleMenu {
+    private Integer roleMenuId;
 
-    private String deptName;
+    private Integer roleId;
 
-    private String deptSuperId;
+    private Integer menuId;
 
     private String sparessV1;
 
@@ -13,28 +13,28 @@ public class Dept {
 
     private String sparessV3;
 
-    public String getDeptId() {
-        return deptId;
+    public Integer getRoleMenuId() {
+        return roleMenuId;
     }
 
-    public void setDeptId(String deptId) {
-        this.deptId = deptId == null ? null : deptId.trim();
+    public void setRoleMenuId(Integer roleMenuId) {
+        this.roleMenuId = roleMenuId;
     }
 
-    public String getDeptName() {
-        return deptName;
+    public Integer getRoleId() {
+        return roleId;
     }
 
-    public void setDeptName(String deptName) {
-        this.deptName = deptName == null ? null : deptName.trim();
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
-    public String getDeptSuperId() {
-        return deptSuperId;
+    public Integer getMenuId() {
+        return menuId;
     }
 
-    public void setDeptSuperId(String deptSuperId) {
-        this.deptSuperId = deptSuperId == null ? null : deptSuperId.trim();
+    public void setMenuId(Integer menuId) {
+        this.menuId = menuId;
     }
 
     public String getSparessV1() {

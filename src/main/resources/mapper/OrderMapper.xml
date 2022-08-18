@@ -2,16 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tx.dllogin.dao.OrderMapper">
     <resultMap id="BaseResultMap" type="com.tx.dllogin.model.Order">
-        <id column="order_id" jdbcType="VARCHAR" property="orderId"/>
-        <result column="order_number" jdbcType="VARCHAR" property="orderNumber"/>
-        <result column="order_date" jdbcType="TIMESTAMP" property="orderDate"/>
-        <result column="sparess_v1" jdbcType="VARCHAR" property="sparessV1"/>
-        <result column="sparess_v2" jdbcType="VARCHAR" property="sparessV2"/>
-        <result column="sparess_v3" jdbcType="VARCHAR" property="sparessV3"/>
-        <result column="shop_user_name" jdbcType="VARCHAR" property="shopUserName"/>
-        <result column="customerTel" jdbcType="VARCHAR" property="customertel"/>
-        <result column="expressageCode" jdbcType="VARCHAR" property="expressagecode"/>
-        <result column="customerName" jdbcType="VARCHAR" property="customername"/>
+        <id column="order_id" jdbcType="VARCHAR" property="orderId" />
+        <result column="order_number" jdbcType="VARCHAR" property="orderNumber" />
+        <result column="order_date" jdbcType="TIMESTAMP" property="orderDate" />
+        <result column="sparess_v1" jdbcType="VARCHAR" property="sparessV1" />
+        <result column="sparess_v2" jdbcType="VARCHAR" property="sparessV2" />
+        <result column="sparess_v3" jdbcType="VARCHAR" property="sparessV3" />
+        <result column="shop_user_name" jdbcType="VARCHAR" property="shopUserName" />
+        <result column="customerTel" jdbcType="VARCHAR" property="customertel" />
+        <result column="expressageCode" jdbcType="VARCHAR" property="expressagecode" />
+        <result column="customerName" jdbcType="VARCHAR" property="customername" />
     </resultMap>
     <sql id="Base_Column_List">
         order_id, order_number, order_date, sparess_v1, sparess_v2, sparess_v3, shop_user_name,
@@ -19,7 +19,7 @@
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="Base_Column_List" />
         from dd_order
         where order_id = #{orderId,jdbcType=VARCHAR}
     </select>
@@ -177,7 +177,7 @@
             <if test="customerTel!=null and customerTel!='' ">
                and d.customerTel =#{customerTel}
             </if>
-           <if test="expressageCode!=null  and expressageCode!=''  " >
+           <if test="expressageCode!=null  and expressageCode!=''  ">
              and d.expressageCode =#{expressageCode}
            </if>
            <if test="customerName!=null and customerName!=''  ">
@@ -190,7 +190,7 @@
      order by d.order_date desc
     </select>
 
-    <insert id="insertListOrder"  parameterType="InsertListOrder">
+    <insert id="insertListOrder" parameterType="InsertListOrder">
         INSERT into
             dd_order(order_number
                     ,order_date
@@ -198,7 +198,7 @@
                     ,customerTel
                     ,expressageCode
                     ,customerName)VALUES
-         <foreach collection="list" item="item" open="" close="" separator="," index="index">
+         <foreach close="" collection="list" index="index" item="item" open="" separator=",">
           (#{item.orderNumber},
            #{item.orderDate},
            #{item.shopUserName},

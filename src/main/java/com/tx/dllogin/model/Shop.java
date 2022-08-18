@@ -1,11 +1,9 @@
 package com.tx.dllogin.model;
 
-import lombok.Data;
-
 import java.util.Date;
-@Data
+
 public class Shop {
-    private String shopId;
+    private Integer shopId;
 
     private String shopUserName;
 
@@ -27,12 +25,12 @@ public class Shop {
 
     private String userTypess;
 
-    public String getShopId() {
+    public Integer getShopId() {
         return shopId;
     }
 
-    public void setShopId(String shopId) {
-        this.shopId = shopId == null ? null : shopId.trim();
+    public void setShopId(Integer shopId) {
+        this.shopId = shopId;
     }
 
     public String getShopUserName() {

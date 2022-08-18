@@ -51,7 +51,7 @@
         </javaClientGenerator>
 
         <!--生成对应表及类名-->
-        <table tableName="dd_dept"
+      <!--  <table tableName="dd_dept"
                domainObjectName="Dept"
                enableCountByExample="false"
                enableUpdateByExample="false"
@@ -96,6 +96,8 @@
                selectByExampleQueryId="false">
         </table>
 
+
+
         <table tableName="dd_firm"
                domainObjectName="Firm"
                enableCountByExample="false"
@@ -104,8 +106,35 @@
                enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
+-->
 
 
+        <table tableName="dd_role"
+               domainObjectName="Role"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <table tableName="dd_role_menu"
+               domainObjectName="RoleMenu"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <table tableName="dd_menu"
+               domainObjectName="Menu"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
     </context>
 
 

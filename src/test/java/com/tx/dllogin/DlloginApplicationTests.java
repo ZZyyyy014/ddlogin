@@ -1,11 +1,7 @@
 package com.tx.dllogin;
 
-import com.alibaba.fastjson.JSON;
-import com.tx.dllogin.dao.DeptMapper;
-import com.tx.dllogin.dao.DeptUserMapper;
-import com.tx.dllogin.dao.OrderMapper;
-import com.tx.dllogin.dao.UserMapper;
-import com.tx.dllogin.model.Order;
+import com.tx.dllogin.dao.*;
+import com.tx.dllogin.model.Shop;
 import com.tx.dllogin.utill.AesUtil;
 import com.tx.dllogin.vo.UserFindAllVo;
 import org.apache.commons.codec.binary.Hex;
@@ -36,6 +32,9 @@ public class DlloginApplicationTests {
 
     @Autowired
     private OrderMapper orderMapper;
+
+    @Autowired
+    private ShopMapper shopMapper;
 
     @Test
     public void tsets() {
@@ -91,13 +90,8 @@ public class DlloginApplicationTests {
 
     @Test
     public void tset27() {
-        List<Order> likeAllOrder = orderMapper.findLikeAllOrder(null,
-                null,
-                null,
-                null,
-                null, null,
-                null);
-        System.out.println(JSON.toJSONString(likeAllOrder.get(0)));
+        Shop shop = shopMapper.selectByPrimaryKey("10");
+        if(shop==null) System.out.println("-------");
 
     }
 

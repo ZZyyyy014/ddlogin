@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tx.dllogin.dao.MenuMapper">
+  <resultMap id="BaseResultMap" type="com.tx.dllogin.model.Menu">
+    <id column="menu_id" jdbcType="INTEGER" property="menuId" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+    <result column="menu_parent_id" jdbcType="VARCHAR" property="menuParentId" />
+    <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
+    <result column="parms" jdbcType="VARCHAR" property="parms" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="order_num" jdbcType="INTEGER" property="orderNum" />
+    <result column="sparess_v1" jdbcType="VARCHAR" property="sparessV1" />
+    <result column="sparess_v2" jdbcType="VARCHAR" property="sparessV2" />
+    <result column="sparess_v3" jdbcType="VARCHAR" property="sparessV3" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    menu_id, menu_name, menu_parent_id, menu_url, parms, type, icon, order_num, sparess_v1, 
+    sparess_v2, sparess_v3
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dd_menu
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dd_menu
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tx.dllogin.model.Menu">
+    insert into dd_menu (menu_id, menu_name, menu_parent_id, 
+      menu_url, parms, type, 
+      icon, order_num, sparess_v1, 
+      sparess_v2, sparess_v3)
+    values (#{menuId,jdbcType=INTEGER}, #{menuName,jdbcType=VARCHAR}, #{menuParentId,jdbcType=VARCHAR}, 
+      #{menuUrl,jdbcType=VARCHAR}, #{parms,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{icon,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER}, #{sparessV1,jdbcType=VARCHAR}, 
+      #{sparessV2,jdbcType=VARCHAR}, #{sparessV3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tx.dllogin.model.Menu">
+    insert into dd_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        menu_id,
+      </if>
+      <if test="menuName != null">
+        menu_name,
+      </if>
+      <if test="menuParentId != null">
+        menu_parent_id,
+      </if>
+      <if test="menuUrl != null">
+        menu_url,
+      </if>
+      <if test="parms != null">
+        parms,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="orderNum != null">
+        order_num,
+      </if>
+      <if test="sparessV1 != null">
+        sparess_v1,
+      </if>
+      <if test="sparessV2 != null">
+        sparess_v2,
+      </if>
+      <if test="sparessV3 != null">
+        sparess_v3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        #{menuId,jdbcType=INTEGER},
+      </if>
+      <if test="menuName != null">
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuParentId != null">
+        #{menuParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null">
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="parms != null">
+        #{parms,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null">
+        #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="sparessV1 != null">
+        #{sparessV1,jdbcType=VARCHAR},
+      </if>
+      <if test="sparessV2 != null">
+        #{sparessV2,jdbcType=VARCHAR},
+      </if>
+      <if test="sparessV3 != null">
+        #{sparessV3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tx.dllogin.model.Menu">
+    update dd_menu
+    <set>
+      <if test="menuName != null">
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuParentId != null">
+        menu_parent_id = #{menuParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null">
+        menu_url = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="parms != null">
+        parms = #{parms,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null">
+        order_num = #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="sparessV1 != null">
+        sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
+      </if>
+      <if test="sparessV2 != null">
+        sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
+      </if>
+      <if test="sparessV3 != null">
+        sparess_v3 = #{sparessV3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tx.dllogin.model.Menu">
+    update dd_menu
+    set menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_parent_id = #{menuParentId,jdbcType=VARCHAR},
+      menu_url = #{menuUrl,jdbcType=VARCHAR},
+      parms = #{parms,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      order_num = #{orderNum,jdbcType=INTEGER},
+      sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
+      sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
+      sparess_v3 = #{sparessV3,jdbcType=VARCHAR}
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+</mapper>

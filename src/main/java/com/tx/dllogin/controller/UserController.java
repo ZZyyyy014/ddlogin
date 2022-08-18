@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.List;
 
 
-@Api(value = "用户模块操作" ,tags = "用户模块操作")
+@Api(tags = "用户模块操作")
 @RestController
 @CrossOrigin("*")
 public class UserController {
@@ -62,10 +62,6 @@ public class UserController {
 
 
 
-
-
-
-
     @ApiOperation("京麦免登陆")
     @GetMapping("/user/ddUrl")
     public  String  ddUrl(String userName,String passWrod){
@@ -84,6 +80,7 @@ public class UserController {
                           ,request);
         return login;
     }
+
 
 
     @GetMapping("/user/findAllLogin")

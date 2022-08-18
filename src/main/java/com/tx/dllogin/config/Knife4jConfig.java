@@ -16,6 +16,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
+
+//springboot版本过低 不能上高版本 2.09~~~
 @EnableSwagger2
 @EnableKnife4j
 //设置 配置环境不是application-prod.properties时候才生效
@@ -51,7 +53,7 @@ public class Knife4jConfig {
         return new ApiInfoBuilder()
                 .title("dd后台Api")
                 .description("API")
-                .termsOfServiceUrl("dev-http://localhos:9090/")
+                .termsOfServiceUrl("dev环境下的-http://localhost:9090/")
                 .version("1.0")
                 .build();
     }
