@@ -23,8 +23,9 @@ public class UserFindAllVo {
 
     // 所在公司id
     private String  sparessV1;
-    //所在公司名称
 
+
+    //所在公司名称
     private String firmName;
 
     // private String spareV3;

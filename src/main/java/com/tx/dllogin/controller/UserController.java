@@ -10,6 +10,8 @@ import com.tx.dllogin.vo.UserFindAllVo;
 import com.tx.dllogin.vo.Uservo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +28,7 @@ import java.util.List;
 @Api(tags = "用户模块操作")
 @RestController
 @CrossOrigin("*")
-public class UserController {
+public class UserController  extends BaseController {
 
     @Autowired
     private  HttpServletRequest request;
@@ -84,12 +86,14 @@ public class UserController {
 
 
     @GetMapping("/user/findAllLogin")
+    @RequiresPermissions(value = {"user:find"} ,logical = Logical.OR)
     public CommonResult  findAllLogin( Integer pageNum,Integer pageSize){
         CommonResult allLogin = userService.findAllLogin(pageNum,pageSize);
         return allLogin;
     }
 
     @GetMapping("/user/deleteOneUser")
+    @RequiresPermissions(value = {"user:delete"} ,logical = Logical.OR)
     public CommonResult  deleteOneUser(@RequestParam ("userId") String userId){
         CommonResult allLogin = userService.deleteOneUser(userId);
         return allLogin;
@@ -97,21 +101,31 @@ public class UserController {
 
 
     @GetMapping("/user/deleteListUser")
+    @RequiresPermissions(value = {"user:delete"} ,logical = Logical.OR)
     public CommonResult  deleteListUser(@RequestParam ("userId") List<String> userId){
         CommonResult allLogin = userService.deleteListUser(userId);
         return allLogin;
     }
 
      @PostMapping("/user/updateUserFindAllVo")
+     @RequiresPermissions(value = {"user:update"} ,logical = Logical.OR)
     public CommonResult  updateUserFindAllVo(@RequestBody UserFindAllVo userFindAllVo){
         CommonResult allLogin = userService.updateUserFindAllVo(userFindAllVo);
         return allLogin;
     }
 
     @PostMapping("/user/AddUser")
+    @RequiresPermissions(value = {"user:create"} ,logical = Logical.OR)
     public CommonResult AddUser(@RequestBody AddUserVo addUserVo){
         CommonResult commonResult = userService.AddUser(addUserVo);
         return commonResult;
+    }
+
+    @GetMapping("/user/findLogRoter")
+    @ApiOperation("登录后查询导航栏有哪些资源")
+    @RequiresPermissions(value = {"user:find"})
+    public CommonResult findLogRoter(){
+        return userService.findLogRoter();
     }
 
 

@@ -6,6 +6,7 @@ import com.tx.dllogin.services.ShopService;
 import com.tx.dllogin.vo.FindAllShopVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,13 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Api(tags = "店铺管理")
-public class ShopController {
+public class ShopController  extends BaseController {
     @Autowired
     private ShopService shopService;
 
 
     @ApiOperation("查询所有店铺（根据用户账号可以为null）")
     @PostMapping("/shop/findAllShop")
+    @RequiresPermissions(value = {"shop:find"})
     public CommonResult findAllShop(@RequestBody FindAllShopVo shopVo){
        return  shopService.findAllShop(shopVo);
     }
@@ -27,6 +29,7 @@ public class ShopController {
 
     @ApiOperation("修改单个店铺")
     @PostMapping("/shop/updateOneShop")
+    @RequiresPermissions(value = {"order:update"})
     public CommonResult updateOneShop(@RequestBody Shop shopVo){
         return  shopService.updateShop(shopVo);
     }

@@ -27,4 +27,11 @@ public interface DeptUserMapper {
             ,@Param("deptId") String deptId
             ,@Param("firmId") String firmId);
 
+    //根据用户账号 修改 关联部门 公司
+    void     updateUserByName(@Param("userName") String userName
+            ,@Param("deptId") String deptId
+            ,@Param("firmId") String firmId);
+
+
+
 }

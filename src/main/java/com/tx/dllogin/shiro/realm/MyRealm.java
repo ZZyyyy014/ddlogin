@@ -2,6 +2,7 @@ package com.tx.dllogin.shiro.realm;
 
 
 import com.tx.dllogin.dao.UserMapper;
+import com.tx.dllogin.vo.FIndShiroUserVo;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -11,35 +12,43 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class MyRealm extends AuthorizingRealm {
 
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    @Lazy
+    private HttpServletRequest request;
+
     @Override //授权
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         //获取身份信息（用户名）
         String primaryPrincipal = principalCollection.getPrimaryPrincipal().toString();
+        if(primaryPrincipal==null) return new  SimpleAuthorizationInfo();
         //查数据库  返回用户信息+权限信息+资源信息 需要什么 那什么
+        FIndShiroUserVo shiroParms = userMapper.findShiroParms(primaryPrincipal);
+        HttpSession session = request.getSession();
 
-
-
-
-
-        //赋值权限
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-
-
-        if(primaryPrincipal==null)return simpleAuthorizationInfo;
-
+        session.setAttribute("roleId",shiroParms.getRoleId());
+        session.setAttribute("roles",shiroParms.getRoleName());
+        //添加角色 如果多角色
+        simpleAuthorizationInfo.addRole(shiroParms.getRoleName());
+        //赋值资源权限   例如 user:create
+        simpleAuthorizationInfo.addStringPermissions(shiroParms.getParmsList());
+        session.setAttribute("permissions",shiroParms.getParmsList());
         return simpleAuthorizationInfo;
     }
 
 
     @Override  //认证
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-
         if(token.getPrincipal()==null)return null;
         //用户名
         String principal = token.getPrincipal().toString();

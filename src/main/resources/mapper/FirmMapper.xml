@@ -103,7 +103,11 @@
     limit 1
   </select>
 
-
+ <select id="findFirmIdByName" resultType="String">
+   select  firm_id
+   from dd_firm
+   where firm_name=#{firmName}
+ </select>
 
 
 </mapper>

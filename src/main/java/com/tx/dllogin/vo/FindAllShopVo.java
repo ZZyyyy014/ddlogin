@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-@ApiModel
+@ApiModel("根据权限查询返回")
 public class FindAllShopVo {
 
     @ApiModelProperty("当前页数")
@@ -28,7 +28,5 @@ public class FindAllShopVo {
 
     @ApiModelProperty("店铺登录时间段")
     private List<Date> shopLoginDateList;
-
-
 
 }

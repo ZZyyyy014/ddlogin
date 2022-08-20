@@ -19,8 +19,11 @@ public interface DeptMapper {
     int updateByPrimaryKey(Dept record);
 
     List<Dept> findAllDept();
+
     //根据名称查询 该部门是否存在
     String  findDeptByName(@Param("deptName") String  deptName);
+    //根据名称 查询该部门id
+    String findDeptIdByName(@Param("deptName") String  deptName);
 
 
 

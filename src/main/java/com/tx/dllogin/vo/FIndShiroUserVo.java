@@ -14,6 +14,10 @@ public class FIndShiroUserVo {
     @ApiModelProperty("用户Id")
     private  String userId;
 
+    @ApiModelProperty("查询角色Id")
+    private String roleId;
+
+
     @ApiModelProperty("查询角色 admin等 名称")
     private String roleName;
 

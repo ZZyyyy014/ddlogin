@@ -2,8 +2,8 @@ package com.tx.dllogin;
 
 import com.tx.dllogin.dao.*;
 import com.tx.dllogin.utill.AesUtil;
-import com.tx.dllogin.vo.FIndShiroUserVo;
 import com.tx.dllogin.vo.UserFindAllVo;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Hex;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +19,7 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Slf4j
 public class DlloginApplicationTests {
 
     @Autowired
@@ -90,8 +91,8 @@ public class DlloginApplicationTests {
 
     @Test
     public void tset27() {
-        FIndShiroUserVo shiroParms = userMapper.findShiroParms("1");
-        System.out.println(shiroParms);
+        log.info("当前操作人:{} 成功删除用户id:{} ","1","2");
+
     }
 
 

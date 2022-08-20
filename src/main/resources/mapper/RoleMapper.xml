@@ -103,4 +103,72 @@
       sparess_v3 = #{sparessV3,jdbcType=VARCHAR}
     where role_id = #{roleId,jdbcType=INTEGER}
   </update>
+
+  <resultMap id="FindAllShiro" type="FindReAllShiroVo">
+    <result column="duser_name" property="userName" />
+    <result column="dip" property="Ip" />
+    <result column="dsparessV1" property="sparessV1" />
+
+    <result column="dedept_id" property="depteId" />
+    <result column="dedept_name" property="deptName" />
+
+    <result column="dffirm_id" property="firmId"/>
+    <result column="dffirm_name" property="firmName"/>
+
+    <result column="drrole_id" property="roleId" />
+    <result column="drrole_remark" property="roleRemark" />
+
+  </resultMap>
+  <select id="FindAllShiro" resultMap="FindAllShiro">
+   select  d.user_name  duser_name,
+           d.ip    dip,
+           d.sparess_v1 dsparessV1,
+           de.dept_id    dedept_id,
+           de.dept_name  dedept_name,
+           df.firm_id    dffirm_id,
+           df.firm_name  dffirm_name,
+           dr.role_id drrole_id,
+           dr.role_remark  drrole_remark
+
+    from dd_user d,dd_dept_user du,dd_dept de,dd_role dr,dd_firm df
+     where
+        d.user_id=du.user_id
+        and du.dept_id=de.dept_id
+        and du.sparess_v1=df.firm_id
+        and d.levelss=dr.role_id
+     <if test="userName!=null and userName!='' ">
+        and  d.user_name=#{userName}
+     </if>
+
+    <if test="sparessV1!=null and sparessV1!='' ">
+      and  d.sparess_v1  like concat('%',#{sparessV1},'%')
+    </if>
+
+    <if test="firmName!=null and firmName!=''  ">
+      and  dr.role_remark=#{firmName}
+    </if>
+    <if test="deptName!=null and deptName!='' ">
+      and  de.dept_name=#{deptName}
+    </if>
+   order by dr.role_id asc , dffirm_name,dedept_name
+  </select>
+
+
+<select id="findAllrole" resultType="Role">
+   select  *
+   from dd_role
+</select>
+
+
+<select id="findRoleIdByName" resultType="String">
+ select role_id
+  from dd_role
+where role_remark=#{roleRemark}
+
+</select>
+
+
+
+
+
 </mapper>

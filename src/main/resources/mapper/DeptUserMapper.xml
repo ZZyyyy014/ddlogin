@@ -104,6 +104,8 @@
     where dept_user_id = #{deptUserId,jdbcType=VARCHAR}
   </update>
 
+
+
   <delete id="deleteUserList">
     delete  from dd_dept_user
     where user_id in
@@ -111,6 +113,25 @@
       #{ss}
     </foreach>
   </delete>
+
+  <delete id="deleteUserOneByUserId">
+    delete  from dd_dept_user
+    where user_id =#{userId}
+  </delete>
+
+
+<update id="updateUserByName" >
+  update  dd_dept_user d
+   set
+       d.dept_id=#{deptId},
+       d.sparess_v1=#{firmId}
+  where
+    d.user_id = (select  user_id from  dd_user where user_name=#{userName})
+</update>
+
+
+
+
 
   <update id="updateUser">
     update  dd_dept_user d
@@ -122,7 +143,6 @@
       d.sparess_v1 = #{firmId}
     </if>
     where user_id = #{userId}
-
   </update>
 
 

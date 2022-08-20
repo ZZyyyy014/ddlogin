@@ -38,23 +38,18 @@ public class JwtIterceptceptor implements HandlerInterceptor {
             JwtUtil.verify(jwtToken);//通过表示 token有用
             return true; //请求放行
         } catch (NullPointerException n) {
-            n.printStackTrace();
             CommonResult.error("无效token");
         } catch (SignatureVerificationException e) {
-            e.printStackTrace();
             CommonResult.error("无效签名");
         } catch (TokenExpiredException e) {
-            e.printStackTrace();
             CommonResult.error("token过期");
         } catch (AlgorithmMismatchException e) {
-            e.printStackTrace();
             CommonResult.error("token算法不一致");
         } catch (Exception e) {
-            e.printStackTrace();
             CommonResult.error("token无效");
         }
-        // 前面验证通过 直接下一步 不会走到这
-        map.put("state", false);
+        // 前面验证通过 直接下一步 不会走到这  //10001  token无效
+        map.put("state", 10001);
         //将将map转为json
         String json = new ObjectMapper().writeValueAsString(map);
         response.setContentType("application/json;charset=UTF-8");

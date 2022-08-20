@@ -24,6 +24,8 @@ public interface UserService {
 
     CommonResult  AddUser(AddUserVo addUserVo);
 
+    //登录后查询 1 2级菜单
+    CommonResult findLogRoter();
 
 
 

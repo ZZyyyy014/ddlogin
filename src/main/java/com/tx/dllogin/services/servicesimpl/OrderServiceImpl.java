@@ -6,21 +6,28 @@ import com.tx.dllogin.common.CommonResult;
 import com.tx.dllogin.dao.OrderMapper;
 import com.tx.dllogin.model.Order;
 import com.tx.dllogin.services.OrderService;
+import com.tx.dllogin.utill.LogUtill;
 import com.tx.dllogin.vo.FindLikeAllOrderVo;
 import com.tx.dllogin.vo.InsertListOrder;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 
 @Service
 @Transactional
+@Slf4j
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
     public OrderMapper orderMapper;
+
+    @Autowired
+    private HttpServletRequest request;
 
     @Override
     public CommonResult findALLOrder(Integer pageNum, Integer pagesize) {
@@ -34,8 +41,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public CommonResult deleteOrderOne(String orderId) {
+        String s = LogUtill.GetUserName(request);
         try {
             orderMapper.deleteOrderById(orderId);
+            log.info("账号{}删除{}订单Id成功",s,orderId);
         } catch (Exception e) {
             return CommonResult.error("删除单个失败");
         }

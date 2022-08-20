@@ -117,6 +117,11 @@
   </select>
 
 
+  <select id="findDeptIdByName" resultType="String">
+    select dept_id
+    from  dd_dept
+     where dept_name=#{deptName}
+  </select>
 
 
 </mapper>

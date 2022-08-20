@@ -21,6 +21,10 @@ public interface FirmMapper {
 
     //查询所有的公司
     List<Firm> findAllFrims();
+
     //查询公司 名称是否存在
     String  findBuyFirmName(@Param("firmName") String firmName);
+
+    String findFirmIdByName(@Param("firmName") String firmName);
+
 }
