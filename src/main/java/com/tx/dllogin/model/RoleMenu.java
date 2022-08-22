@@ -1,5 +1,9 @@
 package com.tx.dllogin.model;
 
+
+import lombok.Data;
+
+@Data
 public class RoleMenu {
     private Integer roleMenuId;
 

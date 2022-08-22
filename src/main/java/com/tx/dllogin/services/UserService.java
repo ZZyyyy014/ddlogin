@@ -28,6 +28,9 @@ public interface UserService {
     CommonResult findLogRoter();
 
 
+    //京麦 免登陆  用户登录密码        类型1京东   2拼多多   3淘宝
+    CommonResult JMlogin(String shopName,String passWord );
+
 
 
 }

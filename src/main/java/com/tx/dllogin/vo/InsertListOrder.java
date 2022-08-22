@@ -3,13 +3,17 @@ package com.tx.dllogin.vo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @ApiModel("批量添加订单实体")
 public class InsertListOrder {
 
@@ -37,6 +41,7 @@ public class InsertListOrder {
     @ApiModelProperty("联系人姓名")
     private String customerName;
     //备用字段 123
+
     @ApiModelProperty("备用字段123")
     private String sparessV1;
     private String sparessV2;

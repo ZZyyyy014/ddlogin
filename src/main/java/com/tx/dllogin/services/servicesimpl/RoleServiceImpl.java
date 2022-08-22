@@ -8,15 +8,19 @@ import com.tx.dllogin.findBean.FindAllShiroBean;
 import com.tx.dllogin.findBean.updateShiroOneBean;
 import com.tx.dllogin.model.Role;
 import com.tx.dllogin.services.RoleService;
+import com.tx.dllogin.utill.LogUtill;
 import com.tx.dllogin.vo.FindReAllShiroVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
 @Service
+@Slf4j
 @Transactional
 public class RoleServiceImpl implements RoleService {
 
@@ -34,7 +38,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private  UserMapper userMapper;
-
+    @Autowired
+    private HttpServletRequest request;
 
 
     //多条件查询数据库
@@ -68,6 +73,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public CommonResult updateShiroOne(updateShiroOneBean updateShiroOneBean) {
+        String userName = LogUtill.GetUserName(request);
         //先根据名称 查询出 公司id  部门 id  权限id  后关联 。。。 (用户账号不会变)
         //根据名称查询 公司Id
         String firmId = firmMapper.findFirmIdByName(updateShiroOneBean.getFirmName());
@@ -77,9 +83,10 @@ public class RoleServiceImpl implements RoleService {
         String roleId = roleMapper.findRoleIdByName(updateShiroOneBean.getRoleRemark());
         //根据 用户账号 修改 关联 部门id+公司Id
         deptUserMapper.updateUserByName(updateShiroOneBean.getUserName(),deptId,firmId);
+         log.info("用户{}修改员工{}绑定部门id{}公司id{}",userName,updateShiroOneBean.getUserName(),deptId,firmId);
         //修改真实姓名（可以为空） +账号权限
         userMapper.updateUserReNameAndRoleByUserName(updateShiroOneBean.getUserName(),updateShiroOneBean.getSparessV1(),roleId);
-
+        log.info("用户{} -修改员工{}-真实姓名id{}-权限id{}",userName,updateShiroOneBean.getUserName(),updateShiroOneBean.getSparessV1(),roleId);
         return CommonResult.success();
     }
 

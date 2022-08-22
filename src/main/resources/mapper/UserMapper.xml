@@ -311,6 +311,19 @@ SELECT
 
   </update>
 
+  <resultMap id="findDeIdAndFirIdBy" type="findDeptAndFirmVo">
+    <result column="dudept_id" property="deptId"/>
+    <result column="dusparess_v1" property="firmId"/>
+  </resultMap>
+  <select id="findDeIdAndFirIdByUserId"  resultMap="findDeIdAndFirIdBy" >
+     select  du.dept_id   dudept_id,  du.sparess_v1 dusparess_v1
+     from  dd_user d ,dd_dept_user du
+     where   d.user_id=#{userId}
+        and  d.user_id=du.user_id
+
+  </select>
+
+
 
 
 </mapper>

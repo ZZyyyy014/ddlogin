@@ -30,7 +30,7 @@ public interface UserMapper {
     List<UserFindAllVo> findAllUser();
 
     //判断是否存在该用户名
-    Integer  findExitByUserName(@Param("userName") String userName);
+    String  findExitByUserName(@Param("userName") String userName);
 
     //根据 用户名称   删除多个用户  和绑定关系表
     void deleteUserList(@Param("lists") List<String> lists);
@@ -43,7 +43,7 @@ public interface UserMapper {
     //前端根据session中存的 roleName 查询roleId   登录后跳转查询
     List<FindLogRoterVo> findLoginShiroParm(@Param("roleId")String roleId);
 
-    //普通管理员  修改 删除用户  先要查询 是否是同一部门 同一公司
+    //部门管理员  修改 删除用户  先要查询 是否是同一部门 同一公司
     findDeptAndFirmVo findDeIdAndFirId(@Param("userName")String userName);
 
     //根据List员工Id 查询部门 公司
@@ -53,5 +53,10 @@ public interface UserMapper {
     void  updateUserReNameAndRoleByUserName(@Param("userName")String userName,
                                             @Param("sparessV1") String sparessV1,
                                             @Param("levelss") String levelss);
+
+      //部门管理员  修改 删除用户  先要查询 是否是同一部门 同一公司
+    findDeptAndFirmVo    findDeIdAndFirIdByUserId(@Param("userId")String userId);
+
+
 
 }

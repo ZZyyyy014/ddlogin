@@ -42,10 +42,12 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public CommonResult deleteOrderOne(String orderId) {
         String s = LogUtill.GetUserName(request);
+        Order order = orderMapper.selectByPrimaryKey(orderId);
         try {
             orderMapper.deleteOrderById(orderId);
-            log.info("账号{}删除{}订单Id成功",s,orderId);
+            log.info("账号{}删除订单{}成功",s,order);
         } catch (Exception e) {
+            log.error("账号{}删除订单{}失败",s,order);
             return CommonResult.error("删除单个失败");
         }
         return CommonResult.success();
@@ -85,15 +87,16 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     @Override
     public CommonResult insetListOrder(List<InsertListOrder> listOrders) {
+
           try{
-              if(listOrders.size()==0){
+              if(listOrders.size()==0) {
                   return CommonResult.error("请添加参数");
               }
               orderMapper.insertListOrder(listOrders);
               return CommonResult.success();
           }catch (Exception e){
               e.printStackTrace();
-              return CommonResult.error("添加失败");
+              return CommonResult.error("添加失败,有重复数据请检查");
           }
     }
 

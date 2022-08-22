@@ -1,7 +1,7 @@
 package com.tx.dllogin;
 
 import com.tx.dllogin.dao.*;
-import com.tx.dllogin.utill.AesUtil;
+import com.tx.dllogin.model.Shop;
 import com.tx.dllogin.vo.UserFindAllVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Hex;
@@ -68,16 +68,11 @@ public class DlloginApplicationTests {
 
     @Test
     public void tset24() {
-        String appid = "feijing&functionId=getAidInfo4B&body={token:3BDF34D9BAABBD44BF92078CD0E9BBC3,ip:127.0.0.1,pin:森马萌2,art:imee,appId:im.waiter,os:windows,aidClientType:pc,aidClientVersion:9.4.9.3}";
-        Object aid = AesUtil.getAid("3BDF34D9BAABBD44BF92078CD0E9BBC3", "森马萌2");
-        System.out.println(aid);
     }
 
 
     @Test
     public void tset25() {
-        String s = AesUtil.loginDd("森马萌2", "QWEQWE123");
-        System.out.println(s);
     }
 
     @Test
@@ -91,8 +86,8 @@ public class DlloginApplicationTests {
 
     @Test
     public void tset27() {
-        log.info("当前操作人:{} 成功删除用户id:{} ","1","2");
-
+        Shop shopByNameAndPassWord = shopMapper.findShopByNameAndPassWord("1", "123");
+        System.out.println("----"+shopByNameAndPassWord.toString());
     }
 
 

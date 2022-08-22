@@ -48,7 +48,7 @@ public class FirmServiceImpl implements FirmService {
           log.info("账号{}添加公司{}成功",s,firm);
       }catch (Exception e){
           e.printStackTrace();
-          log.error("账号{}添加公司失败",s);
+          log.error("账号{}添加公司:{}失败",s,firmName);
           return  CommonResult.error("添加失败");
       }
         return CommonResult.success();

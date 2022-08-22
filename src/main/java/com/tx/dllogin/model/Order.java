@@ -1,7 +1,11 @@
 package com.tx.dllogin.model;
 
+import lombok.Data;
+
 import java.util.Date;
 
+
+@Data
 public class Order {
     private Integer orderId;
 

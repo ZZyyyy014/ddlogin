@@ -5,7 +5,8 @@
     <property name="LOG_HOME" value="/log"/>
     <!-- 定义日志文件名称 -->
     <property name="appName" value="ddlogin"></property>
-    <!-- ch.qos.logback.core.ConsoleAppender 表示控制台输出 -->
+
+    <!-- ch.qos.logback.core.ConsoleAppender   表示控制台输出 生产时候不需要-->
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
         <!--
         日志输出格式：
@@ -17,9 +18,11 @@
    %n是换行符
         -->
         <layout class="ch.qos.logback.classic.PatternLayout">
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level  - %msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss}  ----[%thread] -- %-5level -%msg%n</pattern>
         </layout>
     </appender>
+
+
     <!-- 滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件 -->
     <appender name="appLogAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 指定日志文件的名称 -->
@@ -33,7 +36,7 @@
             滚动时产生的文件的存放位置及文件名称 %d{yyyy-MM-dd}：按天进行日志滚动
             %i：当文件大小超过maxFileSize时，按照i进行文件滚动
             -->
-            <fileNamePattern>${LOG_HOME}/${appName}-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <fileNamePattern>${LOG_HOME}/${appName} -%d{yyyy-MM-dd}-%i.log</fileNamePattern>
             <!--
             可选节点，控制保留的归档文件的最大数量，超出数量就删除旧文件。假设设置每天滚动，
             且maxHistory是365，则只保存最近365天的文件，删除之前的旧文件。注意，删除旧文件是，
@@ -44,12 +47,12 @@
             当日志文件超过maxFileSize指定的大小是，根据上面提到的%i进行日志文件滚动 注意此处配置SizeBasedTriggeringPolicy是无法实现按文件大小进行滚动的，必须配置timeBasedFileNamingAndTriggeringPolicy
             -->
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>100MB</maxFileSize>
+                <maxFileSize>10MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
         <!-- 日志输出格式： -->
         <layout class="ch.qos.logback.classic.PatternLayout">
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} ---- [ %-5level ]  - %msg%n
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} ---- [%thread]---- [ %-5level ]  - %msg%n
             </pattern>
         </layout>
     </appender>

@@ -9,6 +9,7 @@ public class ShiroMd5util {
 
     //返回加盐的密码
     public static String getPssWord(String password){
+
       //密码 +盐 +散列1024次
       Md5Hash md5Hash = new Md5Hash(password,salt,1024);
       return  md5Hash.toHex();

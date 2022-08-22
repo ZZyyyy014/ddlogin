@@ -1,6 +1,7 @@
 package com.tx.dllogin.controller;
 
 import com.tx.dllogin.common.CommonResult;
+import com.tx.dllogin.findBean.DeleteShopeOneBean;
 import com.tx.dllogin.model.Shop;
 import com.tx.dllogin.services.ShopService;
 import com.tx.dllogin.vo.FindAllShopVo;
@@ -23,6 +24,7 @@ public class ShopController  extends BaseController {
     @PostMapping("/shop/findAllShop")
     @RequiresPermissions(value = {"shop:find"})
     public CommonResult findAllShop(@RequestBody FindAllShopVo shopVo){
+
        return  shopService.findAllShop(shopVo);
     }
 
@@ -33,6 +35,18 @@ public class ShopController  extends BaseController {
     public CommonResult updateOneShop(@RequestBody Shop shopVo){
         return  shopService.updateShop(shopVo);
     }
+
+
+    @ApiOperation("删除单个店铺")
+    @PostMapping("/shop/deteleOneShop")
+    @RequiresPermissions(value = {"order:delete"})
+    public CommonResult deteleOneShop(@RequestBody DeleteShopeOneBean deleteShopeOneBean){
+        System.out.println(deleteShopeOneBean);
+        return  shopService.deleteShopOne(deleteShopeOneBean);
+    }
+
+
+
 
 
 }

@@ -2,6 +2,7 @@ package com.tx.dllogin.utill;
 
 
 import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -39,7 +40,9 @@ import java.util.Map;
 import java.util.UUID;
 
 @Component
+@Slf4j
 public class AesUtil {
+
 
     static {
         Security.addProvider(new BouncyCastleProvider());
@@ -84,7 +87,6 @@ public class AesUtil {
         String timestamp = null;
         String v = null;
         String sign = null;
-        //System.out.println(text1.length);
         for (String text2 : text1) {
             String text3[] = text2.split("=");
             switch (text3[0]) {
@@ -134,8 +136,8 @@ public class AesUtil {
         }
     }
 
-    public static String getAid(String token, String pin) {
-        try {
+    public static String getAid (String token, String pin) throws Exception {
+
             String body1 = "{\"token\":\"" + token + "\",\"ip\":\"127.0.0.1\",\"pin\":\"" + pin + "\",\"art\":\"imee\",\"appId\":\"im.waiter\",\"os\":\"windows\",\"aidClientType\":\"pc\",\"aidClientVersion\":\"9.4.9.3\"}";
             CloseableHttpClient client = HttpClients.createDefault();
             HttpPost httpPost = new HttpPost("https://api.m.jd.com/");
@@ -158,20 +160,15 @@ public class AesUtil {
             JSONObject JSONText = JSONObject.parseObject(s);
             String o = JSONText.getJSONObject("body").get("aid").toString();
             return o;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
+
     }
 
 
     //dd 登录
-    public static String loginDd(String loginName,String passwrod) {
-        try {
+    public static String loginDd (String loginName,String passwrod) throws Exception {
             TrustManager trustManager = new X509ExtendedTrustManager() {
                 @Override
                 public void checkClientTrusted(X509Certificate[] chain, String authType, Socket socket) throws CertificateException {
-
                 }
 
                 @Override
@@ -221,8 +218,12 @@ public class AesUtil {
                 // System.out.println("还未连接上");
                 Thread.sleep(500);
             }
-            aesWebsocket.send("{\"body\":{\"clientKind\":\"waiter\",\"clientLocalIp\":\"192.168.202.111\",\"clientType\":\"POP\",\"clientVersion\":\"9.4.9.3\",\"dvc\":\"FBC17678-E294-4DAD-86AD-E817F5A0F2C0\",\"os\":\"Microsoft Windows 10 null\",\"presence\":\"chat\",\"token\":\"3BDF34D9BAABBD44BF92078CD0E9BBC3\",\"versionCheck\":1},\"from\":{\"app\":\"im.waiter\",\"art\":\"customerGroupMsg\",\"clientType\":\"pc\",\"pin\":\"森马萌2\"},\"id\":\"" + UUID.randomUUID().toString() + "\",\"to\":{\"app\":\"im.waiter\",\"pin\":\"@im.jd.com\"},\"type\":\"auth\",\"ver\":\"4.4\"}\n");
-            aesWebsocket.send("{\"aid\":\"" + ddAid + "\",\"body\":{\"mac\":\"FBC17678-E294-4DAD-86AD-E817F5A0F2C0\",\"pin\":\"森马萌2\"},\"from\":{\"app\":\"im.waiter\",\"art\":\"customerGroupMsg\",\"clientType\":\"pc\",\"pin\":\"森马萌2\"},\"id\":\"" + UUID.randomUUID().toString() + "\",\"timestamp\":" + System.currentTimeMillis() + ",\"to\":{\"app\":\"im.waiter\",\"pin\":\"@im.jd.com\"},\"type\":\"pop_security_type_get\",\"ver\":\"4.4\"}");
+           // aesWebsocket.send("{\"body\":{\"clientKind\":\"waiter\",\"clientLocalIp\":\"192.168.202.111\",\"clientType\":\"POP\",\"clientVersion\":\"9.4.9.3\",\"dvc\":\"FBC17678-E294-4DAD-86AD-E817F5A0F2C0\",\"os\":\"Microsoft Windows 10 null\",\"presence\":\"chat\",\"token\":\"3BDF34D9BAABBD44BF92078CD0E9BBC3\",\"versionCheck\":1},\"from\":{\"app\":\"im.waiter\",\"art\":\"customerGroupMsg\",\"clientType\":\"pc\",\"pin\":\"森马萌2\"},\"id\":\"" + UUID.randomUUID().toString() + "\",\"to\":{\"app\":\"im.waiter\",\"pin\":\"@im.jd.com\"},\"type\":\"auth\",\"ver\":\"4.4\"}\n");
+            //aesWebsocket.send("{\"aid\":\"" + ddAid + "\",\"body\":{\"mac\":\"FBC17678-E294-4DAD-86AD-E817F5A0F2C0\",\"pin\":\"森马萌2\"},\"from\":{\"app\":\"im.waiter\",\"art\":\"customerGroupMsg\",\"clientType\":\"pc\",\"pin\":\"森马萌2\"},\"id\":\"" + UUID.randomUUID().toString() + "\",\"timestamp\":" + System.currentTimeMillis() + ",\"to\":{\"app\":\"im.waiter\",\"pin\":\"@im.jd.com\"},\"type\":\"pop_security_type_get\",\"ver\":\"4.4\"}");
+            aesWebsocket.send("{\"body\":{\"clientKind\":\"waiter\",\"clientLocalIp\":\"192.168.202.111\",\"clientType\":\"POP\",\"clientVersion\":\"9.4.9.3\",\"dvc\":\"FBC17678-E294-4DAD-86AD-E817F5A0F2C0\",\"os\":\"Microsoft Windows 10 null\",\"presence\":\"chat\",\"token\":\""+passwrodtoken+"\",\"versionCheck\":1},\"from\":{\"app\":\"im.waiter\",\"art\":\"customerGroupMsg\",\"clientType\":\"pc\",\"pin\":\""+loginName+"\"},\"id\":\"" + UUID.randomUUID().toString() + "\",\"to\":{\"app\":\"im.waiter\",\"pin\":\"@im.jd.com\"},\"type\":\"auth\",\"ver\":\"4.4\"}\n");
+            aesWebsocket.send("{\"aid\":\"" + ddAid + "\",\"body\":{\"mac\":\"FBC17678-E294-4DAD-86AD-E817F5A0F2C0\",\"pin\":\""+loginName+"\"},\"from\":{\"app\":\"im.waiter\",\"art\":\"customerGroupMsg\",\"clientType\":\"pc\",\"pin\":\""+loginName+"\"},\"id\":\"" + UUID.randomUUID().toString() + "\",\"timestamp\":" + System.currentTimeMillis() + ",\"to\":{\"app\":\"im.waiter\",\"pin\":\"@im.jd.com\"},\"type\":\"pop_security_type_get\",\"ver\":\"4.4\"}");
+
+           System.out.println(aesWebsocket.getExcptMessage());
             while (aesWebsocket.getExcptMessage() == null && !("PHONE_ALTERNATIVE").equals(aesWebsocket.getExcptMessage())) {
                 Thread.sleep(1000);
             }
@@ -288,11 +289,8 @@ public class AesUtil {
             JSONObject jsonObject12 = JSONText1.getJSONObject("result");
             Map jsonObject2 = (Map)JSONObject.parseObject(jsonObject12 + "");
             String resurl = (String) jsonObject2.get("pluginOpenUrl");
+        System.out.println(resurl);
             return resurl;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
     }
 
 

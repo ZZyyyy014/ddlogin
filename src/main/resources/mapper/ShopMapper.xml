@@ -192,13 +192,24 @@
             shop_user_passWrod = #{shopUserPasswrod,jdbcType=VARCHAR},
         </if>
             shop_login_date = #{shopLoginDate,jdbcType=TIMESTAMP},
+
             shop_ip = #{shopIp,jdbcType=VARCHAR},
+
             shop_authorization = #{shopAuthorization,jdbcType=VARCHAR},
+
             sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
             return_cookie = #{returnCookie,jdbcType=VARCHAR},
             user_typess = #{userTypess,jdbcType=VARCHAR}
     where shop_id = #{shopId,jdbcType=VARCHAR}
 </update>
+
+
+    <select id="findShopByNameAndPassWord" resultType="Shop">
+     select  *
+       from dd_shop
+       where  shop_user_name=#{shopName}
+    </select>
+
 
 
 </mapper>

@@ -3,8 +3,8 @@ package com.tx.dllogin.controller;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import com.tx.dllogin.common.CommonResult;
+import com.tx.dllogin.findBean.DdUrlBean;
 import com.tx.dllogin.services.UserService;
-import com.tx.dllogin.utill.AesUtil;
 import com.tx.dllogin.vo.AddUserVo;
 import com.tx.dllogin.vo.UserFindAllVo;
 import com.tx.dllogin.vo.Uservo;
@@ -65,12 +65,18 @@ public class UserController  extends BaseController {
 
 
     @ApiOperation("京麦免登陆")
-    @GetMapping("/user/ddUrl")
-    public  String  ddUrl(String userName,String passWrod){
+    @PostMapping("/user/ddUrl")  //userTypess类型  1京东 2拼多多 3淘宝  默认为1
+    public  CommonResult  ddUrl(@RequestBody DdUrlBean ddUrlBean){
+        System.out.println(ddUrlBean);
         //返回的免密 登录
-        String ddUrl = AesUtil.loginDd(userName, passWrod);
-        return ddUrl;
+        CommonResult commonResult = userService.JMlogin(ddUrlBean.getUserName(),ddUrlBean.getPassword());
+        return commonResult;
     }
+
+
+
+
+
 
     @ApiOperation("dd后台登录")
     @PostMapping("/user/ddlogin")

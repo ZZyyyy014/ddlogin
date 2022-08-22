@@ -30,6 +30,10 @@ public interface ShopMapper {
                            @Param("endDate")Date endDate
     );
 
+    Shop  findShopByNameAndPassWord(@Param("shopName") String shopName,
+                                    @Param("passwrod") String passwrod);
+
+
 
 
 }
