@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.servlet.Filter;
 import java.util.HashMap;
-import java.util.Map;
 
 @Configuration
 public class ShiroConfig {
@@ -39,15 +37,6 @@ public class ShiroConfig {
         map.put("/webjars/**", "anon");
         map.put("/configuration/security", "anon");
         map.put("/configuration/ui", "anon");
-
-        // 添加自己的过滤器并且取名为jwt
-        Map<String, Filter> filterMap = new HashMap<String, Filter>();
-        // 2、将自定义过滤器放入map中，如果实现了自定义授权过滤器，那就必须在这里注册，否则Shiro不会使用自定义的授权过滤器
-    /*
-        filterMap.put("authc", new MyFormAuthenticationFilter());
-        // 3、将过滤器Ma绑定到shiroFilterFactoryBean上
-        shiroFilterFactoryBean.setFilters(filterMap);
-        */
 
         //主要这行代码必须放在所有权限设置的最后，不然会导致所有 url 都被拦截
         //所有接口 都要拦截

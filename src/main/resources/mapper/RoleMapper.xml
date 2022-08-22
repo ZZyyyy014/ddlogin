@@ -120,7 +120,7 @@
 
   </resultMap>
   <select id="FindAllShiro" resultMap="FindAllShiro">
-   select  d.user_name  duser_name,
+   select distinct d.user_name  duser_name,
            d.ip    dip,
            d.sparess_v1 dsparessV1,
            de.dept_id    dedept_id,
@@ -129,13 +129,11 @@
            df.firm_name  dffirm_name,
            dr.role_id drrole_id,
            dr.role_remark  drrole_remark
-
-    from dd_user d,dd_dept_user du,dd_dept de,dd_role dr,dd_firm df
-     where
-        d.user_id=du.user_id
-        and du.dept_id=de.dept_id
-        and du.sparess_v1=df.firm_id
-        and d.levelss=dr.role_id
+    from dd_user d      LEFT JOIN    dd_dept_user du      on     d.user_id=du.user_id
+    LEFT JOIN     dd_dept de        on   du.dept_id=de.dept_id
+    LEFT JOIN      dd_firm df          on du.sparess_v1=df.firm_id
+    LEFT JOIN     dd_role dr     ON   d.levelss=dr.role_id
+      where 1=1
      <if test="userName!=null and userName!='' ">
         and  d.user_name=#{userName}
      </if>

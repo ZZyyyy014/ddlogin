@@ -41,7 +41,9 @@ public class OrderController   extends BaseController{
     @PostMapping("/order/insertListOrder")
     @RequiresPermissions(value = {"order:create"})
     public CommonResult insertListOrder(@RequestBody List<InsertListOrder> listOrders) {
+
         return orderService.insetListOrder(listOrders);
+
     }
 
 

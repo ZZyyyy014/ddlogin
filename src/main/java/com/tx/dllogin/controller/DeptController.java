@@ -8,12 +8,18 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @CrossOrigin
 public class DeptController extends BaseController {
 
     @Autowired
     private DeptService deptService;
+
+    @Autowired
+    private HttpServletRequest request;
+
 
     @GetMapping("/dept/findAllDept")
     @RequiresPermissions(value = {"user:find"})
@@ -23,14 +29,18 @@ public class DeptController extends BaseController {
     }
 
 
+    //创建部门
     @GetMapping("/dept/createDept")
     @RequiresPermissions(value = {"user:create"})
     public  CommonResult createDept(String createdeptName){
-        CommonResult allDept = deptService.createDept(createdeptName);
-        return  allDept;
+
+        String roles = request.getSession().getAttribute("roles").toString();
+       if("admin_all".equals(roles)){
+           CommonResult allDept = deptService.createDept(createdeptName);
+           return  allDept;
+       }else {
+           return CommonResult.error("请联系超级管理员添加");
+       }
     }
-
-
-
 
 }

@@ -186,10 +186,15 @@
                   ,u.sparess_v1 uspare_v1
                   ,u.ip uip
                   ,u.levelss ulv
-    from  dd_dept_user du,dd_dept d,dd_user u,dd_firm df
+    from    dd_user u LEFT JOIN        dd_dept_user du   ON  u.user_id =du.user_id
+                      LEFT JOIN        dd_dept d    on   du.dept_id =d.dept_id
+                      LEFT JOIN        dd_firm df  ON  du.sparess_v1=df.firm_id
+  /*  from  dd_dept_user du,dd_dept d,dd_user u,dd_firm df
     where  du.dept_id=d.dept_id
       and  du.user_id=u.user_id
-      and  du.sparess_v1=df.firm_id
+      and  du.sparess_v1=df.firm_id*/
+
+
     ORDER BY dfirmName,ddept_id
   </select>
 

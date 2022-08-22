@@ -94,7 +94,7 @@ public class OrderServiceImpl implements OrderService {
               }
               orderMapper.insertListOrder(listOrders);
               return CommonResult.success();
-          }catch (Exception e){
+          } catch (Exception e){
               e.printStackTrace();
               return CommonResult.error("添加失败,有重复数据请检查");
           }

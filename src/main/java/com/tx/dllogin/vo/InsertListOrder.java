@@ -44,6 +44,7 @@ public class InsertListOrder {
 
     @ApiModelProperty("备用字段123")
     private String sparessV1;
+
     private String sparessV2;
     private String sparessV3;
 

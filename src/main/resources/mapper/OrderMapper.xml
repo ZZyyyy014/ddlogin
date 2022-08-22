@@ -191,20 +191,22 @@
     </select>
 
     <insert id="insertListOrder" parameterType="InsertListOrder">
-        INSERT into
+        INSERT ignore into
             dd_order(order_number
                     ,order_date
                     ,shop_user_name
                     ,customerTel
                     ,expressageCode
-                    ,customerName)VALUES
+                    ,customerName
+                    ,sparess_v1)VALUES
          <foreach close="" collection="list" index="index" item="item" open="" separator=",">
           (#{item.orderNumber},
            #{item.orderDate},
            #{item.shopUserName},
            #{item.customerTel},
            #{item.expressageCode},
-           #{item.customerName})
+           #{item.customerName},
+           #{item.sparessV1})
          </foreach>
     </insert>
 
