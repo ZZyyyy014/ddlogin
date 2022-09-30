@@ -74,14 +74,17 @@ public class ShopServiceImpl implements ShopService {
     public CommonResult updateShop(Shop shop) {
         //当前登录的用户名称
         String userName = LogUtill.GetUserName(request);
+
         //获取当前 身份
         String roles = request.getSession().getAttribute("roles").toString();
         //当前为部门管理员
         if("admin_min".equals(roles)){
-            //部门管理员 的公司Id  deptId
+            //部门管理员 的公司Id
             findDeptAndFirmVo d1 = userMapper.findDeIdAndFirId(userName);
+
             //被修改 店铺绑定的userName  创建人用户username
             String userNameTwo = shop.getSparessV1();
+
            //查询 绑定用户dept  id
             findDeptAndFirmVo d2 = userMapper.findDeIdAndFirIdByUserId(userNameTwo);
            if (d2==null){

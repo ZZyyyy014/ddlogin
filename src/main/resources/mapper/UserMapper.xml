@@ -1,387 +1,383 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tx.dllogin.dao.UserMapper">
-  <resultMap id="BaseResultMap" type="com.tx.dllogin.model.User">
-    <id column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="user_passWrod" jdbcType="VARCHAR" property="userPasswrod" />
-    <result column="login_date" jdbcType="TIMESTAMP" property="loginDate" />
-    <result column="dept_id" jdbcType="VARCHAR" property="deptId" />
-    <result column="ip" jdbcType="VARCHAR" property="ip" />
-    <result column="sparess_v1" jdbcType="VARCHAR" property="sparessV1" />
-    <result column="sparess_v2" jdbcType="VARCHAR" property="sparessV2" />
-    <result column="sparess_v3" jdbcType="VARCHAR" property="sparessV3" />
-    <result column="levelss" jdbcType="VARCHAR" property="levelss" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    user_id, user_name, user_passWrod, login_date, dept_id, ip, sparess_v1, sparess_v2, 
+    <resultMap id="BaseResultMap" type="com.tx.dllogin.model.User">
+        <id column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="user_passWrod" jdbcType="VARCHAR" property="userPasswrod"/>
+        <result column="login_date" jdbcType="TIMESTAMP" property="loginDate"/>
+        <result column="dept_id" jdbcType="VARCHAR" property="deptId"/>
+        <result column="ip" jdbcType="VARCHAR" property="ip"/>
+        <result column="sparess_v1" jdbcType="VARCHAR" property="sparessV1"/>
+        <result column="sparess_v2" jdbcType="VARCHAR" property="sparessV2"/>
+        <result column="sparess_v3" jdbcType="VARCHAR" property="sparessV3"/>
+        <result column="levelss" jdbcType="VARCHAR" property="levelss"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        user_id, user_name, user_passWrod, login_date, dept_id, ip, sparess_v1, sparess_v2,
     sparess_v3, levelss
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from dd_user
-    where user_id = #{userId,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from dd_user
-    where user_id = #{userId,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="com.tx.dllogin.model.User">
-    insert into dd_user (user_id, user_name, user_passWrod, 
-      login_date, dept_id, ip, 
-      sparess_v1, sparess_v2, sparess_v3, 
-      levelss)
-    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userPasswrod,jdbcType=VARCHAR}, 
-      #{loginDate,jdbcType=TIMESTAMP}, #{deptId,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
-      #{sparessV1,jdbcType=VARCHAR}, #{sparessV2,jdbcType=VARCHAR}, #{sparessV3,jdbcType=VARCHAR}, 
-      #{levelss,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.tx.dllogin.model.User">
-    insert into dd_user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="userName != null">
-        user_name,
-      </if>
-      <if test="userPasswrod != null">
-        user_passWrod,
-      </if>
-      <if test="loginDate != null">
-        login_date,
-      </if>
-      <if test="deptId != null">
-        dept_id,
-      </if>
-      <if test="ip != null">
-        ip,
-      </if>
-      <if test="sparessV1 != null">
-        sparess_v1,
-      </if>
-      <if test="sparessV2 != null">
-        sparess_v2,
-      </if>
-      <if test="sparessV3 != null">
-        sparess_v3,
-      </if>
-      <if test="levelss != null">
-        levelss,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="userPasswrod != null">
-        #{userPasswrod,jdbcType=VARCHAR},
-      </if>
-      <if test="loginDate != null">
-        #{loginDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="deptId != null">
-        #{deptId,jdbcType=VARCHAR},
-      </if>
-      <if test="ip != null">
-        #{ip,jdbcType=VARCHAR},
-      </if>
-      <if test="sparessV1 != null">
-        #{sparessV1,jdbcType=VARCHAR},
-      </if>
-      <if test="sparessV2 != null">
-        #{sparessV2,jdbcType=VARCHAR},
-      </if>
-      <if test="sparessV3 != null">
-        #{sparessV3,jdbcType=VARCHAR},
-      </if>
-      <if test="levelss != null">
-        #{levelss,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.tx.dllogin.model.User">
-    update dd_user
-    <set>
-      <if test="userName != null">
-        user_name = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="userPasswrod != null">
-        user_passWrod = #{userPasswrod,jdbcType=VARCHAR},
-      </if>
-      <if test="loginDate != null">
-        login_date = #{loginDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="deptId != null">
-        dept_id = #{deptId,jdbcType=VARCHAR},
-      </if>
-      <if test="ip != null">
-        ip = #{ip,jdbcType=VARCHAR},
-      </if>
-      <if test="sparessV1 != null">
-        sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
-      </if>
-      <if test="sparessV2 != null">
-        sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
-      </if>
-      <if test="sparessV3 != null">
-        sparess_v3 = #{sparessV3,jdbcType=VARCHAR},
-      </if>
-      <if test="levelss != null">
-        levelss = #{levelss,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where user_id = #{userId,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.tx.dllogin.model.User">
-    update dd_user
-    set user_name = #{userName,jdbcType=VARCHAR},
-      user_passWrod = #{userPasswrod,jdbcType=VARCHAR},
-      login_date = #{loginDate,jdbcType=TIMESTAMP},
-      dept_id = #{deptId,jdbcType=VARCHAR},
-      ip = #{ip,jdbcType=VARCHAR},
-      sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
-      sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
-      sparess_v3 = #{sparessV3,jdbcType=VARCHAR},
-      levelss = #{levelss,jdbcType=VARCHAR}
-    where user_id = #{userId,jdbcType=VARCHAR}
-  </update>
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dd_user
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete
+        from dd_user
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.tx.dllogin.model.User">
+        insert into dd_user (user_id, user_name, user_passWrod,
+                             login_date, dept_id, ip,
+                             sparess_v1, sparess_v2, sparess_v3,
+                             levelss)
+        values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userPasswrod,jdbcType=VARCHAR},
+                #{loginDate,jdbcType=TIMESTAMP}, #{deptId,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR},
+                #{sparessV1,jdbcType=VARCHAR}, #{sparessV2,jdbcType=VARCHAR}, #{sparessV3,jdbcType=VARCHAR},
+                #{levelss,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.tx.dllogin.model.User">
+        insert into dd_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="userPasswrod != null">
+                user_passWrod,
+            </if>
+            <if test="loginDate != null">
+                login_date,
+            </if>
+            <if test="deptId != null">
+                dept_id,
+            </if>
+            <if test="ip != null">
+                ip,
+            </if>
+            <if test="sparessV1 != null">
+                sparess_v1,
+            </if>
+            <if test="sparessV2 != null">
+                sparess_v2,
+            </if>
+            <if test="sparessV3 != null">
+                sparess_v3,
+            </if>
+            <if test="levelss != null">
+                levelss,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userPasswrod != null">
+                #{userPasswrod,jdbcType=VARCHAR},
+            </if>
+            <if test="loginDate != null">
+                #{loginDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deptId != null">
+                #{deptId,jdbcType=VARCHAR},
+            </if>
+            <if test="ip != null">
+                #{ip,jdbcType=VARCHAR},
+            </if>
+            <if test="sparessV1 != null">
+                #{sparessV1,jdbcType=VARCHAR},
+            </if>
+            <if test="sparessV2 != null">
+                #{sparessV2,jdbcType=VARCHAR},
+            </if>
+            <if test="sparessV3 != null">
+                #{sparessV3,jdbcType=VARCHAR},
+            </if>
+            <if test="levelss != null">
+                #{levelss,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.tx.dllogin.model.User">
+        update dd_user
+        <set>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userPasswrod != null">
+                user_passWrod = #{userPasswrod,jdbcType=VARCHAR},
+            </if>
+            <if test="loginDate != null">
+                login_date = #{loginDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deptId != null">
+                dept_id = #{deptId,jdbcType=VARCHAR},
+            </if>
+            <if test="ip != null">
+                ip = #{ip,jdbcType=VARCHAR},
+            </if>
+            <if test="sparessV1 != null">
+                sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
+            </if>
+            <if test="sparessV2 != null">
+                sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
+            </if>
+            <if test="sparessV3 != null">
+                sparess_v3 = #{sparessV3,jdbcType=VARCHAR},
+            </if>
+            <if test="levelss != null">
+                levelss = #{levelss,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.tx.dllogin.model.User">
+        update dd_user
+        set user_name     = #{userName,jdbcType=VARCHAR},
+            user_passWrod = #{userPasswrod,jdbcType=VARCHAR},
+            login_date    = #{loginDate,jdbcType=TIMESTAMP},
+            dept_id       = #{deptId,jdbcType=VARCHAR},
+            ip            = #{ip,jdbcType=VARCHAR},
+            sparess_v1    = #{sparessV1,jdbcType=VARCHAR},
+            sparess_v2    = #{sparessV2,jdbcType=VARCHAR},
+            sparess_v3    = #{sparessV3,jdbcType=VARCHAR},
+            levelss       = #{levelss,jdbcType=VARCHAR}
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
 
 
-
-  <select id="findUserByName" resultType="com.tx.dllogin.model.User">
-    select  *
-    from  dd_user
-    where user_name=#{userName}
-  </select>
-
+    <select id="findUserByName" resultType="com.tx.dllogin.model.User">
+        select *
+        from dd_user
+        where user_name = #{userName}
+    </select>
 
 
-  <resultMap id="findAllUser" type="UserFindAllVo">
-    <id column="dusparess_v1" property="sparessV1" />
-    <result column="dfirmName" property="firmName" />
-    <result column="uuser_id" property="userId" />
-    <result column="uuser_name" property="userName" />
-    <result column="ulogin_date" property="loginDate" />
-    <result column="uspare_v1" property="userRealName" />
-    <result column="ddept_name" property="deptName" />
-    <result column="ddept_id" property="deptId" />
-    <result column="uip" property="ip" />
-    <result column="ulv" property="levelss" />
-  </resultMap>
+    <resultMap id="findAllUser" type="UserFindAllVo">
+        <id column="dusparess_v1" property="sparessV1"/>
+        <result column="dfirmName" property="firmName"/>
+        <result column="uuser_id" property="userId"/>
+        <result column="uuser_name" property="userName"/>
+        <result column="ulogin_date" property="loginDate"/>
+        <result column="uspare_v1" property="userRealName"/>
+        <result column="ddept_name" property="deptName"/>
+        <result column="ddept_id" property="deptId"/>
+        <result column="uip" property="ip"/>
+        <result column="ulv" property="levelss"/>
+    </resultMap>
 
-  <select id="findAllUser" resultMap="findAllUser">
-    select DISTINCT
-      du.sparess_v1  dusparess_v1
-                  ,df.firm_name    dfirmName
-                  ,d.dept_id       ddept_id
-                  ,d.dept_name ddept_name
-                  ,u.user_id uuser_id
-                  ,u.user_name uuser_name
-                  ,u.login_date ulogin_date
-                  ,u.sparess_v1 uspare_v1
-                  ,u.ip uip
-                  ,u.levelss ulv
-    from    dd_user u LEFT JOIN        dd_dept_user du   ON  u.user_id =du.user_id
-                      LEFT JOIN        dd_dept d    on   du.dept_id =d.dept_id
-                      LEFT JOIN        dd_firm df  ON  du.sparess_v1=df.firm_id
-  /*
-      from  dd_dept_user du,dd_dept d,dd_user u,dd_firm df
-      where  du.dept_id=d.dept_id
-      and  du.user_id=u.user_id
-      and  du.sparess_v1=df.firm_id
-      */
-
-
-    ORDER BY dfirmName,ddept_id
-  </select>
-
-  <delete id="deleteUserList">
-    delete  from dd_user
-    where user_id  in
-    <foreach close=")" collection="lists" item="ss" open="(" separator=",">
-      #{ss}
-    </foreach>
-  </delete>
-
-  <select id="findExitByUserName" resultType="Integer">
-    select
-      user_name
-    from dd_user
-    where user_name=#{userName}
-    limit 1
-  </select>
+    <select id="findAllUser" resultMap="findAllUser">
+        select DISTINCT du.sparess_v1 dusparess_v1
+                      , df.firm_name  dfirmName
+                      , d.dept_id     ddept_id
+                      , d.dept_name   ddept_name
+                      , u.user_id     uuser_id
+                      , u.user_name   uuser_name
+                      , u.login_date  ulogin_date
+                      , u.sparess_v1  uspare_v1
+                      , u.ip          uip
+                      , u.levelss     ulv
+        from dd_user u
+                 LEFT JOIN dd_dept_user du ON u.user_id = du.user_id
+                 LEFT JOIN dd_dept d on du.dept_id = d.dept_id
+                 LEFT JOIN dd_firm df ON du.sparess_v1 = df.firm_id
+            /*
+                from  dd_dept_user du,dd_dept d,dd_user u,dd_firm df
+                where  du.dept_id=d.dept_id
+                and  du.user_id=u.user_id
+                and  du.sparess_v1=df.firm_id
+                */
 
 
-  <select id="findPassWrodByUserName" resultType="String">
-     select
-       user_passWrod
-    from dd_user
-   where user_name=#{userName}
-  </select>
+        ORDER BY dfirmName, ddept_id
+    </select>
 
-  <resultMap id="findShiroParms" type="FIndShiroUserVo">
-  <id column="dduser_id" property="userId"  />
-    <result column="drrole_id" property="roleId"/>
-    <result column="drrole_name" property="roleName"/>
-    <result column="drrole_remark" property="roleReamark"/>
-    <collection property="parmsList" ofType="String">
-       <result column="dmparms"/>
-    </collection>
-  </resultMap>
-
-  <select id="findShiroParms" resultMap="findShiroParms">
-    select DISTINCT dd_user.user_id dduser_id,
-                    dr.role_id drrole_id,
-                    dr.role_name    drrole_name,
-                    dr.role_remark  drrole_remark,
-                    dm.parms      dmparms
-    from dd_user
-       , dd_role dr
-       ,dd_role_menu drm
-       ,dd_menu dm
-    where dd_user.user_name=#{userName}
-      and  dd_user.levelss = dr.role_id
-      and dr.role_id = drm.role_id
-      and drm.menu_id = dm.menu_id
-      and  dm.type='2'
-  </select>
-
-
-  <resultMap id="findLoginShiroParm" type="FindLogRoterVo">
-    <id property="oneId" column="dmmenu_id"/>
-    <result property="oneMenu" column="dmmenu_url" />
-    <result property="oneMenuName" column="dmmenu_name" />
-    <collection property="twoMenuRouterList" ofType="TwoMenuRouter">
-      <id property="twoMenuId" column="dm1menu_id" />
-      <result column="dm1parms" property="twoMenuRouter"/>
-      <result property="twoMenuRouterName" column="dm1menu_name" />
-    </collection>
-  </resultMap>
-  <select id="findLoginShiroParm" resultMap="findLoginShiroParm">
-SELECT
-       dm.menu_id     dmmenu_id,
-      dm.menu_url dmmenu_url,
-       dm.menu_name dmmenu_name,
-       dm1.menu_id     dm1menu_id   ,
-       dm1.parms dm1parms,
-       dm1.menu_name dm1menu_name
-    FROM dd_menu dm  ,dd_menu dm1
-    where   dm1.menu_parent_id=dm.menu_id   and  dm1.type='3'
-            and dm1.menu_id in  (SELECT  drm.menu_id from dd_role_menu drm where   drm.role_id=#{roleId})
-            and dm.menu_id  in  (SELECT  drm.menu_id from dd_role_menu drm where   drm.role_id=#{roleId})
-   order by dm.order_num asc ,dm1.order_num asc
-</select>
-
-  <resultMap id="findDeIdAndFirId" type="findDeptAndFirmVo">
-      <result column="udept_id" property="deptId"/>
-      <result column="dusparess_v1" property="firmId"/>
-  </resultMap>
-  <select id="findDeIdAndFirId" resultMap="findDeIdAndFirId">
-    select    u.dept_id  udept_id, du.sparess_v1 dusparess_v1
-    from  dd_user u  left join  dd_dept_user  du  on  u.dept_id=du.dept_id
-    where    u.user_name=#{userName}
-  </select>
-
-
-
-  <resultMap id="findDeIdAndFirIdList" type="findDeptAndFirmVo">
-    <result column="udept_id" property="deptId"/>
-    <result column="dusparess_v1" property="firmId"/>
-  </resultMap>
-
-<select id="findDeIdAndFirIdList" resultMap="findDeIdAndFirIdList">
-  select u.dept_id  udept_id, du.sparess_v1 dusparess_v1
-  from  dd_user u  , dd_dept d ,dd_dept_user  du
-  where
-        u.dept_id=d.dept_id
-    and d.dept_id=du.dept_id
-   and  u.user_id in
-        <foreach collection="list"  close=")" open="(" separator="," item="userId" >
-          #{userId}
+    <delete id="deleteUserList">
+        delete from dd_user
+        where user_id in
+        <foreach close=")" collection="lists" item="ss" open="(" separator=",">
+            #{ss}
         </foreach>
-</select>
+    </delete>
+
+    <select id="findExitByUserName" resultType="Integer">
+        select user_name
+        from dd_user
+        where user_name = #{userName}
+        limit 1
+    </select>
 
 
-  <update id="updateUserReNameAndRoleByUserName" >
-   update  dd_user
-   set
-     sparess_v1=#{sparessV1},
-      levelss=#{levelss}
-  where user_name=#{userName}
+    <select id="findPassWrodByUserName" resultType="String">
+        select user_passWrod
+        from dd_user
+        where user_name = #{userName}
+    </select>
 
-  </update>
+    <resultMap id="findShiroParms" type="FIndShiroUserVo">
+        <id column="dduser_id" property="userId"/>
+        <result column="drrole_id" property="roleId"/>
+        <result column="drrole_name" property="roleName"/>
+        <result column="drrole_remark" property="roleReamark"/>
+        <collection property="parmsList" ofType="String">
+            <result column="dmparms"/>
+        </collection>
+    </resultMap>
 
-  <resultMap id="findDeIdAndFirIdBy" type="findDeptAndFirmVo">
-    <result column="dudept_id" property="deptId"/>
-    <result column="dusparess_v1" property="firmId"/>
-  </resultMap>
+    <select id="findShiroParms" resultMap="findShiroParms">
+        select DISTINCT dd_user.user_id dduser_id,
+                        dr.role_id      drrole_id,
+                        dr.role_name    drrole_name,
+                        dr.role_remark  drrole_remark,
+                        dm.parms        dmparms
+        from dd_user
+           , dd_role dr
+           , dd_role_menu drm
+           , dd_menu dm
+        where dd_user.user_name = #{userName}
+          and dd_user.levelss = dr.role_id
+          and dr.role_id = drm.role_id
+          and drm.menu_id = dm.menu_id
+          and dm.type = '2'
+    </select>
 
-  <select id="findDeIdAndFirIdByUserId"  resultMap="findDeIdAndFirIdBy" >
-     select  du.dept_id   dudept_id,  du.sparess_v1 dusparess_v1
-     from    dd_user d left join  dd_dept_user du on d.user_id=du.user_id
-     where   d.user_name=#{userId}
-  </select>
+
+    <resultMap id="findLoginShiroParm" type="FindLogRoterVo">
+        <id property="oneId" column="dmmenu_id"/>
+        <result property="oneMenu" column="dmmenu_url"/>
+        <result property="oneMenuName" column="dmmenu_name"/>
+        <collection property="twoMenuRouterList" ofType="TwoMenuRouter">
+            <id property="twoMenuId" column="dm1menu_id"/>
+            <result column="dm1parms" property="twoMenuRouter"/>
+            <result property="twoMenuRouterName" column="dm1menu_name"/>
+        </collection>
+    </resultMap>
+    <select id="findLoginShiroParm" resultMap="findLoginShiroParm">
+        SELECT dm.menu_id    dmmenu_id,
+               dm.menu_url   dmmenu_url,
+               dm.menu_name  dmmenu_name,
+               dm1.menu_id   dm1menu_id,
+               dm1.parms     dm1parms,
+               dm1.menu_name dm1menu_name
+        FROM dd_menu dm,
+             dd_menu dm1
+        where dm1.menu_parent_id = dm.menu_id
+          and dm1.type = '3'
+          and dm1.menu_id in (SELECT drm.menu_id from dd_role_menu drm where drm.role_id = #{roleId})
+          and dm.menu_id in (SELECT drm.menu_id from dd_role_menu drm where drm.role_id = #{roleId})
+        order by dm.order_num asc, dm1.order_num asc
+    </select>
+
+    <resultMap id="findDeIdAndFirId" type="findDeptAndFirmVo">
+        <result column="udept_id" property="deptId"/>
+        <result column="dusparess_v1" property="firmId"/>
+    </resultMap>
+    <select id="findDeIdAndFirId" resultMap="findDeIdAndFirId">
+        select distinct u.dept_id udept_id, du.sparess_v1 dusparess_v1
+        from dd_user u,
+             dd_dept_user du
+        where  u.user_id=du.user_id
+          and u.user_name = #{userName}
+    </select>
 
 
+    <resultMap id="findDeIdAndFirIdList" type="findDeptAndFirmVo">
+        <result column="udept_id" property="deptId"/>
+        <result column="dusparess_v1" property="firmId"/>
+    </resultMap>
 
-  <resultMap id="findUserListByName" type="UserListByName">
-         <result property="levelss" column="dlevelss"/>
-         <result property="deptId" column="ddept_id"/>
-         <result property="firmId" column="ddusparess_v1"/>
-  </resultMap>
- <select id="findUserListByName" resultMap="findUserListByName">
-   select distinct
-        d.levelss dlevelss
+    <select id="findDeIdAndFirIdList" resultMap="findDeIdAndFirIdList">
+        select u.dept_id udept_id, du.sparess_v1 dusparess_v1
+        from dd_user u , dd_dept d ,dd_dept_user du
+        where
+        u.dept_id=d.dept_id
+        and d.dept_id=du.dept_id
+        and u.user_id in
+        <foreach collection="list" close=")" open="(" separator="," item="userId">
+            #{userId}
+        </foreach>
+    </select>
+
+
+    <update id="updateUserReNameAndRoleByUserName">
+        update dd_user
+        set sparess_v1=#{sparessV1},
+            levelss=#{levelss}
+        where user_name = #{userName}
+
+    </update>
+
+    <resultMap id="findDeIdAndFirIdBy" type="findDeptAndFirmVo">
+        <result column="dudept_id" property="deptId"/>
+        <result column="dusparess_v1" property="firmId"/>
+    </resultMap>
+
+    <select id="findDeIdAndFirIdByUserId" resultMap="findDeIdAndFirIdBy">
+        select du.dept_id dudept_id, du.sparess_v1 dusparess_v1
+        from dd_user d
+                 left join dd_dept_user du on d.user_id = du.user_id
+        where d.user_name = #{userId}
+    </select>
+
+
+    <resultMap id="findUserListByName" type="UserListByName">
+        <result property="levelss" column="dlevelss"/>
+        <result property="deptId" column="ddept_id"/>
+        <result property="firmId" column="ddusparess_v1"/>
+    </resultMap>
+    <select id="findUserListByName" resultMap="findUserListByName">
+        select distinct d.levelss      dlevelss
+                      , d.dept_id      ddept_id
+                      , ddu.sparess_v1 ddusparess_v1
+        from dd_user d
+                 left join dd_dept_user ddu on d.user_id = ddu.user_id
+        where d.user_name = #{userName}
+
+
+    </select>
+
+
+    <resultMap id="findUserByUserName" type="UserFindAllVo">
+        <id column="dusparess_v1" property="sparessV1"/>
+        <result column="dfirmName" property="firmName"/>
+        <result column="uuser_id" property="userId"/>
+        <result column="uuser_name" property="userName"/>
+        <result column="ulogin_date" property="loginDate"/>
+        <result column="uspare_v1" property="userRealName"/>
+        <result column="ddept_name" property="deptName"/>
+        <result column="ddept_id" property="deptId"/>
+        <result column="uip" property="ip"/>
+        <result column="ulv" property="levelss"/>
+    </resultMap>
+    <select id="findUserByUserList" resultMap="findUserByUserName">
+        select DISTINCT
+        du.sparess_v1 dusparess_v1
+        ,df.firm_name dfirmName
         ,d.dept_id ddept_id
-        ,ddu.sparess_v1 ddusparess_v1
-   from  dd_user d left join dd_dept_user ddu on  d.user_id = ddu.user_id
-    where  d.user_name=#{userName}
-
-
- </select>
-
-
-
-
-  <resultMap id="findUserByUserName" type="UserFindAllVo">
-    <id column="dusparess_v1" property="sparessV1" />
-    <result column="dfirmName" property="firmName" />
-    <result column="uuser_id" property="userId" />
-    <result column="uuser_name" property="userName" />
-    <result column="ulogin_date" property="loginDate" />
-    <result column="uspare_v1" property="userRealName" />
-    <result column="ddept_name" property="deptName" />
-    <result column="ddept_id" property="deptId" />
-    <result column="uip" property="ip" />
-    <result column="ulv" property="levelss" />
-  </resultMap>
-  <select id="findUserByUserList" resultMap="findUserByUserName">
-    select DISTINCT
-     du.sparess_v1  dusparess_v1
-    ,df.firm_name    dfirmName
-    ,d.dept_id       ddept_id
-    ,d.dept_name ddept_name
-    ,u.user_id uuser_id
-    ,u.user_name uuser_name
-    ,u.login_date ulogin_date
-    ,u.sparess_v1 uspare_v1
-    ,u.ip uip
-    ,u.levelss ulv
-    from    dd_user u
-    LEFT JOIN        dd_dept_user du   ON  u.user_id =du.user_id
-    LEFT JOIN        dd_dept d    on   du.dept_id =d.dept_id
-    LEFT JOIN        dd_firm df  ON  du.sparess_v1=df.firm_id
-   where  1=1
-      <if test="levelss !=1  ">
-         and  d.dept_id=#{deptId}
-         and  du.sparess_v1=#{firmId}
-      </if>
-  </select>
+        ,d.dept_name ddept_name
+        ,u.user_id uuser_id
+        ,u.user_name uuser_name
+        ,u.login_date ulogin_date
+        ,u.sparess_v1 uspare_v1
+        ,u.ip uip
+        ,u.levelss ulv
+        from dd_user u
+        LEFT JOIN dd_dept_user du ON u.user_id =du.user_id
+        LEFT JOIN dd_dept d on du.dept_id =d.dept_id
+        LEFT JOIN dd_firm df ON du.sparess_v1=df.firm_id
+        where 1=1
+        <if test="levelss !=1  ">
+            and d.dept_id=#{deptId}
+            and du.sparess_v1=#{firmId}
+        </if>
+    </select>
 
 
 </mapper>

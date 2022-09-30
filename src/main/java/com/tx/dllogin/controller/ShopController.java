@@ -26,6 +26,7 @@ public class ShopController  extends BaseController {
     public CommonResult findAllShop(@RequestBody FindAllShopVo shopVo){
        return  shopService.findAllShop(shopVo);
     }
+
     @ApiOperation("修改单个店铺")
     @PostMapping("/shop/updateOneShop")
     @RequiresPermissions(value = {"order:update"})
