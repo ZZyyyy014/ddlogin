@@ -175,6 +175,7 @@ public class AesUtil {
     }
 
 
+
     //dd 登录
     public static String loginDd(String loginName, String passwrod) throws Exception {
         String resurl="";
@@ -223,6 +224,7 @@ public class AesUtil {
         String passwrodtoken = getPasswordToken(passwrod);
         String GUID = UUID.randomUUID().toString();
         String ddAid = AesUtil.getAid(passwrodtoken, loginName);
+        if (ddAid==null) return "";
         String url = "wss://ws2-dd.jd.com/?pin=" + URLEncoder.encode(loginName) + "&clientType=pc&appId=im.waiter&art=imee&aid=" + ddAid + "&_wid_=" + GUID;
         URI uri = new URI(url);
         aesWebsocket = new AesWebsocket(uri);

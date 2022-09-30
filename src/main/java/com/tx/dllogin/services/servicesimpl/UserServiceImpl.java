@@ -338,6 +338,7 @@ public class UserServiceImpl implements UserService {
         try {
             //取京东 登录京麦
             ddUrl = AesUtil.loginDd(shopName, passWord);
+            if (ddUrl=="") return  CommonResult.error("账号无权限或者密码错误");
         } catch (Exception e) {
             e.printStackTrace();
             log.error("用户账号{} 登录京麦失败 账号{}--密码{}", userName,shopName,passWord);

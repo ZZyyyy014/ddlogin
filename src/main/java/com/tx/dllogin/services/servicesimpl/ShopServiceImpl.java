@@ -69,7 +69,6 @@ public class ShopServiceImpl implements ShopService {
 
 
 
-
     @Override
     public CommonResult updateShop(Shop shop) {
         //当前登录的用户名称
