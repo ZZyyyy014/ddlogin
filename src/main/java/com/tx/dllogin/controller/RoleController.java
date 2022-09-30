@@ -27,7 +27,7 @@ public class RoleController extends BaseController{
 
 
        @PostMapping("/shiro/updateShiroOne")
-    @RequiresPermissions({"shiro:update"})
+       @RequiresPermissions({"shiro:update"})
        public CommonResult updateShiroOne(@RequestBody  updateShiroOneBean updateShiroOneBean){
            roleService.updateShiroOne(updateShiroOneBean);
             return CommonResult.success();

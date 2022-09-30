@@ -36,10 +36,13 @@ public class DeptServiceImpl implements DeptService {
     @Override
     public CommonResult createDept(String deptName) {
         String s = LogUtill.GetUserName(request);
-        if(deptName==null||deptName==""){
+
+        if(deptName==null  ||  deptName.trim()==""){
             return  CommonResult.error("请添加部门名称");
         }
+
         String deptByName = deptMapper.findDeptByName(deptName);
+
         if(deptByName!=null){
             return  CommonResult.error("该部门存在");
         }

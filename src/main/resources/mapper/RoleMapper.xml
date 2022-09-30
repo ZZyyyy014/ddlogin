@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tx.dllogin.dao.RoleMapper">
+
   <resultMap id="BaseResultMap" type="com.tx.dllogin.model.Role">
     <id column="role_id" jdbcType="INTEGER" property="roleId" />
     <result column="role_name" jdbcType="VARCHAR" property="roleName" />
@@ -143,7 +144,7 @@
     </if>
 
     <if test="firmName!=null and firmName!=''  ">
-      and  dr.role_remark=#{firmName}
+      and  df.firm_name=#{firmName}
     </if>
     <if test="deptName!=null and deptName!='' ">
       and  de.dept_name=#{deptName}

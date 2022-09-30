@@ -67,7 +67,6 @@ public class UserController  extends BaseController {
     @ApiOperation("京麦免登陆")
     @PostMapping("/user/ddUrl")  //userTypess类型  1京东 2拼多多 3淘宝  默认为1
     public  CommonResult  ddUrl(@RequestBody DdUrlBean ddUrlBean){
-        System.out.println(ddUrlBean);
         //返回的免密 登录
         CommonResult commonResult = userService.JMlogin(ddUrlBean.getUserName(),ddUrlBean.getPassword());
         return commonResult;
@@ -95,6 +94,8 @@ public class UserController  extends BaseController {
     @RequiresPermissions(value = {"user:find"} ,logical = Logical.OR)
     public CommonResult  findAllLogin( Integer pageNum,Integer pageSize){
         CommonResult allLogin = userService.findAllLogin(pageNum,pageSize);
+
+
         return allLogin;
     }
 

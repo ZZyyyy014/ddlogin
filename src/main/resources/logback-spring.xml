@@ -2,7 +2,7 @@
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
 
     <!-- 定义日志的根目录 -->
-    <property name="LOG_HOME" value="/log"/>
+    <property name="LOG_HOME" value="/log/ddlogin"/>
     <!-- 定义日志文件名称 -->
     <property name="appName" value="ddlogin"></property>
 

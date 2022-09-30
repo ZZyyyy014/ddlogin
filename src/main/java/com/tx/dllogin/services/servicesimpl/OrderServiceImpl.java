@@ -4,11 +4,13 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tx.dllogin.common.CommonResult;
 import com.tx.dllogin.dao.OrderMapper;
+import com.tx.dllogin.dao.UserMapper;
 import com.tx.dllogin.model.Order;
 import com.tx.dllogin.services.OrderService;
 import com.tx.dllogin.utill.LogUtill;
 import com.tx.dllogin.vo.FindLikeAllOrderVo;
 import com.tx.dllogin.vo.InsertListOrder;
+import com.tx.dllogin.vo.UserListByName;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,11 +31,18 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private HttpServletRequest request;
 
+    @Autowired
+    private UserMapper userMapper;
+
     @Override
     public CommonResult findALLOrder(Integer pageNum, Integer pagesize) {
         //pageNum 第几页   pagesize 每页多少条
         PageHelper.startPage(pageNum, pagesize);
+
+
         List<Order> allOrder = orderMapper.findAllOrder();
+
+
         PageInfo<Order> orderPageInfo = new PageInfo<>(allOrder);
         return CommonResult.success(orderPageInfo);
     }
@@ -67,6 +76,11 @@ public class OrderServiceImpl implements OrderService {
         }
         //添加查询 条件
         try {
+            //登录后 获取到用户名称
+            String userNameOne = request.getSession().getAttribute("userNameOne").toString();
+            //根据用户名称 查询该用户 所在公司Id  部门Id  角色Id
+            UserListByName userListByName = userMapper.findUserListByName(userNameOne);
+
             PageHelper.startPage(findLikeAllOrderVo.getLiekpageNum(), findLikeAllOrderVo.getLikepageSize());
             List<Order> likeAllOrder = orderMapper.findLikeAllOrder(date1,
                     date2,
@@ -74,7 +88,9 @@ public class OrderServiceImpl implements OrderService {
                     findLikeAllOrderVo.getCustomerTel(),
                     findLikeAllOrderVo.getExpressageCode(),
                     findLikeAllOrderVo.getCustomerName(),
-                    findLikeAllOrderVo.getShopUserName());
+                    findLikeAllOrderVo.getShopUserName(),
+                    userListByName.getLevelss(),
+                    userListByName.getFirmId());
             PageInfo<Order> orderPageInfo = new PageInfo<>(likeAllOrder);
             return CommonResult.success(orderPageInfo);
         } catch (Exception e) {
@@ -84,19 +100,38 @@ public class OrderServiceImpl implements OrderService {
 
     }
 
+
     @Transactional
     @Override
-    public CommonResult insetListOrder(List<InsertListOrder> listOrders) {
-
+    public CommonResult insetListOrder(InsertListOrder listOrders) {
           try{
-              if(listOrders.size()==0) {
-                  return CommonResult.error("请添加参数");
-              }
-              orderMapper.insertListOrder(listOrders);
+              String orderNumber = listOrders.getOrderNumber();
+              Integer byId = orderMapper.findById(orderNumber);
+            if (byId==null){
+                //登录后 获取到用户名称
+                String userNameOne = request.getSession().getAttribute("userNameOne").toString();
+
+                //根据用户名称 查询该用户 所在公司Id  部门Id  角色Id
+                UserListByName userListByName = userMapper.findUserListByName(userNameOne);
+                Order order = new Order();
+                order.setOrderNumber(listOrders.getOrderNumber());
+                order.setCustomername(listOrders.getCustomerName());
+                order.setCustomertel(listOrders.getCustomerTel());
+                order.setExpressagecode(listOrders.getExpressageCode());
+                order.setOrderDate(listOrders.getOrderDate());
+                order.setShopUserName(listOrders.getShopUserName());
+                order.setSparessV1(listOrders.getSparessV1());
+                order.setSparessV2(userListByName.getFirmId());
+                order.setSparessV3(listOrders.getSparessV3());
+                orderMapper.insertSelective(order);
+            }else {
+                return CommonResult.error("该订单已经存在");
+            }
+              //  orderMapper.insertListOrder(listOrders);
               return CommonResult.success();
           } catch (Exception e){
               e.printStackTrace();
-              return CommonResult.error("添加失败,有重复数据请检查");
+              return CommonResult.error("添加失败,请重试");
           }
     }
 

@@ -1,10 +1,7 @@
 package com.tx.dllogin.dao;
 
 import com.tx.dllogin.model.User;
-import com.tx.dllogin.vo.FIndShiroUserVo;
-import com.tx.dllogin.vo.FindLogRoterVo;
-import com.tx.dllogin.vo.UserFindAllVo;
-import com.tx.dllogin.vo.findDeptAndFirmVo;
+import com.tx.dllogin.vo.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -56,6 +53,17 @@ public interface UserMapper {
 
       //部门管理员  修改 删除用户  先要查询 是否是同一部门 同一公司
     findDeptAndFirmVo    findDeIdAndFirIdByUserId(@Param("userId")String userId);
+
+
+
+
+    UserListByName findUserListByName(@Param("userName")String userName);
+
+
+    //根据用户角色查询(超级管理员除外---只能查询同一公司 同一部门下的用户)     用户分页
+    List<UserFindAllVo> findUserByUserList(@Param("levelss") String levelss
+                                           ,@Param("deptId") String deptId
+                                            ,@Param("firmId") String firmId);
 
 
 

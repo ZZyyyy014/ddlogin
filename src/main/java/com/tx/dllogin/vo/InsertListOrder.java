@@ -42,9 +42,9 @@ public class InsertListOrder {
     private String customerName;
     //备用字段 123
 
+
     @ApiModelProperty("备用字段123")
     private String sparessV1;
-
     private String sparessV2;
     private String sparessV3;
 

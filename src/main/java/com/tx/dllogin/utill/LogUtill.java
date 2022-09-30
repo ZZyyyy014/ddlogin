@@ -11,8 +11,8 @@ public class LogUtill {
 
     public static  String GetUserName(HttpServletRequest request){
         //从jwtUtill 中取出 sing签名
-         String jwtToken = request.getHeader("jwtToken");
-        String Sing ="123456789asdzxc";
+        String jwtToken = request.getHeader("jwtToken");
+        String Sing ="1234657498ghvjhjhbhjb";
         DecodedJWT verify = JWT.require(Algorithm.HMAC256(Sing)).build().verify(jwtToken);
         //登录时候 传的map取出来。。。 用户账号
         String userName = verify.getClaim("userName").asString();

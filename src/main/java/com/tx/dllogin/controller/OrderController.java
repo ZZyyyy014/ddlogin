@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @Api(value = "订单模块",tags = "订单模块")
 @RestController
 public class OrderController   extends BaseController{
@@ -40,8 +38,7 @@ public class OrderController   extends BaseController{
     @ApiOperation("批量添加订单")
     @PostMapping("/order/insertListOrder")
     @RequiresPermissions(value = {"order:create"})
-    public CommonResult insertListOrder(@RequestBody List<InsertListOrder> listOrders) {
-
+    public CommonResult insertListOrder(@RequestBody InsertListOrder listOrders) {
         return orderService.insetListOrder(listOrders);
 
     }

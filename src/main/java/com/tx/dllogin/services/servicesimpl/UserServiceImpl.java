@@ -12,10 +12,7 @@ import com.tx.dllogin.services.UserService;
 import com.tx.dllogin.shiro.ShiroMyUtills;
 import com.tx.dllogin.shiro.realm.MyRealm;
 import com.tx.dllogin.utill.*;
-import com.tx.dllogin.vo.AddUserVo;
-import com.tx.dllogin.vo.FindLogRoterVo;
-import com.tx.dllogin.vo.UserFindAllVo;
-import com.tx.dllogin.vo.findDeptAndFirmVo;
+import com.tx.dllogin.vo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -62,8 +59,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED)//有1个事务  当前只执行一次数据库操作  查询无所谓
     public CommonResult login(String userName, String passWrod, String captcha, HttpServletRequest request) {
-        log.info(userName + "---登录验证");
-        String attribute;
+        String attribute="";
         try {
             attribute = request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY).toString();
         } catch (NullPointerException n) {
@@ -73,6 +69,7 @@ public class UserServiceImpl implements UserService {
         if (!attribute.equals(captcha)) {
             return CommonResult.error("验证码错误,请重新登录");
         }
+
         User userByName = userMapper.findUserByName(userName);
         if (userByName == null) {
             return CommonResult.error("该用户未注册");
@@ -115,12 +112,16 @@ public class UserServiceImpl implements UserService {
         //生成toekn
         String token = "";
         HashMap<String, String> map1 = new HashMap<>();
+        //把当前用户账号 存入session
+        request.getSession().setAttribute("userNameOne",userByName.getUserName());
+
         map1.put("userName", userByName.getUserName());
         map1.put("userId", userByName.getUserId());
         map1.put("level", userByName.getLevelss());
         token = JwtUtil.getToken(map1);
         HashMap<String, String> map = new HashMap<>();
         map.put("jwtToken", token);
+
         log.info(userName + "---登录成功生成token");
         return CommonResult.success("登录成功", map);
     }
@@ -130,8 +131,18 @@ public class UserServiceImpl implements UserService {
     public CommonResult findAllLogin(Integer pageNum, Integer pageSize) {
         //设置开启分页参数    1.当前业数   2.每页多少
         PageHelper.startPage(pageNum, pageSize);
-        List<UserFindAllVo> allUser = userMapper.findAllUser();
+
+        //获取到账号  除了超级管理员 其他的 只能查看该用户 同一公司 同一部门
+        String userNameOne = request.getSession().getAttribute("userNameOne").toString();
+        UserListByName userListByName = userMapper.findUserListByName(userNameOne);
+       //不是超级管理员     只能查询 到同一公司 同一部门
+        List<UserFindAllVo> allUser = userMapper.findUserByUserList(userListByName.getLevelss()
+                                                                   ,userListByName.getDeptId()
+                                                                   ,userListByName.getFirmId());
+       // List<UserFindAllVo> allUser = userMapper.findAllUser();
+
         PageInfo<UserFindAllVo> userFindAllVoPageInfo = new PageInfo<>(allUser);
+
         return CommonResult.success(userFindAllVoPageInfo);
     }
 
@@ -184,7 +195,7 @@ public class UserServiceImpl implements UserService {
                 findDeptAndFirmVo deIdAndFirId = userMapper.findDeIdAndFirId(userName);
                 List<findDeptAndFirmVo> deIdAndFirIdList = userMapper.findDeIdAndFirIdList(userId);
                 for (findDeptAndFirmVo userFindAllVo : deIdAndFirIdList) {
-                    //&  只要满足其中一个条件就行了
+                       //&  只要满足其中一个条件就行了
                     if (!deIdAndFirId.getDeptId().equals(userFindAllVo.getDeptId()) & !
                             deIdAndFirId.getFirmId().equals(userFindAllVo.getFirmId())) {
                         return CommonResult.error("部门管理员无权限删除 不是同一公司同一部门");
@@ -321,6 +332,9 @@ public class UserServiceImpl implements UserService {
         String userName = LogUtill.GetUserName(request);
         log.info("用户账号{} ---京麦免登陆商户账号{}-密码{}", userName, shopName, passWord);
         String ddUrl = "";
+        if(shopName==null ||shopName.trim().equals("")||passWord==null||passWord.trim().equals("")){
+           return CommonResult.error("请填写用户名或者密码");
+        }
         try {
             //取京东 登录京麦
             ddUrl = AesUtil.loginDd(shopName, passWord);

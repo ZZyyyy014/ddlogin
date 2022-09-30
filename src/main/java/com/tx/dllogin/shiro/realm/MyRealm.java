@@ -34,7 +34,6 @@ public class MyRealm extends AuthorizingRealm {
         //查数据库  返回用户信息+权限信息+资源信息 需要什么 那什么
         FIndShiroUserVo shiroParms = userMapper.findShiroParms(primaryPrincipal);
         HttpSession session = request.getSession();
-
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         session.setAttribute("roleId",shiroParms.getRoleId());
         session.setAttribute("roles",shiroParms.getRoleName());

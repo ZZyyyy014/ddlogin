@@ -35,8 +35,11 @@ public class FirmServiceImpl implements FirmService {
 
     @Override
     public CommonResult addFirm(String firmName) {
+
+
+        if (firmName==null||firmName=="") return CommonResult.error("请填写公司名称！！！");
+
         String buyFirmName = firmMapper.findBuyFirmName(firmName);
-        if (buyFirmName==null||buyFirmName=="") return CommonResult.error("请填写公司名称！！！");
         if (buyFirmName!=null)return CommonResult.error("该公司已经存在！！！");
         String s = LogUtill.GetUserName(request);
         try {

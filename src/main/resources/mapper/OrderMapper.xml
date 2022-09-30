@@ -168,6 +168,11 @@
         from dd_order d
         <where>
              1=1
+
+             <if test="levelss!=1 ">
+                 and d.sparess_v2=#{firmId}
+             </if>
+
             <if test="dateFrist!=null and  dateEnd!=null ">
                 and d.order_date between #{dateFrist}  and  #{dateEnd}
             </if>
@@ -187,7 +192,6 @@
               and d.shop_user_name   =#{shopUserName}
             </if>
         </where>
-     order by d.order_date desc
     </select>
 
     <insert id="insertListOrder" parameterType="InsertListOrder">
@@ -209,6 +213,13 @@
            #{item.sparessV1})
          </foreach>
     </insert>
+
+
+    <select id="findById"  resultType="Integer">
+     select  order_id
+      from dd_order
+      where  order_number=#{orderNuber}
+    </select>
 
 
 

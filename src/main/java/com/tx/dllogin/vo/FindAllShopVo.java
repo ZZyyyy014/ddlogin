@@ -26,6 +26,9 @@ public class FindAllShopVo {
     @ApiModelProperty("店铺IP")
     private String shopIp;
 
+    @ApiModelProperty("店铺类型 账号类型  1京东   2拼多多   3淘宝")
+    private  String userTypess;
+
     @ApiModelProperty("店铺登录时间段")
     private List<Date> shopLoginDateList;
 

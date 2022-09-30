@@ -42,16 +42,19 @@ public class AesWebsocket extends WebSocketClient {
 
     @Override //收到来自服务器的消息  调用该方法
     public void onMessage(String m) {
-        JSONObject body = JSONObject.parseObject(m).getJSONObject("body");
-         if(body.containsKey("checkWay")){
-           //this.setMsg(body.getJSONObject("checkWay").toString());
-             this.excptMessage="PHONE_ALTERNATIVE";
+        JSONObject body1 = JSONObject.parseObject(m).getJSONObject("body");
+        JSONObject body = JSONObject.parseObject(m);
+        String type = body.getString("type");
+        if(type.equals("pop_security_type_get")){
+             if(body1.getBoolean("success")){
+                 this.excptMessage="PHONE_ALTERNATIVE";
+             }
          }
-        //System.out.println("返回:"+m);
     }
 
     @Override  //断开时调用该方法
     public void onClose(int i,String s,boolean a) {
+
     }
 
 

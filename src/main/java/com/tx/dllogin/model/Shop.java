@@ -9,8 +9,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class Shop {
     private Integer shopId;
 
@@ -30,9 +30,15 @@ public class Shop {
 
     private String sparessV2;
 
+    private String sparessV4;
+
     private String sparessV3;
 
     private String returnCookie;
+
+    private String shopPhone;
+
+    private String shopRemarkss;
 
     private String userTypess;
 
@@ -100,6 +106,14 @@ public class Shop {
         this.sparessV2 = sparessV2 == null ? null : sparessV2.trim();
     }
 
+    public String getSparessV4() {
+        return sparessV4;
+    }
+
+    public void setSparessV4(String sparessV4) {
+        this.sparessV4 = sparessV4 == null ? null : sparessV4.trim();
+    }
+
     public String getSparessV3() {
         return sparessV3;
     }
@@ -114,6 +128,22 @@ public class Shop {
 
     public void setReturnCookie(String returnCookie) {
         this.returnCookie = returnCookie == null ? null : returnCookie.trim();
+    }
+
+    public String getShopPhone() {
+        return shopPhone;
+    }
+
+    public void setShopPhone(String shopPhone) {
+        this.shopPhone = shopPhone == null ? null : shopPhone.trim();
+    }
+
+    public String getShopRemarkss() {
+        return shopRemarkss;
+    }
+
+    public void setShopRemarkss(String shopRemarkss) {
+        this.shopRemarkss = shopRemarkss == null ? null : shopRemarkss.trim();
     }
 
     public String getUserTypess() {

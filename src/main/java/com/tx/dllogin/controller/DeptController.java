@@ -6,6 +6,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,8 +33,7 @@ public class DeptController extends BaseController {
     //创建部门
     @GetMapping("/dept/createDept")
     @RequiresPermissions(value = {"user:create"})
-    public  CommonResult createDept(String createdeptName){
-
+    public  CommonResult createDept( @RequestParam ("createdeptName") String createdeptName){
         String roles = request.getSession().getAttribute("roles").toString();
        if("admin_all".equals(roles)){
            CommonResult allDept = deptService.createDept(createdeptName);

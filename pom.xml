@@ -45,7 +45,6 @@
         </dependency>
 
 
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
@@ -97,8 +96,6 @@
         </dependency>
 
 
-
-
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
@@ -123,6 +120,13 @@
             <version>1.46</version>
         </dependency>
 
+        <!--HikariCP数据源-->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+        </dependency>
+
+
 
         <!-- jwt -->
         <dependency>
@@ -137,13 +141,13 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
 
-     <!--    shiro -->
+        <!--    shiro -->
 
-         <!-- <dependency>
-                    <groupId>org.apache.shiro</groupId>
-                    <artifactId>shiro-spring-boot-starter</artifactId>
-                    <version>1.7.1</version>
-                </dependency>-->
+        <!-- <dependency>
+                   <groupId>org.apache.shiro</groupId>
+                   <artifactId>shiro-spring-boot-starter</artifactId>
+                   <version>1.7.1</version>
+               </dependency>-->
 
         <dependency>
             <groupId>org.apache.shiro</groupId>
@@ -157,7 +161,6 @@
             <artifactId>kaptcha</artifactId>
             <version>2.3.2</version>
         </dependency>
-
 
 
         <dependency>
@@ -181,31 +184,19 @@
 
 
     <build>
- <!--
-   <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>**/*.properties</include>
-                    <include>**/*.xml</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.xml</include>
-                    <include>**/*.properties</include>
-                </includes>
-            </resource>
-        </resources>-->
-
-
 
 
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <excludes>
                         <exclude>
@@ -217,21 +208,18 @@
             </plugin>
 
 
-     <!--        gentator 集成maven-->
+            <!--  gentator 集成maven-->
 <!--
-            <plugin>
-                <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-maven-plugin</artifactId>
-                <version>1.3.7</version>
-                <configuration>
-                    <configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
-                    <verbose>true</verbose>
-                    <overwrite>true</overwrite>
-                </configuration>
-            </plugin>
--->
-
-
+                        <plugin>
+                            <groupId>org.mybatis.generator</groupId>
+                            <artifactId>mybatis-generator-maven-plugin</artifactId>
+                            <version>1.3.7</version>
+                            <configuration>
+                                <configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
+                                <verbose>true</verbose>
+                                <overwrite>true</overwrite>
+                            </configuration>
+                        </plugin>-->
         </plugins>
     </build>
 

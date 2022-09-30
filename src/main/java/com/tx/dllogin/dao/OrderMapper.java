@@ -33,11 +33,15 @@ public interface OrderMapper {
                                   @Param("customerTel")String customerTel,
                                   @Param("expressageCode")String expressageCode,
                                   @Param("customerName")String customerName,
-                                  @Param("shopUserName")String shopUserName);
+                                  @Param("shopUserName")String shopUserName,
+                                  @Param("levelss")String levelss,
+                                  @Param("firmId")String firmId);
 
 
     void   insertListOrder(List<InsertListOrder> list );
 
+    // 根据订单号  查询 是否存在 该订单
+    Integer  findById(@Param("orderNuber") String orderNuber);
 
 
 }

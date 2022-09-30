@@ -14,6 +14,8 @@ public interface ShopService {
 
    CommonResult deleteShopOne(DeleteShopeOneBean deleteShopeOneBean);
 
+   CommonResult  insertShopOne(Shop shop);
+
 
 
 

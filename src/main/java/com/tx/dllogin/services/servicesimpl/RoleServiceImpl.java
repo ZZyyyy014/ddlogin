@@ -45,9 +45,10 @@ public class RoleServiceImpl implements RoleService {
     //多条件查询数据库
     @Override
     public CommonResult findAllShiro(FindAllShiroBean findAllShiroBean) {
-        //开启分页插件
+
+       //开启分页插件
         PageHelper.startPage(findAllShiroBean.getPageNum(),findAllShiroBean.getPageSize());
-       try {
+        try {
            List<FindReAllShiroVo> findAllShopVos = roleMapper.FindAllShiro(
                    findAllShiroBean.getUserName(),
                    findAllShiroBean.getSparessV1(),

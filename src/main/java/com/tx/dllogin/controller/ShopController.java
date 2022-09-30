@@ -24,11 +24,8 @@ public class ShopController  extends BaseController {
     @PostMapping("/shop/findAllShop")
     @RequiresPermissions(value = {"shop:find"})
     public CommonResult findAllShop(@RequestBody FindAllShopVo shopVo){
-
        return  shopService.findAllShop(shopVo);
     }
-
-
     @ApiOperation("修改单个店铺")
     @PostMapping("/shop/updateOneShop")
     @RequiresPermissions(value = {"order:update"})
@@ -45,6 +42,14 @@ public class ShopController  extends BaseController {
         return  shopService.deleteShopOne(deleteShopeOneBean);
     }
 
+
+
+    @PostMapping("/shop/insetShopOne")
+    @ApiOperation("添加单个店铺")
+    @RequiresPermissions(value = {"shop:create"})
+    public CommonResult insetShopOne(@RequestBody Shop shop){
+        return  shopService.insertShopOne(shop);
+    }
 
 
 

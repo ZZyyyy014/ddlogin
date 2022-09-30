@@ -14,4 +14,8 @@ public interface RoleMenuMapper {
     int updateByPrimaryKeySelective(RoleMenu record);
 
     int updateByPrimaryKey(RoleMenu record);
+
+
+
+
 }

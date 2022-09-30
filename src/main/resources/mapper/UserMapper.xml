@@ -189,10 +189,12 @@
     from    dd_user u LEFT JOIN        dd_dept_user du   ON  u.user_id =du.user_id
                       LEFT JOIN        dd_dept d    on   du.dept_id =d.dept_id
                       LEFT JOIN        dd_firm df  ON  du.sparess_v1=df.firm_id
-  /*  from  dd_dept_user du,dd_dept d,dd_user u,dd_firm df
-    where  du.dept_id=d.dept_id
+  /*
+      from  dd_dept_user du,dd_dept d,dd_user u,dd_firm df
+      where  du.dept_id=d.dept_id
       and  du.user_id=u.user_id
-      and  du.sparess_v1=df.firm_id*/
+      and  du.sparess_v1=df.firm_id
+      */
 
 
     ORDER BY dfirmName,ddept_id
@@ -281,10 +283,8 @@ SELECT
   </resultMap>
   <select id="findDeIdAndFirId" resultMap="findDeIdAndFirId">
     select    u.dept_id  udept_id, du.sparess_v1 dusparess_v1
-    from  dd_user u  , dd_dept d ,dd_dept_user  du
+    from  dd_user u  left join  dd_dept_user  du  on  u.dept_id=du.dept_id
     where    u.user_name=#{userName}
-          and u.dept_id=d.dept_id
-          and d.dept_id=du.dept_id
   </select>
 
 
@@ -320,15 +320,68 @@ SELECT
     <result column="dudept_id" property="deptId"/>
     <result column="dusparess_v1" property="firmId"/>
   </resultMap>
+
   <select id="findDeIdAndFirIdByUserId"  resultMap="findDeIdAndFirIdBy" >
      select  du.dept_id   dudept_id,  du.sparess_v1 dusparess_v1
-     from  dd_user d ,dd_dept_user du
-     where   d.user_id=#{userId}
-        and  d.user_id=du.user_id
-
+     from    dd_user d left join  dd_dept_user du on d.user_id=du.user_id
+     where   d.user_name=#{userId}
   </select>
 
 
+
+  <resultMap id="findUserListByName" type="UserListByName">
+         <result property="levelss" column="dlevelss"/>
+         <result property="deptId" column="ddept_id"/>
+         <result property="firmId" column="ddusparess_v1"/>
+  </resultMap>
+ <select id="findUserListByName" resultMap="findUserListByName">
+   select distinct
+        d.levelss dlevelss
+        ,d.dept_id ddept_id
+        ,ddu.sparess_v1 ddusparess_v1
+   from  dd_user d left join dd_dept_user ddu on  d.user_id = ddu.user_id
+    where  d.user_name=#{userName}
+
+
+ </select>
+
+
+
+
+  <resultMap id="findUserByUserName" type="UserFindAllVo">
+    <id column="dusparess_v1" property="sparessV1" />
+    <result column="dfirmName" property="firmName" />
+    <result column="uuser_id" property="userId" />
+    <result column="uuser_name" property="userName" />
+    <result column="ulogin_date" property="loginDate" />
+    <result column="uspare_v1" property="userRealName" />
+    <result column="ddept_name" property="deptName" />
+    <result column="ddept_id" property="deptId" />
+    <result column="uip" property="ip" />
+    <result column="ulv" property="levelss" />
+  </resultMap>
+  <select id="findUserByUserList" resultMap="findUserByUserName">
+    select DISTINCT
+     du.sparess_v1  dusparess_v1
+    ,df.firm_name    dfirmName
+    ,d.dept_id       ddept_id
+    ,d.dept_name ddept_name
+    ,u.user_id uuser_id
+    ,u.user_name uuser_name
+    ,u.login_date ulogin_date
+    ,u.sparess_v1 uspare_v1
+    ,u.ip uip
+    ,u.levelss ulv
+    from    dd_user u
+    LEFT JOIN        dd_dept_user du   ON  u.user_id =du.user_id
+    LEFT JOIN        dd_dept d    on   du.dept_id =d.dept_id
+    LEFT JOIN        dd_firm df  ON  du.sparess_v1=df.firm_id
+   where  1=1
+      <if test="levelss !=1  ">
+         and  d.dept_id=#{deptId}
+         and  du.sparess_v1=#{firmId}
+      </if>
+  </select>
 
 
 </mapper>

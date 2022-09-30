@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -32,11 +33,10 @@ public class Knife4jConfig {
     public Docket createRestApi() {
 
         //设置只在开发中环境中启动swagger
-       // Profiles profiles=Profiles.of("dev");
+        Profiles profiles=Profiles.of("dev");
 
         //表示如果现在是dev环境，则返回true 开启swagger
-      //  boolean flag=environment.acceptsProfiles(profiles);
-
+        boolean flag=environment.acceptsProfiles(profiles);
 
         return  new Docket(DocumentationType.SWAGGER_2)
                 .useDefaultResponseMessages(false)

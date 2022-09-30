@@ -1,214 +1,271 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tx.dllogin.dao.ShopMapper">
-    <resultMap id="BaseResultMap" type="com.tx.dllogin.model.Shop">
-        <id column="shop_id" jdbcType="VARCHAR" property="shopId" />
-        <result column="shop_user_name" jdbcType="VARCHAR" property="shopUserName" />
-        <result column="shop_user_passWrod" jdbcType="VARCHAR" property="shopUserPasswrod" />
-        <result column="shop_login_date" jdbcType="TIMESTAMP" property="shopLoginDate" />
-        <result column="shop_ip" jdbcType="VARCHAR" property="shopIp" />
-        <result column="shop_authorization" jdbcType="VARCHAR" property="shopAuthorization" />
-        <result column="sparess_v1" jdbcType="VARCHAR" property="sparessV1" />
-        <result column="sparess_v2" jdbcType="VARCHAR" property="sparessV2" />
-        <result column="sparess_v3" jdbcType="VARCHAR" property="sparessV3" />
-        <result column="return_cookie" jdbcType="VARCHAR" property="returnCookie" />
-        <result column="user_typess" jdbcType="VARCHAR" property="userTypess" />
-    </resultMap>
-    <sql id="Base_Column_List">
-        shop_id, shop_user_name, shop_user_passWrod, shop_login_date, shop_ip, shop_authorization,
-    sparess_v1, sparess_v2, sparess_v3, return_cookie, user_typess
-    </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from dd_shop
-        where shop_id = #{shopId,jdbcType=VARCHAR}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete
-        from dd_shop
-        where shop_id = #{shopId,jdbcType=VARCHAR}
-    </delete>
-    <insert id="insert" parameterType="com.tx.dllogin.model.Shop">
-        insert into dd_shop (shop_id, shop_user_name, shop_user_passWrod,
-                             shop_login_date, shop_ip, shop_authorization,
-                             sparess_v1, sparess_v2, sparess_v3,
-                             return_cookie, user_typess)
-        values (#{shopId,jdbcType=VARCHAR}, #{shopUserName,jdbcType=VARCHAR}, #{shopUserPasswrod,jdbcType=VARCHAR},
-                #{shopLoginDate,jdbcType=TIMESTAMP}, #{shopIp,jdbcType=VARCHAR}, #{shopAuthorization,jdbcType=VARCHAR},
-                #{sparessV1,jdbcType=VARCHAR}, #{sparessV2,jdbcType=VARCHAR}, #{sparessV3,jdbcType=VARCHAR},
-                #{returnCookie,jdbcType=VARCHAR}, #{userTypess,jdbcType=VARCHAR})
-    </insert>
-    <insert id="insertSelective" parameterType="com.tx.dllogin.model.Shop">
-        insert into dd_shop
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="shopId != null">
-                shop_id,
-            </if>
-            <if test="shopUserName != null">
-                shop_user_name,
-            </if>
-            <if test="shopUserPasswrod != null">
-                shop_user_passWrod,
-            </if>
-            <if test="shopLoginDate != null">
-                shop_login_date,
-            </if>
-            <if test="shopIp != null">
-                shop_ip,
-            </if>
-            <if test="shopAuthorization != null">
-                shop_authorization,
-            </if>
-            <if test="sparessV1 != null">
-                sparess_v1,
-            </if>
-            <if test="sparessV2 != null">
-                sparess_v2,
-            </if>
-            <if test="sparessV3 != null">
-                sparess_v3,
-            </if>
-            <if test="returnCookie != null">
-                return_cookie,
-            </if>
-            <if test="userTypess != null">
-                user_typess,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="shopId != null">
-                #{shopId,jdbcType=VARCHAR},
-            </if>
-            <if test="shopUserName != null">
-                #{shopUserName,jdbcType=VARCHAR},
-            </if>
-            <if test="shopUserPasswrod != null">
-                #{shopUserPasswrod,jdbcType=VARCHAR},
-            </if>
-            <if test="shopLoginDate != null">
-                #{shopLoginDate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="shopIp != null">
-                #{shopIp,jdbcType=VARCHAR},
-            </if>
-            <if test="shopAuthorization != null">
-                #{shopAuthorization,jdbcType=VARCHAR},
-            </if>
-            <if test="sparessV1 != null">
-                #{sparessV1,jdbcType=VARCHAR},
-            </if>
-            <if test="sparessV2 != null">
-                #{sparessV2,jdbcType=VARCHAR},
-            </if>
-            <if test="sparessV3 != null">
-                #{sparessV3,jdbcType=VARCHAR},
-            </if>
-            <if test="returnCookie != null">
-                #{returnCookie,jdbcType=VARCHAR},
-            </if>
-            <if test="userTypess != null">
-                #{userTypess,jdbcType=VARCHAR},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.tx.dllogin.model.Shop">
-        update dd_shop
-        <set>
-            <if test="shopUserName != null">
-                shop_user_name = #{shopUserName,jdbcType=VARCHAR},
-            </if>
-            <if test="shopUserPasswrod != null">
-                shop_user_passWrod = #{shopUserPasswrod,jdbcType=VARCHAR},
-            </if>
-            <if test="shopLoginDate != null">
-                shop_login_date = #{shopLoginDate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="shopIp != null">
-                shop_ip = #{shopIp,jdbcType=VARCHAR},
-            </if>
-            <if test="shopAuthorization != null">
-                shop_authorization = #{shopAuthorization,jdbcType=VARCHAR},
-            </if>
-            <if test="sparessV1 != null">
-                sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
-            </if>
-            <if test="sparessV2 != null">
-                sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
-            </if>
-            <if test="sparessV3 != null">
-                sparess_v3 = #{sparessV3,jdbcType=VARCHAR},
-            </if>
-            <if test="returnCookie != null">
-                return_cookie = #{returnCookie,jdbcType=VARCHAR},
-            </if>
-            <if test="userTypess != null">
-                user_typess = #{userTypess,jdbcType=VARCHAR},
-            </if>
-        </set>
-        where shop_id = #{shopId,jdbcType=VARCHAR}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.tx.dllogin.model.Shop">
-        update dd_shop
-        set shop_user_name     = #{shopUserName,jdbcType=VARCHAR},
-            shop_user_passWrod = #{shopUserPasswrod,jdbcType=VARCHAR},
-            shop_login_date    = #{shopLoginDate,jdbcType=TIMESTAMP},
-            shop_ip            = #{shopIp,jdbcType=VARCHAR},
-            shop_authorization = #{shopAuthorization,jdbcType=VARCHAR},
-            sparess_v1         = #{sparessV1,jdbcType=VARCHAR},
-            sparess_v2         = #{sparessV2,jdbcType=VARCHAR},
-            sparess_v3         = #{sparessV3,jdbcType=VARCHAR},
-            return_cookie      = #{returnCookie,jdbcType=VARCHAR},
-            user_typess        = #{userTypess,jdbcType=VARCHAR}
-        where shop_id = #{shopId,jdbcType=VARCHAR}
-    </update>
+  <resultMap id="BaseResultMap" type="com.tx.dllogin.model.Shop">
+    <id column="shop_id" jdbcType="INTEGER" property="shopId" />
+    <result column="shop_user_name" jdbcType="VARCHAR" property="shopUserName" />
+    <result column="shop_user_passWrod" jdbcType="VARCHAR" property="shopUserPasswrod" />
+    <result column="shop_login_date" jdbcType="TIMESTAMP" property="shopLoginDate" />
+    <result column="shop_ip" jdbcType="VARCHAR" property="shopIp" />
+    <result column="shop_authorization" jdbcType="VARCHAR" property="shopAuthorization" />
+    <result column="sparess_v1" jdbcType="VARCHAR" property="sparessV1" />
+    <result column="sparess_v2" jdbcType="VARCHAR" property="sparessV2" />
+    <result column="sparess_v4" jdbcType="VARCHAR" property="sparessV4" />
+    <result column="sparess_v3" jdbcType="VARCHAR" property="sparessV3" />
+    <result column="return_cookie" jdbcType="VARCHAR" property="returnCookie" />
+    <result column="shop_phone" jdbcType="VARCHAR" property="shopPhone" />
+    <result column="shop_remarkss" jdbcType="VARCHAR" property="shopRemarkss" />
+    <result column="user_typess" jdbcType="VARCHAR" property="userTypess" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    shop_id, shop_user_name, shop_user_passWrod, shop_login_date, shop_ip, shop_authorization, 
+    sparess_v1, sparess_v2, sparess_v4, sparess_v3, return_cookie, shop_phone, shop_remarkss, 
+    user_typess
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dd_shop
+    where shop_id = #{shopId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dd_shop
+    where shop_id = #{shopId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tx.dllogin.model.Shop">
+    insert into dd_shop (shop_id, shop_user_name, shop_user_passWrod, 
+      shop_login_date, shop_ip, shop_authorization, 
+      sparess_v1, sparess_v2, sparess_v4, 
+      sparess_v3, return_cookie, shop_phone, 
+      shop_remarkss, user_typess)
+    values (#{shopId,jdbcType=INTEGER}, #{shopUserName,jdbcType=VARCHAR}, #{shopUserPasswrod,jdbcType=VARCHAR}, 
+      #{shopLoginDate,jdbcType=TIMESTAMP}, #{shopIp,jdbcType=VARCHAR}, #{shopAuthorization,jdbcType=VARCHAR}, 
+      #{sparessV1,jdbcType=VARCHAR}, #{sparessV2,jdbcType=VARCHAR}, #{sparessV4,jdbcType=VARCHAR}, 
+      #{sparessV3,jdbcType=VARCHAR}, #{returnCookie,jdbcType=VARCHAR}, #{shopPhone,jdbcType=VARCHAR}, 
+      #{shopRemarkss,jdbcType=VARCHAR}, #{userTypess,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tx.dllogin.model.Shop">
+    insert into dd_shop
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="shopId != null">
+        shop_id,
+      </if>
+      <if test="shopUserName != null">
+        shop_user_name,
+      </if>
+      <if test="shopUserPasswrod != null">
+        shop_user_passWrod,
+      </if>
+      <if test="shopLoginDate != null">
+        shop_login_date,
+      </if>
+      <if test="shopIp != null">
+        shop_ip,
+      </if>
+      <if test="shopAuthorization != null">
+        shop_authorization,
+      </if>
+      <if test="sparessV1 != null">
+        sparess_v1,
+      </if>
+      <if test="sparessV2 != null">
+        sparess_v2,
+      </if>
+      <if test="sparessV4 != null">
+        sparess_v4,
+      </if>
+      <if test="sparessV3 != null">
+        sparess_v3,
+      </if>
+      <if test="returnCookie != null">
+        return_cookie,
+      </if>
+      <if test="shopPhone != null">
+        shop_phone,
+      </if>
+      <if test="shopRemarkss != null">
+        shop_remarkss,
+      </if>
+      <if test="userTypess != null">
+        user_typess,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="shopId != null">
+        #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="shopUserName != null">
+        #{shopUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopUserPasswrod != null">
+        #{shopUserPasswrod,jdbcType=VARCHAR},
+      </if>
+      <if test="shopLoginDate != null">
+        #{shopLoginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shopIp != null">
+        #{shopIp,jdbcType=VARCHAR},
+      </if>
+      <if test="shopAuthorization != null">
+        #{shopAuthorization,jdbcType=VARCHAR},
+      </if>
+      <if test="sparessV1 != null">
+        #{sparessV1,jdbcType=VARCHAR},
+      </if>
+      <if test="sparessV2 != null">
+        #{sparessV2,jdbcType=VARCHAR},
+      </if>
+      <if test="sparessV4 != null">
+        #{sparessV4,jdbcType=VARCHAR},
+      </if>
+      <if test="sparessV3 != null">
+        #{sparessV3,jdbcType=VARCHAR},
+      </if>
+      <if test="returnCookie != null">
+        #{returnCookie,jdbcType=VARCHAR},
+      </if>
+      <if test="shopPhone != null">
+        #{shopPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="shopRemarkss != null">
+        #{shopRemarkss,jdbcType=VARCHAR},
+      </if>
+      <if test="userTypess != null">
+        #{userTypess,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tx.dllogin.model.Shop">
+    update dd_shop
+    <set>
+      <if test="shopUserName != null">
+        shop_user_name = #{shopUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopUserPasswrod != null">
+        shop_user_passWrod = #{shopUserPasswrod,jdbcType=VARCHAR},
+      </if>
+      <if test="shopLoginDate != null">
+        shop_login_date = #{shopLoginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shopIp != null">
+        shop_ip = #{shopIp,jdbcType=VARCHAR},
+      </if>
+      <if test="shopAuthorization != null">
+        shop_authorization = #{shopAuthorization,jdbcType=VARCHAR},
+      </if>
+      <if test="sparessV1 != null">
+        sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
+      </if>
+      <if test="sparessV2 != null">
+        sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
+      </if>
+      <if test="sparessV4 != null">
+        sparess_v4 = #{sparessV4,jdbcType=VARCHAR},
+      </if>
+      <if test="sparessV3 != null">
+        sparess_v3 = #{sparessV3,jdbcType=VARCHAR},
+      </if>
+      <if test="returnCookie != null">
+        return_cookie = #{returnCookie,jdbcType=VARCHAR},
+      </if>
+      <if test="shopPhone != null">
+        shop_phone = #{shopPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="shopRemarkss != null">
+        shop_remarkss = #{shopRemarkss,jdbcType=VARCHAR},
+      </if>
+      <if test="userTypess != null">
+        user_typess = #{userTypess,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where shop_id = #{shopId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tx.dllogin.model.Shop">
+    update dd_shop
+    set shop_user_name = #{shopUserName,jdbcType=VARCHAR},
+      shop_user_passWrod = #{shopUserPasswrod,jdbcType=VARCHAR},
+      shop_login_date = #{shopLoginDate,jdbcType=TIMESTAMP},
+      shop_ip = #{shopIp,jdbcType=VARCHAR},
+      shop_authorization = #{shopAuthorization,jdbcType=VARCHAR},
+      sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
+      sparess_v2 = #{sparessV2,jdbcType=VARCHAR},
+      sparess_v4 = #{sparessV4,jdbcType=VARCHAR},
+      sparess_v3 = #{sparessV3,jdbcType=VARCHAR},
+      return_cookie = #{returnCookie,jdbcType=VARCHAR},
+      shop_phone = #{shopPhone,jdbcType=VARCHAR},
+      shop_remarkss = #{shopRemarkss,jdbcType=VARCHAR},
+      user_typess = #{userTypess,jdbcType=VARCHAR}
+    where shop_id = #{shopId,jdbcType=INTEGER}
+  </update>
 
+  <select id="findAllShop" resultType="Shop">
+    select  distinct   d.*
+    from dd_shop d
+    left join dd_user du on d.sparess_v1 = du.user_name
+    left join dd_dept_user ddu on du.dept_id = ddu.dept_id
+    where 1=1
+    <if test="levelss !=1 ">
+      and  d.sparess_v2=#{firmId}
+    </if>
+    <if test="userName!=null and userName!='' ">
+      and d.sparess_v1 = #{userName}
+    </if>
+    <if test="shopUserName!=null and shopUserName!='' ">
+      and d.shop_user_name = #{shopUserName}
+    </if>
+    <if test="shopIp!=null and shopIp!='' ">
+      and d.shop_ip = #{shopIp}
+    </if>
+    <if test="fristDate!=null and endDate!=null ">
+      and d.shop_login_date between #{fristDate} and #{endDate}
+    </if>
+    <if test="userTypess!=null and userTypess!='' ">
+      and d.user_typess=#{userTypess}
+    </if>
+  </select>
 
-    <select id="findAllShop" resultType="Shop">
-        select *
-        from dd_shop d
-        where 1=1
-        <if test="userName!=null and userName!='' ">
-            and d.sparess_v1 = #{userName}
-        </if>
-        <if test="shopUserName!=null and shopUserName!='' ">
-            and d.shop_user_name = #{shopUserName}
-        </if>
-        <if test="shopIp!=null and shopIp!='' ">
-            and d.shop_ip = #{shopIp}
-        </if>
-        <if test="fristDate!=null and endDate!=null ">
-            and d.shop_login_date between #{fristDate} and #{endDate}
-        </if>
+  <update id="updateShop">
+    update dd_shop
+    set
+    shop_user_name = #{shopUserName,jdbcType=VARCHAR},
+    <if test="shopUserPasswrod != null">
+      shop_user_passWrod = #{shopUserPasswrod,jdbcType=VARCHAR},
+    </if>
+    shop_login_date = #{shopLoginDate,jdbcType=TIMESTAMP},
 
+    shop_ip = #{shopIp,jdbcType=VARCHAR},
 
-    </select>
+    shop_authorization = #{shopAuthorization,jdbcType=VARCHAR},
 
-<update id="updateShop">
-   update dd_shop
-   set
-            shop_user_name = #{shopUserName,jdbcType=VARCHAR},
-        <if test="shopUserPasswrod != null">
-            shop_user_passWrod = #{shopUserPasswrod,jdbcType=VARCHAR},
-        </if>
-            shop_login_date = #{shopLoginDate,jdbcType=TIMESTAMP},
-
-            shop_ip = #{shopIp,jdbcType=VARCHAR},
-
-            shop_authorization = #{shopAuthorization,jdbcType=VARCHAR},
-
-            sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
-            return_cookie = #{returnCookie,jdbcType=VARCHAR},
-            user_typess = #{userTypess,jdbcType=VARCHAR}
+    sparess_v1 = #{sparessV1,jdbcType=VARCHAR},
+    return_cookie = #{returnCookie,jdbcType=VARCHAR},
+    user_typess = #{userTypess,jdbcType=VARCHAR}
     where shop_id = #{shopId,jdbcType=VARCHAR}
-</update>
+  </update>
 
 
-    <select id="findShopByNameAndPassWord" resultType="Shop">
-     select  *
-       from dd_shop
-       where  shop_user_name=#{shopName}
-    </select>
+  <select id="findShopByNameAndPassWord" resultType="Shop">
+    select  *
+    from dd_shop
+    where  shop_user_name=#{shopName}
+  </select>
+
+
+  <update id="updateAllShop"  >
+    update  dd_shop
+    set sparess_v2=#{firmId}
+    where sparess_v1=#{userName}
+  </update>
+
+
+  <select id="findShopByShopName" resultType="Shop">
+    select  *
+    from  dd_shop
+    where shop_user_name=#{shopName}
+  </select>
+
+
+
 
 
 
